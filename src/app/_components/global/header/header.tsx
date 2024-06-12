@@ -27,7 +27,7 @@ export default function Header() {
   }, [prevScrollPos]);
 
   return (
-    <>
+    <Box component="header">
       <Topbar />
 
       <Drawer
@@ -73,7 +73,7 @@ export default function Header() {
         </Box>
       </Drawer>
 
-      <Box>
+      <Box component="nav">
         <Navbar
           setOpenMobileDrawer={setOpenMobileDrawer}
           isInverted={!pathname.includes("/login")}
@@ -95,6 +95,6 @@ export default function Header() {
       >
         <Navbar setOpenMobileDrawer={setOpenMobileDrawer} />
       </Box>
-    </>
+    </Box>
   );
 }

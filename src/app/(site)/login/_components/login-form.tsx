@@ -22,7 +22,8 @@ import Link from "next/link";
 import { BUSINESS_NAME } from "@/shared/constants";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import GoogleIcon from "@/app/_components/icons/google-icon";
+// import GoogleIcon from "@/app/_components/icons/google-icon";
+
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 
 import { loginAccount } from "@/services/account.services";
@@ -101,7 +102,7 @@ export default function LoginForm() {
           color="neutral"
           fullWidth
           size="lg"
-          startDecorator={<GoogleIcon />}
+          // startDecorator={<GoogleIcon />}
         >
           Continue with Google
         </Button>

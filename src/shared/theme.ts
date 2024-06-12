@@ -1,5 +1,5 @@
-import { PaletteRange, extendTheme } from "@mui/joy/styles";
-import { Inter, Outfit, Source_Code_Pro } from "next/font/google";
+import { PaletteBackground, PaletteRange, extendTheme } from "@mui/joy/styles";
+import { Outfit, Source_Code_Pro } from "next/font/google";
 import { hexToRgba } from "./functions";
 
 const outfit = Outfit({
@@ -18,6 +18,20 @@ declare module "@mui/joy/styles" {
   interface Palette {
     secondary: PaletteRange;
     accent1: PaletteRange;
+  }
+}
+
+declare module "@mui/joy/styles" {
+  interface PaletteBackgroundOverrides {
+    level4: true;
+    level5: true;
+    level6: true;
+  }
+
+  interface Palette {
+    level4: PaletteBackground;
+    level5: PaletteBackground;
+    level6: PaletteBackground;
   }
 }
 
@@ -120,9 +134,9 @@ const theme = extendTheme({
         },
 
         background: {
-          // level1: "#E2F3F6",
-          // level2: "#EAF3FB",
-          // level3: "#F8F8F8",
+          level4: "#E2F3F6",
+          level5: "#EAF3FB",
+          level6: "#F8F8F8",
         },
       },
     },

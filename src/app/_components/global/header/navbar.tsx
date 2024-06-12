@@ -2,7 +2,6 @@
 import Box from "@mui/joy/Box";
 import {
   Button,
-  CircularProgress,
   Container,
   IconButton,
   Stack,
@@ -33,7 +32,7 @@ export default function Navbar({
   const { userData, isPending: isCurrentUserPending } = useCurrentUser();
 
   return (
-    <Box component="header" sx={{ zIndex: 10, position: "relative" }}>
+    <Box sx={{ zIndex: 10, position: "relative" }}>
       <Container sx={{ zIndex: 100000, position: "relative" }}>
         <Box
           sx={{
@@ -88,32 +87,45 @@ export default function Navbar({
                     href={item.path}
                     endDecorator={item.children && <ExpandMore />}
                     sx={{
-                      color:
-                        item.path === pathname && isInverted
-                          ? theme.palette.secondary[500]
-                          : item.path === pathname
-                          ? theme.palette.primary[500]
-                          : isInverted
-                          ? "white"
-                          : theme.palette.text.primary,
-                      backgroundColor:
-                        isInverted && item.path === pathname
-                          ? hexToRgba(theme.palette.secondary[500], 0.2)
-                          : item.path === pathname
-                          ? hexToRgba(theme.palette.primary[500], 0.1)
-                          : "transparent",
+                      ...(isInverted
+                        ? {
+                            color:
+                              item.path === pathname
+                                ? theme.palette.secondary[500]
+                                : "white",
+                            backgroundColor:
+                              item.path === pathname
+                                ? hexToRgba(theme.palette.secondary[500], 0.2)
+                                : "transparent",
+                            ":hover": {
+                              color: theme.palette.secondary[500],
+                              backgroundColor: hexToRgba(
+                                theme.palette.secondary[500],
+                                0.2
+                              ),
+                            },
+                          }
+                        : {
+                            color:
+                              item.path === pathname
+                                ? theme.palette.primary[500]
+                                : theme.palette.text.primary,
+                            backgroundColor:
+                              item.path === pathname
+                                ? hexToRgba(theme.palette.primary[500], 0.1)
+                                : "transparent",
+                            ":hover": {
+                              color: theme.palette.primary[500],
+                              backgroundColor: hexToRgba(
+                                theme.palette.primary[500],
+                                0.1
+                              ),
+                            },
+                          }),
+
                       cursor: "pointer",
                       fontWeight: 600,
                       fontSize: "md",
-
-                      ":hover": {
-                        color: isInverted
-                          ? theme.palette.secondary[500]
-                          : theme.palette.primary[500],
-                        backgroundColor: isInverted
-                          ? hexToRgba(theme.palette.secondary[500], 0.2)
-                          : hexToRgba(theme.palette.primary[500], 0.1),
-                      },
                     }}
                   >
                     {item.label}
@@ -163,8 +175,10 @@ export default function Navbar({
                               justifyContent: "flex-start",
                               color: theme.palette.text.primary,
                               ":hover": {
-                                backgroundColor:
-                                  theme.palette.background.level2,
+                                backgroundColor: hexToRgba(
+                                  theme.palette.primary[500],
+                                  0.1
+                                ),
                                 color: theme.palette.primary[500],
                               },
                             }}
@@ -212,8 +226,10 @@ export default function Navbar({
                                         color: theme.palette.text.primary,
                                         justifyContent: "flex-start",
                                         ":hover": {
-                                          backgroundColor:
-                                            theme.palette.background.level2,
+                                          backgroundColor: hexToRgba(
+                                            theme.palette.primary[500],
+                                            0.1
+                                          ),
                                           color: theme.palette.primary[500],
                                         },
                                       }}
@@ -235,16 +251,16 @@ export default function Navbar({
             <Stack
               spacing={3}
               direction="row"
+              justifyContent="flex-end"
               sx={{
+                minWidth: 262,
                 mr: {
                   xs: 3,
                   md: 0,
                 },
               }}
             >
-              {isCurrentUserPending ? (
-                <CircularProgress thickness={4} size="md" />
-              ) : userData ? (
+              {isCurrentUserPending ? null : userData ? (
                 <NavbarDropdown />
               ) : (
                 <Button
