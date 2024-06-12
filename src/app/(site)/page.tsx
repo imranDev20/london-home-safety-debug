@@ -6,7 +6,6 @@ import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
 import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
-import SvgComponent from "../_components/icons/test";
 import { HomeMax, KeyboardAlt } from "@mui/icons-material";
 
 export default function Home() {
@@ -21,7 +20,7 @@ export default function Home() {
       }}
     >
       <KeyboardAlt sx={{}} />
-      <SvgComponent />
+
       <Sheet
         sx={{
           width: 300,
