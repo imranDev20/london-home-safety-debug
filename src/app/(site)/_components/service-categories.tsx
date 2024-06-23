@@ -1,5 +1,11 @@
 "use client";
-import { Container, Grid, Sheet, Typography, useTheme } from "@mui/joy";
+import Container from "@mui/joy/Container";
+import Grid from "@mui/joy/Grid";
+import Sheet from "@mui/joy/Sheet";
+import Typography from "@mui/joy/Typography";
+import { useTheme } from "@mui/joy/styles/ThemeProvider";
+import React from "react";
+
 import ServiceCategoryCard from "./service-category-card";
 import EicrOutlinedIcon from "@/app/_components/icons/eicr-outlined-icon";
 import GasOutlinedIcon from "@/app/_components/icons/gas-outlined-icon";

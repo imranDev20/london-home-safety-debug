@@ -1,6 +1,11 @@
 "use state";
 import React, { useState } from "react";
-import { Box, Card, CardContent, Typography, Button, useTheme } from "@mui/joy";
+import Box from "@mui/joy/Box";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Typography from "@mui/joy/Typography";
+import Button from "@mui/joy/Button";
+import { useTheme } from "@mui/joy/styles/ThemeProvider";
 import StarIcon from "@mui/icons-material/Star";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 

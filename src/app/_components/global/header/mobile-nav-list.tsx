@@ -1,5 +1,9 @@
 import { NAV_ITEMS } from "@/shared/data";
-import { List, ListItem, ListItemButton, Typography, useTheme } from "@mui/joy";
+import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
+import ListItemButton from "@mui/joy/ListItemButton";
+import Typography from "@mui/joy/Typography";
+import { useTheme } from "@mui/joy/styles/ThemeProvider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

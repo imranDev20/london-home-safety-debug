@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
-import { CssVarsProvider } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
-import NextAppDirEmotionCacheProvider from "./emption-cache-provider";
+import NextAppDirEmotionCacheProvider from "./emotion-cache-provider";
 import theme from "@/shared/theme";
+import { CssVarsProvider } from "@mui/joy/styles/CssVarsProvider";
 
 export default function ThemeRegistry({
   children,
