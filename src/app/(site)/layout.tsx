@@ -18,7 +18,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           <QueryProvider>
             <ThemeRegistry>
               <SnackbarProvider>
-                <Header />
+                {/* <Header /> */}
                 <main>{props.children}</main>
               </SnackbarProvider>
             </ThemeRegistry>
