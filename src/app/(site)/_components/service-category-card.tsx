@@ -1,12 +1,11 @@
 import { customSlugify } from "@/shared/functions";
-import {
-  Card,
-  Link as JoyLink,
-  Stack,
-  SvgIconProps,
-  Typography,
-  useTheme,
-} from "@mui/joy";
+import { SvgIconProps } from "@mui/joy/SvgIcon/SvgIconProps";
+import Card from "@mui/joy/Card";
+import JoyLink from "@mui/joy/Link";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import { useTheme } from "@mui/joy/styles/ThemeProvider";
+
 import Link from "next/link";
 import React from "react";
 

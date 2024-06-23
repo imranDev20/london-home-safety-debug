@@ -1,12 +1,12 @@
-import { CorporateFare, Home, Textsms } from "@mui/icons-material";
-import {
-  Button,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-  Link as JoyLink,
-} from "@mui/joy";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import HomeIcon from "@mui/icons-material/Home";
+import TextsmsIcon from "@mui/icons-material/Textsms";
+import Button from "@mui/joy/Button";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import JoyLink from "@mui/joy/Link";
 import Link from "next/link";
 import React from "react";
 
@@ -46,7 +46,7 @@ export default function BookNow() {
           }}
         >
           <Button
-            startDecorator={<Home />}
+            startDecorator={<HomeIcon />}
             size="lg"
             component={Link}
             sx={{
@@ -57,7 +57,7 @@ export default function BookNow() {
             Residential Property
           </Button>
           <Button
-            startDecorator={<CorporateFare />}
+            startDecorator={<CorporateFareIcon />}
             size="lg"
             component={Link}
             sx={{
@@ -69,7 +69,7 @@ export default function BookNow() {
           </Button>
 
           <Button
-            startDecorator={<Textsms />}
+            startDecorator={<TextsmsIcon />}
             size="lg"
             color="secondary"
             component={JoyLink}

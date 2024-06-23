@@ -1,4 +1,4 @@
-import { Box } from "@mui/joy";
+import Box from "@mui/joy/Box";
 import Hero from "./_components/hero";
 import ServiceCategories from "./_components/service-categories";
 import Testimonials from "./_components/testimonials/testimonials";

@@ -1,4 +1,9 @@
-import { PaletteBackground, PaletteRange, extendTheme } from "@mui/joy/styles";
+import {
+  PaletteBackground,
+  PaletteRange,
+} from "@mui/joy/styles/types/colorSystem";
+import extendTheme from "@mui/joy/styles/extendTheme";
+
 import { Outfit, Source_Code_Pro } from "next/font/google";
 import { hexToRgba } from "./functions";
 
