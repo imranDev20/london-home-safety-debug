@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+import Testimonial from "../api/_models/Testimonial";
 import testimonialSchema from "./schemas/testimonial-schema";
 
 export type FormState = {
@@ -17,19 +19,35 @@ export async function createTestimonialAction(
   };
 
   try {
-    const parseResult = testimonialSchema.safeParse(parsedData);
-    console.log(parseResult);
+    const validationResult = testimonialSchema.safeParse(parsedData);
 
-    if (!parseResult.success) {
-      throw new Error("Invalid data");
+    if (!validationResult.success) {
+      // If validation fails, return the error messages
+      const errorMessages = validationResult.error.errors
+        .map((err) => err.message)
+        .join(", ");
+      return {
+        message: `Validation failed: ${errorMessages}`,
+        success: false,
+      };
     }
 
+    // If validation succeeds, create a new testimonial using Mongoose
+    const newTestimonial = new Testimonial(validationResult.data);
+    await newTestimonial.save();
+
+    // Revalidate the page to update the UI
+    revalidatePath("/");
+
     return {
-      message: "Created Successfully",
+      message: "Testimonial created successfully!",
+      success: true,
     };
   } catch (error: any) {
+    console.error("Error creating testimonial:", error);
     return {
-      message: error?.message,
+      message: "An error occurred while creating the testimonial.",
+      success: false,
     };
   }
 

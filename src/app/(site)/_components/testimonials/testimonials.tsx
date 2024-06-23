@@ -1,29 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Star } from "@mui/icons-material";
 import { Box, Container, Grid, Sheet, Typography } from "@mui/joy";
 import TestimonialModal from "./testimonial-modal";
-import TestimonialSlider from "./testimonial-slider";
-import Testimonial from "@/app/api/_models/Testimonial";
-import { ITestimonial } from "@/types/testimonial";
-import dbConnect from "@/app/api/_lib/dbConnect";
-import "@/styles/embla.css";
+import TestimonialDataWrapper from "./testimonial-data-wrapper";
+import TestimonialSkeleton from "./testimonial-skeleton";
 
-async function fetchTestimonials(page: number): Promise<ITestimonial[]> {
-  await dbConnect();
-  const limit = 10;
-  const skip = (page - 1) * limit;
-
-  const testimonials: ITestimonial[] = await Testimonial.find({})
-    .sort({ createdAt: -1 }) // Sort by createdAt in descending order
-    .skip(skip)
-    .limit(limit);
-
-  return testimonials;
-}
-
-export default async function Testimonials() {
-  const testimonialData = await fetchTestimonials(1);
-
+export default function Testimonials() {
   return (
     <Sheet
       sx={{
@@ -74,7 +56,9 @@ export default async function Testimonials() {
             </Box>
           </Grid>
           <Grid xs={12} md={8}>
-            <TestimonialSlider slides={testimonialData} />
+            <Suspense fallback={<TestimonialSkeleton />}>
+              <TestimonialDataWrapper />
+            </Suspense>
           </Grid>
         </Grid>
 
