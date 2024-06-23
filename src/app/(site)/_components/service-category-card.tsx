@@ -8,6 +8,7 @@ import { useTheme } from "@mui/joy/styles/ThemeProvider";
 
 import Link from "next/link";
 import React from "react";
+import { PRIMARY_COLOUR } from "@/shared/constants";
 
 interface ServiceProps {
   service: {
@@ -19,8 +20,6 @@ interface ServiceProps {
 }
 
 export default function ServiceCategoryCard({ service }: ServiceProps) {
-  const theme = useTheme();
-
   return (
     <JoyLink
       component={Link}
@@ -36,7 +35,7 @@ export default function ServiceCategoryCard({ service }: ServiceProps) {
           backgroundColor: "white",
           boxShadow: "md",
           ":hover": {
-            backgroundColor: theme.palette.primary[500],
+            backgroundColor: PRIMARY_COLOUR[500],
             ".MuiTypography-root": {
               color: "white",
             },

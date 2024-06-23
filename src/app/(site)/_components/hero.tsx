@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 
@@ -8,17 +7,14 @@ import Container from "@mui/joy/Container";
 import Grid from "@mui/joy/Grid";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
-import { useTheme } from "@mui/joy/styles/ThemeProvider";
 import PhoneIcon from "@mui/icons-material/Phone";
 
 import BackgroundImage from "@/images/hero-image-new.jpeg";
 import { hexToRgba } from "@/shared/functions";
-import { PHONE_NO } from "@/shared/constants";
+import { PHONE_NO, SECONDARY_COLOUR } from "@/shared/constants";
 import BookNow from "./book-now";
 
 export default function Hero() {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
@@ -78,8 +74,7 @@ export default function Hero() {
                       Safeguarding London&apos;s{" "}
                       <Typography
                         sx={{
-                          color:
-                            theme.colorSchemes.light.palette.secondary[600],
+                          color: SECONDARY_COLOUR[600],
                         }}
                         component="span"
                       >
@@ -88,8 +83,7 @@ export default function Hero() {
                       with Premier{" "}
                       <Typography
                         sx={{
-                          color:
-                            theme.colorSchemes.light.palette.secondary[600],
+                          color: SECONDARY_COLOUR[600],
                         }}
                         component="span"
                       >
