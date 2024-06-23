@@ -18,10 +18,10 @@ import {
 import HookFormError from "@/app/_components/common/hook-form-error";
 import StarRating from "@/app/_components/common/star-rating";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
-import { createTestimonialAction } from "../actions";
+import { createTestimonialAction } from "../../actions";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import testimonialSchema from "../schemas/testimonial-schema";
+import testimonialSchema from "../../schemas/testimonial-schema";
 import { useFormState } from "react-dom";
 
 export default function TestimonialForm({
@@ -32,6 +32,7 @@ export default function TestimonialForm({
   setOpenModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const [state, formAction] = useFormState(createTestimonialAction, {
+    success: false,
     message: "",
   });
 
@@ -48,42 +49,20 @@ export default function TestimonialForm({
     defaultValues: {
       name: "",
       subject: "",
-      rating: 0,
+      rating: 5,
       content: "",
     },
   });
   const { enqueueSnackbar } = useSnackbar();
-  // const queryClient = useQueryClient();
-
-  // const {
-  //   mutateAsync: createTestimonialMutate,
-  //   isPending: isCreateTestimonialPending,
-  // } = useMutation({
-  //   mutationFn: (testimonialData: TestimonialInput) =>
-  //     createTestimonial(testimonialData),
-
-  //   onSuccess: (response) => {
-  //     queryClient.invalidateQueries({ queryKey: ["testimonials"] });
-  //     console.log(response);
-  //     reset();
-  //     setOpenModal(false);
-  //     console.log(response);
-  //     enqueueSnackbar(response.message, "success");
-  //   },
-  //   onError: (error) => enqueueSnackbar(error.message, "error"),
-  // });
-
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-  //   // createTestimonialMutate(data);
-  // };
 
   useEffect(() => {
     if (state.message && state.message !== prevMessage.current) {
-      enqueueSnackbar(state.message, "success");
+      enqueueSnackbar(state.message, state.success ? "success" : "error");
       prevMessage.current = state.message;
+
+      if (state.success) setOpenModal(false);
     }
-  }, [state, enqueueSnackbar]);
+  }, [state, enqueueSnackbar, setOpenModal]);
 
   // Invoke the form handlesubmit using ref
   const formRef = useRef<HTMLFormElement>(null);

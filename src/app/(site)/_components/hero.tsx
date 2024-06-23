@@ -33,7 +33,6 @@ export default function Hero() {
         src={BackgroundImage}
         alt="Background"
         fill
-        loading="lazy"
         placeholder="blur"
         style={{ objectFit: "cover" }}
       />
