@@ -1,18 +1,14 @@
 import { IOrder, IPreOrder } from "@/types/orders";
 import Order from "../_models/Order";
 import jsPDF from "jspdf";
-import {
-  ADDRESS,
-  CONGESTION_ZONE_OPTIONS,
-  EMAIL_ADDRESS,
-  PARKING_OPTIONS,
-  PHONE_NO,
-} from "@/shared/constants";
+
 import {
   calculateOrderTotalCost,
   calculatePreOrderTotalCost,
 } from "@/shared/functions";
-import { IUser } from "@/types/user";
+import { IUser } from "@/types/users";
+import { ADDRESS, EMAIL_ADDRESS, PHONE_NO } from "@/shared/constants";
+import { CONGESTION_ZONE_OPTIONS, PARKING_OPTIONS } from "@/shared/data";
 
 export async function generateInvoiceId() {
   const mostRecentOrder = await Order.findOne().sort({ createdAt: -1 }).exec();

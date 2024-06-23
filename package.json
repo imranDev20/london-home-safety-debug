@@ -12,6 +12,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@hookform/error-message": "^2.0.1",
+    "@hookform/resolvers": "^3.6.0",
     "@mui/icons-material": "^5.15.19",
     "@mui/joy": "^5.0.0-beta.36",
     "@mui/material": "npm:@mui/joy@latest",
@@ -21,17 +22,18 @@
     "embla-carousel": "^8.1.5",
     "embla-carousel-react": "^8.1.5",
     "jose": "^5.4.0",
+    "jspdf": "^2.5.1",
     "mongoose": "^8.4.1",
-    "next": "14.2.3",
+    "next": "14.2.4",
     "nextjs-toploader": "^1.6.12",
-    "pure-react-carousel": "^1.30.1",
+    "node-mailjet": "^6.0.5",
     "react": "^18",
     "react-dom": "^18",
     "react-google-recaptcha-v3": "^1.10.1",
-    "react-hook-form": "^7.51.5",
-    "react-slugify": "^4.0.0",
+    "react-hook-form": "^7.52.0",
     "sharp": "^0.33.4",
-    "slugify": "^1.6.6"
+    "slugify": "^1.6.6",
+    "zod": "^3.23.8"
   },
   "resolutions": {
     "@mui/material": "npm:@mui/joy@latest"

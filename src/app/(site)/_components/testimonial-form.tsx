@@ -1,12 +1,12 @@
-import React, { Dispatch, SetStateAction } from "react";
+"use client";
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import {
-  Box,
   DialogContent,
   FormControl,
   FormLabel,
@@ -17,10 +17,12 @@ import {
 } from "@mui/joy";
 import HookFormError from "@/app/_components/common/hook-form-error";
 import StarRating from "@/app/_components/common/star-rating";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createTestimonial } from "@/services/testimonial.services";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
-import { ITestimonial, TestimonialInput } from "@/types/testimonial";
+import { createTestimonialAction } from "../actions";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import testimonialSchema from "../schemas/testimonial-schema";
+import { useFormState } from "react-dom";
 
 export default function TestimonialForm({
   openModal,
@@ -29,43 +31,62 @@ export default function TestimonialForm({
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
 }) {
+  const [state, formAction] = useFormState(createTestimonialAction, {
+    message: "",
+  });
+
+  // make sure that adding snackbar to the dep array doesn't cause infinite loop.
+  const prevMessage = useRef(state.message);
+
   const {
     handleSubmit,
     formState: { errors },
     control,
-    reset,
-  } = useForm<TestimonialInput>({
+    register,
+  } = useForm({
+    resolver: zodResolver(testimonialSchema),
     defaultValues: {
       name: "",
       subject: "",
-      rating: 5,
+      rating: 0,
       content: "",
     },
   });
   const { enqueueSnackbar } = useSnackbar();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const {
-    mutateAsync: createTestimonialMutate,
-    isPending: isCreateTestimonialPending,
-  } = useMutation({
-    mutationFn: (testimonialData: TestimonialInput) =>
-      createTestimonial(testimonialData),
+  // const {
+  //   mutateAsync: createTestimonialMutate,
+  //   isPending: isCreateTestimonialPending,
+  // } = useMutation({
+  //   mutationFn: (testimonialData: TestimonialInput) =>
+  //     createTestimonial(testimonialData),
 
-    onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ["testimonials"] });
-      console.log(response);
-      reset();
-      setOpenModal(false);
-      console.log(response);
-      enqueueSnackbar(response.message, "success");
-    },
-    onError: (error) => enqueueSnackbar(error.message, "error"),
-  });
+  //   onSuccess: (response) => {
+  //     queryClient.invalidateQueries({ queryKey: ["testimonials"] });
+  //     console.log(response);
+  //     reset();
+  //     setOpenModal(false);
+  //     console.log(response);
+  //     enqueueSnackbar(response.message, "success");
+  //   },
+  //   onError: (error) => enqueueSnackbar(error.message, "error"),
+  // });
 
-  const onSubmit: SubmitHandler<TestimonialInput> = async (data) => {
-    createTestimonialMutate(data);
-  };
+  // const onSubmit = async (data) => {
+  //   console.log(data);
+  //   // createTestimonialMutate(data);
+  // };
+
+  useEffect(() => {
+    if (state.message && state.message !== prevMessage.current) {
+      enqueueSnackbar(state.message, "success");
+      prevMessage.current = state.message;
+    }
+  }, [state, enqueueSnackbar]);
+
+  // Invoke the form handlesubmit using ref
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <React.Fragment>
@@ -100,13 +121,19 @@ export default function TestimonialForm({
             feedback helps us improve and serve you better.
           </DialogContent>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form
+            action={formAction}
+            ref={formRef}
+            onSubmit={(e) => {
+              e.preventDefault();
+              return handleSubmit(() => {
+                formAction(new FormData(formRef.current!));
+              })(e);
+            }}
+          >
             <Stack spacing={2}>
               <Controller
                 name="name"
-                rules={{
-                  required: "Name is required",
-                }}
                 control={control}
                 render={({ field }) => (
                   <FormControl error={!!errors.name}>
@@ -123,9 +150,6 @@ export default function TestimonialForm({
 
               <Controller
                 name="subject"
-                rules={{
-                  required: "Subject is required",
-                }}
                 control={control}
                 render={({ field }) => (
                   <FormControl error={!!errors.subject}>
@@ -142,14 +166,16 @@ export default function TestimonialForm({
 
               <Controller
                 name="rating"
-                rules={{
-                  required: "Rating is required",
-                }}
                 control={control}
-                render={({ field: { value, onChange } }) => (
+                render={({ field }) => (
                   <FormControl error={!!errors.rating}>
                     <FormLabel>Rating</FormLabel>
-                    <StarRating value={value} onChange={onChange} />
+                    <input
+                      type="hidden"
+                      {...register("rating", { valueAsNumber: true })}
+                    />
+
+                    <StarRating {...field} />
                     <HookFormError name="rating" errors={errors} />
                   </FormControl>
                 )}
@@ -157,9 +183,6 @@ export default function TestimonialForm({
 
               <Controller
                 name="content"
-                rules={{
-                  required: "Description is required",
-                }}
                 control={control}
                 render={({ field }) => (
                   <FormControl error={!!errors.content}>
@@ -175,9 +198,7 @@ export default function TestimonialForm({
                 )}
               />
 
-              <Button loading={isCreateTestimonialPending} type="submit">
-                Submit
-              </Button>
+              <Button type="submit">Submit</Button>
             </Stack>
           </form>
         </ModalDialog>

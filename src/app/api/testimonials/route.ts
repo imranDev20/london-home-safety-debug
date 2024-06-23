@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
     const totalCount = await Testimonial.countDocuments(
       userId ? { user: userId } : {}
     );
+
     const totalPages = Math.ceil(totalCount / limit);
 
     return NextResponse.json(

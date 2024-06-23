@@ -1,7 +1,8 @@
 // tokenUtils.ts
 import { NextRequest, NextResponse } from "next/server";
-import { verifyJWT } from "@/app/api/_lib/verifyJWT";
+
 import { formatResponse } from "@/shared/functions";
+import { verifyJWT } from "./verify-jwt";
 
 export async function validateToken(req: NextRequest) {
   const token = req.cookies.get("accessToken")?.value;
