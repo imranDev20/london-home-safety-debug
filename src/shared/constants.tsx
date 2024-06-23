@@ -17,6 +17,19 @@ export const PHONE_NO: string = "020 8146 6698";
 export const WEBSITE_URL: string = "www.londonhomesafety.co.uk";
 export const EMAIL_ADDRESS: string = "info@londonhomesafety.co.uk";
 
+export const PRIMARY_COLOUR = {
+  500: "#267ECE",
+  600: "#206AB2",
+};
+export const SECONDARY_COLOUR = {
+  500: "#FFC527",
+  600: "#E6B322",
+};
+
+export const BACKGROUND_COLOUR = {
+  level5: "#EAF3FB",
+};
+
 export const ORDER_STATUS_COLORS = {
   pending_payment: "#FFC107",
   payment_completed: "#4CAF50",

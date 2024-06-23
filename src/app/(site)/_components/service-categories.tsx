@@ -1,16 +1,14 @@
-"use client";
 import Container from "@mui/joy/Container";
 import Grid from "@mui/joy/Grid";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
-import { useTheme } from "@mui/joy/styles/ThemeProvider";
 import React from "react";
-
 import ServiceCategoryCard from "./service-category-card";
 import EicrOutlinedIcon from "@/app/_components/icons/eicr-outlined-icon";
 import GasOutlinedIcon from "@/app/_components/icons/gas-outlined-icon";
 import FireAlarmBellIcon from "@/app/_components/icons/fire-alarm-bell-icon";
 import HealthHeartIcon from "@/app/_components/icons/health-heart-icon";
+import { BACKGROUND_COLOUR } from "@/shared/constants";
 
 const SERVICES_PRICE = [
   {
@@ -50,13 +48,11 @@ const SERVICES_PRICE = [
 ];
 
 export default function ServiceCategories() {
-  const theme = useTheme();
-
   return (
     <Sheet
       variant="soft"
       sx={{
-        backgroundColor: theme.palette.background.level5,
+        backgroundColor: BACKGROUND_COLOUR.level5,
       }}
       id="categories"
     >
