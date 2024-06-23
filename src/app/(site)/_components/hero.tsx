@@ -34,6 +34,7 @@ export default function Hero() {
         alt="Background"
         fill
         priority
+        quality={80}
         placeholder="blur"
         style={{ objectFit: "cover" }}
       />
