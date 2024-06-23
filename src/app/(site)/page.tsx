@@ -22,14 +22,10 @@ const Testimonials = dynamic(
 
 export default function Home() {
   return (
-    <Box
-      sx={{
-        height: 10000,
-      }}
-    >
+    <>
       <Hero />
       <ServiceCategories />
       <Testimonials />
-    </Box>
+    </>
   );
 }

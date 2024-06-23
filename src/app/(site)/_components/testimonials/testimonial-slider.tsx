@@ -11,6 +11,7 @@ import {
 } from "./embla-arrow-buttons";
 import { ITestimonial } from "@/types/testimonial";
 import TestimonialCard from "./testimonial-card";
+import styles from "@/styles/Embla.module.css";
 
 type PropType = {
   slides: ITestimonial[];
@@ -37,19 +38,19 @@ const TestimonialSlider: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
+    <div className={styles.embla}>
+      <div className={styles.embla__viewport} ref={emblaRef}>
+        <div className={styles.embla__container}>
           {slides.map((slide, index) => (
-            <div className="embla__slide" key={index}>
+            <div className={styles.embla__slide} key={index}>
               <TestimonialCard slide={slide} />
             </div>
           ))}
         </div>
       </div>
 
-      <div className="embla__controls">
-        <div className="embla__buttons">
+      <div className={styles.embla__controls}>
+        <div className={styles.embla__buttons}>
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
@@ -66,7 +67,7 @@ const TestimonialSlider: React.FC<PropType> = (props) => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

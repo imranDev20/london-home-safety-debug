@@ -17,6 +17,8 @@ import BookNow from "./book-now";
 export default function Hero() {
   return (
     <Box
+      id="hero"
+      component="section"
       sx={{
         position: "relative",
         mt: {
