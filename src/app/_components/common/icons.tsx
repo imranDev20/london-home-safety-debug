@@ -1,4 +1,6 @@
 "use client";
+
+// delete this one
 import { createSvgIcon } from "@mui/joy/utils";
 import GasSafteySvg from "@/images/icons/gas-safety.svg";
 import PatSvg from "@/images/icons/pat-icon.svg";

@@ -77,3 +77,35 @@ export const NAV_ITEMS = [
   },
   { label: "Contact", path: "/contact" },
 ];
+export const CONGESTION_ZONE_OPTIONS = [
+  {
+    value: "congestion",
+    name: "Yes",
+    nameAlt: "In Congestion Zone",
+    cost: 18,
+  },
+  {
+    value: "non_congestion",
+    name: "No",
+    nameAlt: "Outside Congestion Zone",
+    cost: 0,
+  },
+];
+
+export const PARKING_OPTIONS = [
+  {
+    value: "free",
+    name: "Free Parking Available",
+    cost: 0,
+  },
+  {
+    value: "paid",
+    name: "Paid Parking Available",
+    cost: 5,
+  },
+  {
+    value: "unavailable",
+    name: "No Parking Available",
+    cost: 5,
+  },
+];

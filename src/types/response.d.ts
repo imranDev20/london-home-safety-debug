@@ -1,7 +1,7 @@
 import { Pagination } from "./misc";
 import { IOrder, IPreOrder, InvoiceData } from "./orders";
 import { ITestimonial } from "./testimonial";
-import { ICustomer, IEngineer, IUser, IUserBasicInfo } from "./user";
+import { ICustomer, IEngineer, IUser, IUserBasicInfo } from "./users";
 
 export type SuccessResponseWithArray<T> = {
   data: T[];

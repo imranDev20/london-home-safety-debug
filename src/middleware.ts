@@ -29,7 +29,6 @@ export async function middleware(req: NextRequest) {
         try {
           const user = await verifyJWT(refreshToken);
           token = await generateAccessToken(user);
-          console.log(token);
 
           const response = NextResponse.next();
 
