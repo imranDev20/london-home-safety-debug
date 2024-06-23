@@ -50,6 +50,7 @@ const SERVICES_PRICE = [
 export default function ServiceCategories() {
   return (
     <Sheet
+      component="section"
       variant="soft"
       sx={{
         backgroundColor: BACKGROUND_COLOUR.level5,

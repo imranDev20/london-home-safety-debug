@@ -8,6 +8,7 @@ import TestimonialSkeleton from "./testimonial-skeleton";
 export default function Testimonials() {
   return (
     <Sheet
+      component="section"
       sx={{
         mt: 5,
         py: 10,

@@ -1,6 +1,5 @@
 import React from "react";
 import TestimonialSlider from "./testimonial-slider";
-import "@/styles/embla.css";
 import dbConnect from "@/app/api/_lib/dbConnect";
 import { ITestimonial } from "@/types/testimonial";
 import Testimonial from "@/app/api/_models/Testimonial";
