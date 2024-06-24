@@ -5,7 +5,6 @@ import Container from "@mui/joy/Container";
 import IconButton from "@mui/joy/IconButton";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
-import { useTheme } from "@mui/joy/styles";
 import React from "react";
 
 import { East, ExpandMore, Login } from "@mui/icons-material";
@@ -18,6 +17,12 @@ import NavbarDropdown from "./navbar-dropdown";
 import { hexToRgba } from "@/shared/functions";
 import useCurrentUser from "@/shared/hooks/use-current-user";
 import { NAV_ITEMS } from "@/shared/data";
+import {
+  ACCENT_COLOR,
+  PRIMARY_COLOUR,
+  SECONDARY_COLOUR,
+  TEXT_COLOR,
+} from "@/shared/constants";
 
 export default function Navbar({
   setOpenMobileDrawer,
@@ -26,7 +31,6 @@ export default function Navbar({
   setOpenMobileDrawer: Dispatch<SetStateAction<boolean>>;
   isInverted?: boolean;
 }) {
-  const theme = useTheme();
   const pathname = usePathname();
   const { userData, isPending: isCurrentUserPending } = useCurrentUser();
 
@@ -90,16 +94,16 @@ export default function Navbar({
                         ? {
                             color:
                               item.path === pathname
-                                ? theme.palette.secondary[500]
+                                ? SECONDARY_COLOUR[500]
                                 : "white",
                             backgroundColor:
                               item.path === pathname
-                                ? hexToRgba(theme.palette.secondary[500], 0.2)
+                                ? hexToRgba(SECONDARY_COLOUR[500], 0.2)
                                 : "transparent",
                             ":hover": {
-                              color: theme.palette.secondary[500],
+                              color: SECONDARY_COLOUR[500],
                               backgroundColor: hexToRgba(
-                                theme.palette.secondary[500],
+                                SECONDARY_COLOUR[500],
                                 0.2
                               ),
                             },
@@ -107,16 +111,16 @@ export default function Navbar({
                         : {
                             color:
                               item.path === pathname
-                                ? theme.palette.primary[500]
-                                : theme.palette.text.primary,
+                                ? PRIMARY_COLOUR[500]
+                                : TEXT_COLOR.primary,
                             backgroundColor:
                               item.path === pathname
-                                ? hexToRgba(theme.palette.primary[500], 0.1)
+                                ? hexToRgba(PRIMARY_COLOUR[500], 0.1)
                                 : "transparent",
                             ":hover": {
-                              color: theme.palette.primary[500],
+                              color: PRIMARY_COLOUR[500],
                               backgroundColor: hexToRgba(
-                                theme.palette.primary[500],
+                                PRIMARY_COLOUR[500],
                                 0.1
                               ),
                             },
@@ -172,13 +176,13 @@ export default function Navbar({
                               borderRadius: "sm",
                               cursor: "pointer",
                               justifyContent: "flex-start",
-                              color: theme.palette.text.primary,
+                              color: TEXT_COLOR.primary,
                               ":hover": {
                                 backgroundColor: hexToRgba(
-                                  theme.palette.primary[500],
+                                  PRIMARY_COLOUR[500],
                                   0.1
                                 ),
-                                color: theme.palette.primary[500],
+                                color: PRIMARY_COLOUR[500],
                               },
                             }}
                           >
@@ -222,14 +226,14 @@ export default function Navbar({
                                         fontSize: "md",
                                         borderRadius: "sm",
                                         cursor: "pointer",
-                                        color: theme.palette.text.primary,
+                                        color: TEXT_COLOR.primary,
                                         justifyContent: "flex-start",
                                         ":hover": {
                                           backgroundColor: hexToRgba(
-                                            theme.palette.primary[500],
+                                            PRIMARY_COLOUR[500],
                                             0.1
                                           ),
-                                          color: theme.palette.primary[500],
+                                          color: PRIMARY_COLOUR[500],
                                         },
                                       }}
                                     >
@@ -290,7 +294,7 @@ export default function Navbar({
                     md: 0,
                   },
                   ":hover": {
-                    backgroundColor: theme.palette.accent1[500],
+                    backgroundColor: ACCENT_COLOR.accent1,
                     color: "white",
                   },
                 }}

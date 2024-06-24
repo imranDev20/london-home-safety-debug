@@ -27,7 +27,16 @@ export const SECONDARY_COLOUR = {
 };
 
 export const BACKGROUND_COLOUR = {
+  level3: "#FAFAFA",
   level5: "#EAF3FB",
+};
+
+export const ACCENT_COLOR = {
+  accent1: "#434343",
+};
+
+export const TEXT_COLOR = {
+  primary: "#222222",
 };
 
 export const ORDER_STATUS_COLORS = {
