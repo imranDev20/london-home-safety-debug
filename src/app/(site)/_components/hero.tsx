@@ -27,7 +27,7 @@ export default function Hero() {
         },
       }}
     >
-      <Image
+      {/* <Image
         src={BackgroundImage}
         alt="Background"
         fill
@@ -35,7 +35,7 @@ export default function Hero() {
         quality={40}
         placeholder="blur"
         style={{ objectFit: "cover" }}
-      />
+      /> */}
 
       <Box
         sx={{

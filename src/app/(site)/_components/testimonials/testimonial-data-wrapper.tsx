@@ -1,14 +1,8 @@
 import React from "react";
-// import TestimonialSlider from "./testimonial-slider";
+import TestimonialSlider from "./testimonial-slider";
 import dbConnect from "@/app/api/_lib/dbConnect";
 import { ITestimonial } from "@/types/testimonial";
 import Testimonial from "@/app/api/_models/Testimonial";
-import dynamic from "next/dynamic";
-
-const TestimonialSlider = dynamic(() => import("./testimonial-slider"), {
-  loading: () => <p>Loading...</p>,
-  ssr: false, // Set to true if you want server-side rendering
-});
 
 async function fetchTestimonials(page: number): Promise<ITestimonial[]> {
   await dbConnect();
