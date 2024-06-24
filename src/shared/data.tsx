@@ -1,7 +1,19 @@
-import { HomeRounded } from "@mui/icons-material";
+import BoilerOutlinedIcon from "@/app/_components/icons/boiler-outlined-icon";
+import EicrOutlinedTwoIcon from "@/app/_components/icons/eicr-outlined-two-icon";
+import EpcOutlinedIcon from "@/app/_components/icons/epc-outlined-icon";
+import EvChargerOutlinedIcon from "@/app/_components/icons/ev-charger-outlined-icon";
+import FireAlarmOutlinedIcon from "@/app/_components/icons/fire-alarm-outlined-icon";
+import FireAlarmOutlinedTwoIcon from "@/app/_components/icons/fire-alarm-outlined-two-icon";
+import FireRiskOutlinedIcon from "@/app/_components/icons/fire-risk-outlined-icon";
+import FuseBoxOutlinedIcon from "@/app/_components/icons/fuse-box-outlined-icon";
+import GasOutlinedIcon from "@/app/_components/icons/gas-outlined-icon";
+import PatOutlinedIcon from "@/app/_components/icons/pat-outlined-icon";
+import ScrewDriverOutlinedIcon from "@/app/_components/icons/screw-driver-outlined-icon";
+
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 export const NAV_ITEMS = [
-  { label: "Home", path: "/", icon: <HomeRounded /> },
+  { label: "Home", path: "/", icon: <HomeRoundedIcon /> },
   { label: "About", path: "/about" },
   {
     label: "Services",
@@ -14,26 +26,35 @@ export const NAV_ITEMS = [
           {
             label: "Energy Certificate",
             path: "/epc",
+            abbr: "EPC",
+            Icon: EpcOutlinedIcon,
           },
           {
-            label: "EICR",
+            label: "Electrical Installation Condition Report",
             path: "/eicr",
+            abbr: "EICR",
+            Icon: EicrOutlinedTwoIcon,
           },
           {
-            label: "PAT Testing",
+            label: "Portable Appliance Testing",
             path: "/pat",
+            abbr: "PAT",
+            Icon: PatOutlinedIcon,
           },
           {
             label: "Fuse Box Installation",
             path: "/fuse-box-installation",
+            Icon: FuseBoxOutlinedIcon,
           },
           {
             label: "Electrical Repairs",
             path: "/electrical-repairs",
+            Icon: ScrewDriverOutlinedIcon,
           },
           {
             label: "EV Charger Installation",
             path: "/ev-charger-installation",
+            Icon: EvChargerOutlinedIcon,
           },
         ],
       },
@@ -44,10 +65,12 @@ export const NAV_ITEMS = [
           {
             label: "Gas Certificate & Repairs",
             path: "/gas-certificate-repair",
+            Icon: GasOutlinedIcon,
           },
           {
             label: "Boiler Service & Repair",
             path: "/boiler-service-repair",
+            Icon: BoilerOutlinedIcon,
           },
         ],
       },
@@ -58,14 +81,17 @@ export const NAV_ITEMS = [
           {
             label: "Fire Risk Assessment",
             path: "/fire-risk-assessment",
+            Icon: FireRiskOutlinedIcon,
           },
           {
-            label: "Boiler Service & Repair",
+            label: "Fire Alarm Certificate",
             path: "/fire-alarm-certificate",
+            Icon: FireAlarmOutlinedIcon,
           },
           {
             label: "Fire Alarm Installation",
             path: "/fire-alarm-installation",
+            Icon: FireAlarmOutlinedTwoIcon,
           },
         ],
       },
