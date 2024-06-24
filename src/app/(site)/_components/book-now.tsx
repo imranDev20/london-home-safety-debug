@@ -46,6 +46,7 @@ export default function BookNow() {
           }}
         >
           <Button
+            prefetch={false}
             startDecorator={<HomeIcon />}
             size="lg"
             component={Link}
@@ -57,6 +58,7 @@ export default function BookNow() {
             Residential Property
           </Button>
           <Button
+            prefetch={false}
             startDecorator={<CorporateFareIcon />}
             size="lg"
             component={Link}
