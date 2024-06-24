@@ -11,8 +11,9 @@ import PhoneIcon from "@mui/icons-material/Phone";
 
 import BackgroundImage from "@/images/hero-image-new.jpeg";
 import { hexToRgba } from "@/shared/functions";
-import { PHONE_NO, SECONDARY_COLOUR } from "@/shared/constants";
+import { SECONDARY_COLOUR } from "@/shared/constants";
 import BookNow from "./book-now";
+import { PHONE_NO } from "@/shared/data";
 
 export default function Hero() {
   return (

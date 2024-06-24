@@ -10,6 +10,7 @@ import Container from "@mui/joy/Container";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "@/shared/constants";
+import { PHONE_NO } from "@/shared/data";
 
 const Topbar = () => {
   return (
@@ -56,7 +57,7 @@ const Topbar = () => {
                 color: "white",
               }}
             >
-              07480 062995
+              {PHONE_NO}
             </Typography>
           </Box>
 
@@ -80,7 +81,7 @@ const Topbar = () => {
                 color: "white",
               }}
             >
-              0191 743 1448
+              {PHONE_NO}
             </Typography>
           </Box>
 

@@ -19,10 +19,11 @@ import {
 import HookFormError from "@/app/_components/common/hook-form-error";
 import StarRating from "@/app/_components/common/star-rating";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
-import { createTestimonialAction } from "../../actions";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import testimonialSchema from "../../schemas/testimonial-schema";
+import testimonialSchema from "../../_schemas/testimonial-schema";
 import { useFormState, useFormStatus } from "react-dom";
+import { createTestimonialAction } from "../../_actions/testimonial-actions";
 
 function SubmitButton({ isValid }: { isValid: boolean }) {
   const { pending } = useFormStatus();
@@ -98,6 +99,7 @@ export default function TestimonialForm({
             sx={{
               mb: 2,
               justifyContent: "center",
+              textAlign: "center",
             }}
           >
             Share Your Experience

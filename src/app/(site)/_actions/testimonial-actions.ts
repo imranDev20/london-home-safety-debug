@@ -1,9 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import Testimonial from "../api/_models/Testimonial";
-import testimonialSchema from "./schemas/testimonial-schema";
-import dbConnect from "../api/_lib/dbConnect";
+import testimonialSchema from "../_schemas/testimonial-schema";
+import dbConnect from "@/app/api/_lib/dbConnect";
+import Testimonial from "@/app/api/_models/Testimonial";
 
 export type FormState = {
   message: string;

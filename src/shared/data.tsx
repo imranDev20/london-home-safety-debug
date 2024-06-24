@@ -77,6 +77,35 @@ export const NAV_ITEMS = [
   },
   { label: "Contact", path: "/contact" },
 ];
+
+export const OTHER_PAGES = [
+  {
+    label: "Privacy Policy",
+    path: "/privacy-policy",
+  },
+  {
+    label: "Terms & Conditions",
+    path: "/terms-and-conditions",
+  },
+  {
+    label: "Cookie Policy",
+    path: "/cookie-policy",
+  },
+  {
+    label: "Health & Safety Policy",
+    path: "/health-and-safety-policy",
+  },
+];
+
+export const ALL_SERVICES =
+  NAV_ITEMS.find((item) => item.label === "Services")?.children?.flatMap(
+    (category) =>
+      (category.children || []).map((service) => ({
+        ...service,
+        categoryPath: category.path,
+      }))
+  ) ?? [];
+
 export const CONGESTION_ZONE_OPTIONS = [
   {
     value: "congestion",
@@ -109,3 +138,10 @@ export const PARKING_OPTIONS = [
     cost: 5,
   },
 ];
+
+export const FIXED_HEIGHT: number = 285;
+export const BUSINESS_NAME: string = "London Home Safety Limited";
+export const ADDRESS: string = "43 Felton Road, Barking, London IG11 7YA";
+export const PHONE_NO: string = "020 8146 6698";
+export const WEBSITE_URL: string = "www.londonhomesafety.co.uk";
+export const EMAIL_ADDRESS: string = "info@londonhomesafety.co.uk";

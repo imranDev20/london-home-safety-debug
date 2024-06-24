@@ -35,7 +35,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ slide }) => {
       }}
     >
       <Card
-        variant="plain"
+        variant="outlined"
         sx={{
           boxShadow: "lg",
           width: "100%",
