@@ -10,6 +10,8 @@ import {
 } from "@/types/orders";
 import { IUser } from "@/types/users";
 
+import Mailjet from "node-mailjet";
+
 export function snakeCaseToNormalText(snakeCaseString: string) {
   return snakeCaseString?.replace(/_/g, " ")?.toLowerCase();
 }
@@ -99,6 +101,7 @@ export const formatResponse = <T>(
   message: string;
   pagination?: Pagination;
 } => {
+  console.log("first");
   return {
     success,
     ...(data ? { data } : {}),

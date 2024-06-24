@@ -1,5 +1,5 @@
 import { IOrder, IPreOrder } from "@/types/orders";
-import Order from "../_models/Order";
+
 import jsPDF from "jspdf";
 
 import {
@@ -9,6 +9,7 @@ import {
 import { IUser } from "@/types/users";
 import { ADDRESS, EMAIL_ADDRESS, PHONE_NO } from "@/shared/data";
 import { CONGESTION_ZONE_OPTIONS, PARKING_OPTIONS } from "@/shared/data";
+import Order from "@/app/api/_models/Order";
 
 export async function generateInvoiceId() {
   const mostRecentOrder = await Order.findOne().sort({ createdAt: -1 }).exec();

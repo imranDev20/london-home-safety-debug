@@ -1,7 +1,7 @@
-import dbConnect from "@/app/api/_lib/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 import Testimonial from "../_models/Testimonial";
 import { formatResponse } from "@/shared/functions";
+import dbConnect from "../_lib/dbConnect";
 
 export async function POST(req: NextRequest) {
   try {

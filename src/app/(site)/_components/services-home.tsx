@@ -14,7 +14,6 @@ import { hexToRgba } from "@/shared/functions";
 
 import Image from "next/image";
 import backgroundImage from "@/images/about-bg.jpeg";
-import ElectricImage from "@/images/electric.jpg";
 
 import {
   BACKGROUND_COLOUR,
@@ -22,104 +21,7 @@ import {
   SECONDARY_COLOUR,
   TEXT_COLOR,
 } from "@/shared/constants";
-
-import EpcOutlinedIcon from "@/app/_components/icons/epc-outlined-icon";
-import EicrOutlinedTwoIcon from "@/app/_components/icons/eicr-outlined-two-icon";
-import GasOutlinedIcon from "@/app/_components/icons/gas-outlined-icon";
-import BoilerOutlinedIcon from "@/app/_components/icons/boiler-outlined-icon";
-import FireRiskOutlinedIcon from "@/app/_components/icons/fire-risk-outlined-icon";
-import FireAlarmOutlinedIcon from "@/app/_components/icons/fire-alarm-outlined-icon";
-import FuseBoxOutlinedIcon from "@/app/_components/icons/fuse-box-outlined-icon";
-import ScrewDriverOutlinedIcon from "@/app/_components/icons/screw-driver-outlined-icon";
-import FireAlarmOutlinedTwoIcon from "@/app/_components/icons/fire-alarm-outlined-two-icon";
-import EvChargerOutlinedIcon from "@/app/_components/icons/ev-charger-outlined-icon";
-import PatOutlinedIcon from "@/app/_components/icons/pat-outlined-icon";
-
-export const DETAILED_SERVICES = [
-  {
-    id: 1,
-    name: "Energy Certificate (EPC)",
-    Icon: EpcOutlinedIcon,
-    image: ElectricImage,
-    route: "/electrical-services/epc",
-  },
-  {
-    id: 2,
-    name: "EICR",
-    Icon: EicrOutlinedTwoIcon,
-    image: ElectricImage,
-    route: "/electrical-services/eicr",
-  },
-  {
-    id: 3,
-    name: "Gas Certificate & Repair",
-    Icon: GasOutlinedIcon,
-
-    image: ElectricImage,
-    route: "/gas-services/gas-certificate-repair",
-  },
-  {
-    id: 4,
-    name: "Boiler Service & Repair",
-    Icon: BoilerOutlinedIcon,
-    image: ElectricImage,
-    route: "/gas-services/boiler-certificate-repair",
-  },
-  {
-    id: 5,
-    name: "PAT Testing",
-    Icon: PatOutlinedIcon,
-    image: ElectricImage,
-    route: "/electrical-services/pat",
-  },
-  {
-    id: 6,
-    name: "Fire Risk Assessment",
-    Icon: FireRiskOutlinedIcon,
-
-    image: ElectricImage,
-
-    route: "/fire-services/fire-risk-assessment",
-  },
-  {
-    id: 7,
-    name: "Fire Alarm Certificate",
-    Icon: FireAlarmOutlinedIcon,
-    image: ElectricImage,
-    route: "/fire-services/fire-alarm-certificate",
-  },
-  {
-    id: 8,
-    name: "Fuse Box Installation",
-    Icon: FuseBoxOutlinedIcon,
-    image: ElectricImage,
-    route: "/electrical-services/fuse-box-installation",
-  },
-  {
-    id: 9,
-    name: "Electrical Repairs",
-    Icon: ScrewDriverOutlinedIcon,
-
-    image: ElectricImage,
-
-    route: "/electrical-services/electrical-repairs",
-  },
-  {
-    id: 10,
-    name: "Fire Alarm Installation",
-    Icon: FireAlarmOutlinedTwoIcon,
-
-    image: ElectricImage,
-    route: "/fire-services/fire-alarm-installation",
-  },
-  {
-    id: 11,
-    name: "EV Charger Installation",
-    Icon: EvChargerOutlinedIcon,
-    image: ElectricImage,
-    route: "/electrical-services/ev-charger-installation",
-  },
-];
+import { ALL_SERVICES } from "@/shared/data";
 
 export default function ServicesHome() {
   return (
@@ -143,12 +45,12 @@ export default function ServicesHome() {
           Comprehensive Home Safety Services
         </Typography>
         <Grid container spacing={5}>
-          {DETAILED_SERVICES.map((item) => (
-            <Grid xs={12} md={4} key={item.id}>
+          {ALL_SERVICES.map((item) => (
+            <Grid xs={12} md={4} key={item.path}>
               <Card
                 variant="plain"
                 component={Link}
-                href={`/services${item.route}`}
+                href={`/categories${item.categoryPath}${item.path}`}
                 sx={{
                   textDecoration: "none",
                   transition: ".3s ease-in-out",
@@ -210,7 +112,7 @@ export default function ServicesHome() {
               <JoyLink
                 underline="none"
                 component={Link}
-                href={`/categories/${item.route}`}
+                href={`/categories${item.categoryPath}${item.path}`}
                 sx={{
                   color: TEXT_COLOR.primary,
                   display: "flex",
@@ -230,7 +132,7 @@ export default function ServicesHome() {
                     fontSize: 26,
                   }}
                 >
-                  {item.name}
+                  {item.label}
                 </Typography>
               </JoyLink>
             </Grid>

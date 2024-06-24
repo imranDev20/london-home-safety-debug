@@ -131,9 +131,13 @@ export default function AboutUsHome() {
               >
                 <Image
                   src={BackgroundImage}
-                  objectFit="cover"
                   alt="serviceImage"
-                  style={{ width: "100%", height: "100%", borderRadius: 15 }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 15,
+                    objectFit: "cover",
+                  }}
                 />
               </Box>
             </Stack>

@@ -31,8 +31,6 @@ export default function Footer() {
   const today = new Date();
   const year = today.getFullYear();
 
-  console.log(ALL_SERVICES);
-
   return (
     <Box>
       <Sheet

@@ -1,9 +1,9 @@
 import React from "react";
 import TestimonialSlider from "./testimonial-slider";
-import dbConnect from "@/app/api/_lib/dbConnect";
+
 import { ITestimonial } from "@/types/testimonial";
 import Testimonial from "@/app/api/_models/Testimonial";
-import dynamic from "next/dynamic";
+import dbConnect from "@/app/api/_lib/dbConnect";
 
 // const TestimonialSlider = dynamic(() => import("./testimonial-slider"), {
 //   loading: () => <p>Loading...</p>,
@@ -26,5 +26,7 @@ async function fetchTestimonials(page: number): Promise<ITestimonial[]> {
 export default async function TestimonialDataWrapper() {
   const testimonialData = await fetchTestimonials(1);
 
-  return <TestimonialSlider slides={testimonialData} />;
+  return (
+    <TestimonialSlider slides={JSON.parse(JSON.stringify(testimonialData))} />
+  );
 }

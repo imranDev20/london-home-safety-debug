@@ -69,6 +69,7 @@ export default function Hero() {
                 >
                   <Box>
                     <Typography
+                      component="h1"
                       sx={{
                         fontWeight: 800,
                         fontSize: { xs: 30, sm: 35, md: 50 },
@@ -126,6 +127,7 @@ export default function Hero() {
                         component="a"
                         color="secondary"
                         href="tel:07480062995"
+                        aria-label={`Call us at ${PHONE_NO}`}
                       >
                         {PHONE_NO}
                       </Button>
