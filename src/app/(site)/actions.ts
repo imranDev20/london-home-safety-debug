@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import Testimonial from "../api/_models/Testimonial";
 import testimonialSchema from "./schemas/testimonial-schema";
+import dbConnect from "../api/_lib/dbConnect";
 
 export type FormState = {
   message: string;
@@ -31,6 +32,8 @@ export async function createTestimonialAction(
         success: false,
       };
     }
+
+    await dbConnect();
 
     // If validation succeeds, create a new testimonial using Mongoose
     const newTestimonial = new Testimonial(validationResult.data);
