@@ -19,7 +19,7 @@ import Typography from "@mui/joy/Typography";
 
 import HookFormError from "@/app/_components/common/hook-form-error";
 import Link from "next/link";
-import { BUSINESS_NAME } from "@/shared/constants";
+import { BUSINESS_NAME } from "@/shared/data";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 // import GoogleIcon from "@/app/_components/icons/google-icon";

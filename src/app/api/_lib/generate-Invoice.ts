@@ -7,7 +7,7 @@ import {
   calculatePreOrderTotalCost,
 } from "@/shared/functions";
 import { IUser } from "@/types/users";
-import { ADDRESS, EMAIL_ADDRESS, PHONE_NO } from "@/shared/constants";
+import { ADDRESS, EMAIL_ADDRESS, PHONE_NO } from "@/shared/data";
 import { CONGESTION_ZONE_OPTIONS, PARKING_OPTIONS } from "@/shared/data";
 
 export async function generateInvoiceId() {
