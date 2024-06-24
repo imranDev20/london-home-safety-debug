@@ -31,9 +31,11 @@ export default function Hero() {
         src={BackgroundImage}
         alt="London Home Safety Hero Background"
         fill
-        rel="preload"
-        loading="eager"
+        priority
         style={{ objectFit: "cover" }}
+        placeholder="blur"
+        quality={30}
+        rel="preload"
         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw" //
       />
 
