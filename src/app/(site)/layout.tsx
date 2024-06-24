@@ -1,4 +1,5 @@
 import * as React from "react";
+import Header from "../_components/global/header/header";
 
 export const metadata = {
   title: "Create Next App",
@@ -6,5 +7,10 @@ export const metadata = {
 };
 
 export default function SiteLayout(props: { children: React.ReactNode }) {
-  return <>{props.children}</>;
+  return (
+    <>
+      <Header />
+      <main>{props.children}</main>
+    </>
+  );
 }
