@@ -32,7 +32,7 @@ export default function Hero() {
         alt="Background"
         fill
         priority
-        quality={60}
+        quality={40}
         placeholder="blur"
         style={{ objectFit: "cover" }}
       />
@@ -64,7 +64,7 @@ export default function Hero() {
                   spacing={3}
                   sx={{ textAlign: { xs: "center", md: "left" } }}
                 >
-                  <Box>
+                  {/* <Box>
                     <Typography
                       sx={{
                         fontWeight: 800,
@@ -127,7 +127,7 @@ export default function Hero() {
                         {PHONE_NO}
                       </Button>
                     </Stack>
-                  </Box>
+                  </Box> */}
                 </Grid>
               </Box>
             </Grid>
