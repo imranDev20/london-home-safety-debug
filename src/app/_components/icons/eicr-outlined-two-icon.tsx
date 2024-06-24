@@ -9,7 +9,7 @@ const EicrOutlinedTwoIcon = createSvgIcon(
     x="0"
     y="0"
     viewBox="0 0 24 24"
-    fill-rule="evenodd"
+    fillRule="evenodd"
     fill="currentColor"
   >
     <g>
