@@ -14,15 +14,25 @@ import {
   ModalClose,
   Stack,
   Textarea,
+  Typography,
 } from "@mui/joy";
 import HookFormError from "@/app/_components/common/hook-form-error";
 import StarRating from "@/app/_components/common/star-rating";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 import { createTestimonialAction } from "../../actions";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import testimonialSchema from "../../schemas/testimonial-schema";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+
+function SubmitButton({ isValid }: { isValid: boolean }) {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" loading={pending} disabled={!isValid}>
+      Add
+    </Button>
+  );
+}
 
 export default function TestimonialForm({
   openModal,
@@ -36,15 +46,14 @@ export default function TestimonialForm({
     message: "",
   });
 
-  // make sure that adding snackbar to the dep array doesn't cause infinite loop.
-  const prevMessage = useRef(state.message);
-
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     control,
     register,
+    reset,
   } = useForm({
+    mode: "all",
     resolver: zodResolver(testimonialSchema),
     defaultValues: {
       name: "",
@@ -56,13 +65,16 @@ export default function TestimonialForm({
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    if (state.message && state.message !== prevMessage.current) {
+    if (state.message) {
       enqueueSnackbar(state.message, state.success ? "success" : "error");
-      prevMessage.current = state.message;
 
-      if (state.success) setOpenModal(false);
+      if (state.success) {
+        reset();
+        setOpenModal(false);
+      }
     }
-  }, [state, enqueueSnackbar, setOpenModal]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, setOpenModal, reset]);
 
   // Invoke the form handlesubmit using ref
   const formRef = useRef<HTMLFormElement>(null);
@@ -103,12 +115,12 @@ export default function TestimonialForm({
           <form
             action={formAction}
             ref={formRef}
-            onSubmit={(e) => {
-              e.preventDefault();
-              return handleSubmit(() => {
-                formAction(new FormData(formRef.current!));
-              })(e);
-            }}
+            // onSubmit={(e) => {
+            //   e.preventDefault();
+            //   return handleSubmit(() => {
+            //     formAction(new FormData(formRef.current!));
+            //   })(e);
+            // }}
           >
             <Stack spacing={2}>
               <Controller
@@ -177,9 +189,20 @@ export default function TestimonialForm({
                 )}
               />
 
-              <Button type="submit">Submit</Button>
+              <SubmitButton isValid={isValid} />
             </Stack>
           </form>
+
+          {!isValid && (
+            <Typography
+              color="danger"
+              sx={{
+                textAlign: "center",
+              }}
+            >
+              Please fill all the necessary fields
+            </Typography>
+          )}
         </ModalDialog>
       </Modal>
     </React.Fragment>
