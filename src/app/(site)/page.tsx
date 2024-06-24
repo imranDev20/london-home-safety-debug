@@ -1,4 +1,3 @@
-import Box from "@mui/joy/Box";
 import Hero from "./_components/hero";
 // import ServiceCategories from "./_components/service-categories";
 // import Testimonials from "./_components/testimonials/testimonials";
@@ -8,7 +7,7 @@ const ServiceCategories = dynamic(
   () => import("./_components/service-categories"),
   {
     loading: () => <p>Loading...</p>,
-    ssr: false, // Set to true if you want server-side rendering
+    ssr: true, // Set to true if you want server-side rendering
   }
 );
 
