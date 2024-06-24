@@ -32,7 +32,6 @@ export default function Hero() {
         alt="London Home Safety Hero Background"
         fill
         priority={true}
-        loading="eager"
         quality={40}
         placeholder="blur"
         style={{ objectFit: "cover" }}
