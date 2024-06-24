@@ -1,6 +1,8 @@
 import mongoose, { ConnectOptions } from "mongoose";
+
 declare global {
-  var mongoose: any; // This must be a `var` and not a `let / const`
+  // This must be a `var` and not a `let / const`
+  var mongoose: any;
 }
 
 const MONGODB_URI = process.env.MONGODB_URI!;
@@ -31,6 +33,7 @@ async function dbConnect() {
       return mongoose;
     });
   }
+
   try {
     cached.conn = await cached.promise;
   } catch (e) {
