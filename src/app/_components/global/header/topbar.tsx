@@ -9,11 +9,9 @@ import Box from "@mui/joy/Box";
 import Container from "@mui/joy/Container";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
-import { useTheme } from "@mui/joy/styles/ThemeProvider";
+import { PRIMARY_COLOUR, SECONDARY_COLOUR } from "@/shared/constants";
 
 const Topbar = () => {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
@@ -22,7 +20,7 @@ const Topbar = () => {
           md: "block",
         },
 
-        backgroundColor: theme.palette.primary[500],
+        backgroundColor: PRIMARY_COLOUR[500],
       }}
     >
       <Container
@@ -48,7 +46,7 @@ const Topbar = () => {
               sx={{
                 mr: 1,
                 fontWeight: 30,
-                color: theme.palette.secondary[500],
+                color: SECONDARY_COLOUR[500],
               }}
             />
             <Typography
@@ -72,7 +70,7 @@ const Topbar = () => {
               sx={{
                 mr: 1,
                 fontWeight: 30,
-                color: theme.palette.secondary[500],
+                color: SECONDARY_COLOUR[500],
               }}
             />
             <Typography
@@ -96,7 +94,7 @@ const Topbar = () => {
               sx={{
                 mr: 1,
                 fontWeight: 30,
-                color: theme.palette.secondary[500],
+                color: SECONDARY_COLOUR[500],
               }}
             />
             <Typography
@@ -115,18 +113,18 @@ const Topbar = () => {
           <Stack direction="row" alignItems="center" gap={1}>
             <Facebook
               sx={{
-                color: theme.palette.secondary[500],
+                color: SECONDARY_COLOUR[500],
               }}
             />
             <Instagram
               sx={{
-                color: theme.palette.secondary[500],
+                color: SECONDARY_COLOUR[500],
               }}
             />
             <X
               fontSize="inherit"
               sx={{
-                color: theme.palette.secondary[500],
+                color: SECONDARY_COLOUR[500],
                 fontSize: 20,
               }}
             />

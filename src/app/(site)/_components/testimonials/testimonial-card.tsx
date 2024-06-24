@@ -5,9 +5,9 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
-import { useTheme } from "@mui/joy/styles/ThemeProvider";
 import StarIcon from "@mui/icons-material/Star";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import { BACKGROUND_COLOUR } from "@/shared/constants";
 
 const TRUNCATE_LENGTH = 150;
 
@@ -16,7 +16,6 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ slide }) => {
-  const theme = useTheme();
   const [showFullContent, setShowFullContent] = useState(false);
   const truncatedContent =
     slide.content.length > TRUNCATE_LENGTH
@@ -40,7 +39,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ slide }) => {
         sx={{
           width: "100%",
           borderRadius: "xl",
-          backgroundColor: theme.palette.background.level3,
+          backgroundColor: BACKGROUND_COLOUR.level3,
         }}
       >
         <CardContent

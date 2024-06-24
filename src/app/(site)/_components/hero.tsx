@@ -27,15 +27,17 @@ export default function Hero() {
         },
       }}
     >
-      {/* <Image
+      <Image
         src={BackgroundImage}
-        alt="Background"
+        alt="London Home Safety Hero Background"
         fill
-        priority
+        priority={true}
+        loading="eager"
         quality={40}
         placeholder="blur"
         style={{ objectFit: "cover" }}
-      /> */}
+        rel="preload"
+      />
 
       <Box
         sx={{

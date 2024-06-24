@@ -4,7 +4,6 @@ import Card from "@mui/joy/Card";
 import JoyLink from "@mui/joy/Link";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
-import { useTheme } from "@mui/joy/styles/ThemeProvider";
 
 import Link from "next/link";
 import React from "react";

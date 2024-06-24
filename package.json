@@ -39,13 +39,10 @@
     "@mui/material": "npm:@mui/joy@latest"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "babel-plugin-import": "^1.13.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "typescript": "^5"
