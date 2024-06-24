@@ -66,7 +66,7 @@ export default function Hero() {
                   spacing={3}
                   sx={{ textAlign: { xs: "center", md: "left" } }}
                 >
-                  {/* <Box>
+                  <Box>
                     <Typography
                       sx={{
                         fontWeight: 800,
@@ -129,7 +129,7 @@ export default function Hero() {
                         {PHONE_NO}
                       </Button>
                     </Stack>
-                  </Box> */}
+                  </Box>
                 </Grid>
               </Box>
             </Grid>

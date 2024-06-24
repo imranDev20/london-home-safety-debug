@@ -3,15 +3,14 @@ import {
   PaletteRange,
 } from "@mui/joy/styles/types/colorSystem";
 import extendTheme from "@mui/joy/styles/extendTheme";
-
-import { Outfit, Source_Code_Pro } from "next/font/google";
-import { hexToRgba } from "./functions";
+import { Outfit } from "next/font/google";
 
 const outfit = Outfit({
   subsets: ["latin"],
   adjustFontFallback: false, // prevent NextJS from adding its own fallback font
   fallback: ["var(--joy-fontFamily-fallback)"], // use Joy UI's fallback font
   display: "swap",
+  preload: true,
 });
 
 declare module "@mui/joy/styles" {
@@ -40,28 +39,28 @@ declare module "@mui/joy/styles" {
   }
 }
 
-const sourceCodePro = Source_Code_Pro({
-  subsets: ["latin"],
-  adjustFontFallback: false, // prevent NextJS from adding its own fallback font
-  fallback: [
-    // the default theme's fallback for monospace fonts
-    "ui-monospace",
-    "SFMono-Regular",
-    "Menlo",
-    "Monaco",
-    "Consolas",
-    "Liberation Mono",
-    "Courier New",
-    "monospace",
-  ],
-  display: "swap",
-});
+// const sourceCodePro = Source_Code_Pro({
+//   subsets: ["latin"],
+//   adjustFontFallback: false, // prevent NextJS from adding its own fallback font
+//   fallback: [
+//     // the default theme's fallback for monospace fonts
+//     "ui-monospace",
+//     "SFMono-Regular",
+//     "Menlo",
+//     "Monaco",
+//     "Consolas",
+//     "Liberation Mono",
+//     "Courier New",
+//     "monospace",
+//   ],
+//   display: "swap",
+// });
 
 const theme = extendTheme({
   fontFamily: {
     body: outfit.style.fontFamily,
     display: outfit.style.fontFamily,
-    code: sourceCodePro.style.fontFamily,
+    // code: sourceCodePro.style.fontFamily,
   },
   colorSchemes: {
     light: {
@@ -99,7 +98,7 @@ const theme = extendTheme({
           solidColor: "#222222",
           outlinedBorder: "var(--joy-palette-secondary-400)",
           outlinedColor: "var(--joy-palette-secondary-400)",
-          outlinedHoverBg: hexToRgba("#FFCA26", 0.3),
+          outlinedHoverBg: "var(--joy-palette-secondary-400)",
           outlinedActiveBg: "var(--joy-palette-secondary-100)",
           softColor: "var(--joy-palette-secondary-800)",
           softBg: "var(--joy-palette-secondary-100)",
