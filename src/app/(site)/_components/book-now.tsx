@@ -9,6 +9,7 @@ import Typography from "@mui/joy/Typography";
 import JoyLink from "@mui/joy/Link";
 import Link from "next/link";
 import React from "react";
+import { TEXT_COLOR } from "@/shared/constants";
 
 export default function BookNow() {
   return (
@@ -51,6 +52,11 @@ export default function BookNow() {
             component={Link}
             sx={{
               border: "1px solid white",
+
+              ":hover": {
+                backgroundColor: "white",
+                color: TEXT_COLOR.primary,
+              },
             }}
             href="/book-now?property_type=residential"
           >
@@ -62,6 +68,11 @@ export default function BookNow() {
             component={Link}
             sx={{
               border: "1px solid white",
+
+              ":hover": {
+                backgroundColor: "white",
+                color: TEXT_COLOR.primary,
+              },
             }}
             href="/book-now?property_type=commercial"
           >
@@ -75,6 +86,12 @@ export default function BookNow() {
             component={JoyLink}
             href="#contact-us-form"
             underline="none"
+            sx={{
+              ":hover": {
+                backgroundColor: TEXT_COLOR.primary,
+                color: "white",
+              },
+            }}
           >
             Request a Quote
           </Button>

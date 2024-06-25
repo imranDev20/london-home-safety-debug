@@ -71,7 +71,13 @@ export default function Partners({ isHome }: { isHome?: boolean }) {
       >
         {isHome && (
           <Divider sx={{ mb: 5 }}>
-            <Typography component="h2" level="h2">
+            <Typography
+              component="h2"
+              level="h2"
+              sx={{
+                whiteSpace: "wrap",
+              }}
+            >
               Proudly{" "}
               <Typography component="span" color="primary">
                 Certified

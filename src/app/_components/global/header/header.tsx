@@ -8,6 +8,7 @@ import Topbar from "./topbar";
 import MobileNavList from "./mobile-nav-list";
 import Navbar from "./navbar";
 import { usePathname } from "next/navigation";
+import { SECONDARY_COLOUR, TEXT_COLOR } from "@/shared/constants";
 
 export default function Header() {
   const [openMobileDrawer, setOpenMobileDrawer] = useState<boolean>(false);
@@ -62,11 +63,16 @@ export default function Header() {
 
           <Button
             variant="solid"
-            color="primary"
             startDecorator={<Login />}
             component={Link}
             href="/login"
             fullWidth
+            sx={{
+              ":hover": {
+                backgroundColor: SECONDARY_COLOUR[500],
+                color: TEXT_COLOR.primary,
+              },
+            }}
           >
             Login
           </Button>

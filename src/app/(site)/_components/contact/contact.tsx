@@ -53,6 +53,7 @@ const Contact = () => {
           sx={{
             borderRadius: "lg",
             overflow: "hidden",
+            boxShadow: "lg",
           }}
         >
           <Grid xs={12} lg={3}>
