@@ -23,9 +23,9 @@ import { ALL_SERVICES } from "@/shared/data";
 
 function convertToNormalText(str: string): string {
   return str
-    .split("-") // Split the string by hyphens
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-    .join(" "); // Join the words back together with spaces
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 
 export default function CategoryServices({ category }: { category: string }) {
@@ -83,18 +83,24 @@ export default function CategoryServices({ category }: { category: string }) {
                     p: 2,
                   }}
                 >
-                  <Typography
-                    level="h3"
-                    component="h3"
-                    sx={{
-                      mb: 1,
-                      ":hover": {
-                        color: PRIMARY_COLOUR[500],
-                      },
-                    }}
+                  <JoyLink
+                    underline="none"
+                    component={Link}
+                    href={`/services${item.categoryPath}${item.path}`}
                   >
-                    {item.label}
-                  </Typography>
+                    <Typography
+                      level="h3"
+                      component="h3"
+                      sx={{
+                        mb: 1,
+                        ":hover": {
+                          color: PRIMARY_COLOUR[500],
+                        },
+                      }}
+                    >
+                      {item.label}
+                    </Typography>
+                  </JoyLink>
 
                   <Typography
                     level="body-md"

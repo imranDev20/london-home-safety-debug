@@ -4,6 +4,9 @@ import { Box, Container, Grid, Sheet, Typography } from "@mui/joy";
 import TestimonialModal from "./testimonial-modal";
 import TestimonialDataWrapper from "./testimonial-data-wrapper";
 import TestimonialSkeleton from "./testimonial-skeleton";
+import dbConnect from "@/app/api/_lib/dbConnect";
+
+await dbConnect();
 
 export default function Testimonials() {
   return (

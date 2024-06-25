@@ -34,8 +34,6 @@ export async function createTestimonialAction(
       };
     }
 
-    await dbConnect();
-
     // If validation succeeds, create a new testimonial using Mongoose
     const newTestimonial = new Testimonial(validationResult.data);
     await newTestimonial.save();
@@ -54,6 +52,4 @@ export async function createTestimonialAction(
       success: false,
     };
   }
-
-  // Convert fields to their appropriate types with validation
 }
