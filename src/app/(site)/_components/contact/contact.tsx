@@ -2,16 +2,14 @@ import ContactUsForm from "@/app/_components/common/contact-us-form";
 import { PHONE_NO, WORKING_HOURS } from "@/shared/data";
 import { Phone } from "@mui/icons-material";
 
-import {
-  Box,
-  Container,
-  Divider,
-  Grid,
-  Sheet,
-  Stack,
-  Typography,
-  Link as JoyLink,
-} from "@mui/joy";
+import Box from "@mui/joy/Box";
+import Container from "@mui/joy/Container";
+import Divider from "@mui/joy/Divider";
+import Grid from "@mui/joy/Grid";
+import Sheet from "@mui/joy/Sheet";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import JoyLink from "@mui/joy/Link";
 
 import Image from "next/image";
 import ContactUsImage from "@/images/home/home-contact-image.jpeg";
