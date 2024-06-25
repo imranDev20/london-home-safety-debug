@@ -268,7 +268,6 @@ export default function Navbar({
               ) : (
                 <Button
                   variant="solid"
-                  color="primary"
                   startDecorator={<Login />}
                   component={Link}
                   href="/login"
@@ -276,6 +275,10 @@ export default function Navbar({
                     display: {
                       xs: "none",
                       md: "flex",
+                    },
+                    ":hover": {
+                      backgroundColor: SECONDARY_COLOUR[500],
+                      color: TEXT_COLOR.primary,
                     },
                   }}
                 >

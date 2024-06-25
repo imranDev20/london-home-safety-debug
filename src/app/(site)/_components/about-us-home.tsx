@@ -223,7 +223,18 @@ export default function AboutUsHome() {
                 mt: 3,
               }}
             >
-              <Button variant="solid" size="lg" component={Link} href="/about">
+              <Button
+                variant="solid"
+                size="lg"
+                component={Link}
+                href="/about"
+                sx={{
+                  ":hover": {
+                    backgroundColor: SECONDARY_COLOUR[500],
+                    color: TEXT_COLOR.primary,
+                  },
+                }}
+              >
                 More About Us
               </Button>
 

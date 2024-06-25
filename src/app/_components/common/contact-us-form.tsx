@@ -67,7 +67,7 @@ export default function ContactUsForm() {
       submitContactUsForm(contactFormData),
 
     onSuccess: (response) => {
-      // reset();
+      reset();
       enqueueSnackbar(response.message, "success");
     },
 

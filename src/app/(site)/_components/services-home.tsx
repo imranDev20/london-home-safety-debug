@@ -154,9 +154,10 @@ export default function ServicesHome() {
             size="lg"
             sx={{
               backgroundColor: SECONDARY_COLOUR[500],
-              color: "white",
+              color: TEXT_COLOR.primary,
               ":hover": {
                 backgroundColor: TEXT_COLOR.primary,
+                color: "white",
               },
             }}
           >

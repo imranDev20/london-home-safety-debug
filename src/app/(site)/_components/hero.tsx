@@ -11,7 +11,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 
 import BackgroundImage from "@/images/hero-image-new.jpeg";
 import { hexToRgba } from "@/shared/functions";
-import { SECONDARY_COLOUR } from "@/shared/constants";
+import { SECONDARY_COLOUR, TEXT_COLOR } from "@/shared/constants";
 import BookNow from "./book-now";
 import { PHONE_NO } from "@/shared/data";
 
@@ -125,9 +125,16 @@ export default function Hero() {
                         startDecorator={<PhoneIcon />}
                         variant="solid"
                         component="a"
-                        color="secondary"
-                        href="tel:07480062995"
+                        href={`tel:${PHONE_NO}`}
                         aria-label={`Call us at ${PHONE_NO}`}
+                        sx={{
+                          backgroundColor: SECONDARY_COLOUR[500],
+                          color: TEXT_COLOR.primary,
+
+                          ":hover": {
+                            backgroundColor: "white",
+                          },
+                        }}
                       >
                         {PHONE_NO}
                       </Button>

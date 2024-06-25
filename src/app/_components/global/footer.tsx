@@ -115,7 +115,7 @@ export default function Footer() {
                     <ListItem key={item.path}>
                       <ListItemButton
                         component={Link}
-                        href={`/categories${item.categoryPath}${item.path}`}
+                        href={`/services${item.categoryPath}${item.path}`}
                       >
                         {item.label}
                       </ListItemButton>
