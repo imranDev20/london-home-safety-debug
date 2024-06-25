@@ -70,186 +70,188 @@ export default function Navbar({
                 },
               }}
             >
-              {NAV_ITEMS.map((item) => (
-                <Box
-                  key={item.path}
-                  sx={{
-                    position: "relative",
-                    py: 2,
-                    ":hover": {
-                      ".subMenu": {
-                        display: "block",
-                      },
-                    },
-                  }}
-                >
-                  <Button
-                    key={item.label}
-                    component={Link}
-                    variant="plain"
-                    href={item.path}
-                    endDecorator={item.children && <ExpandMore />}
+              {NAV_ITEMS.map((item) => {
+                return (
+                  <Box
+                    key={item.path}
                     sx={{
-                      ...(isInverted
-                        ? {
-                            color:
-                              item.path === pathname
-                                ? SECONDARY_COLOUR[500]
-                                : "white",
-                            backgroundColor:
-                              item.path === pathname
-                                ? hexToRgba(SECONDARY_COLOUR[500], 0.2)
-                                : "transparent",
-                            ":hover": {
-                              color: SECONDARY_COLOUR[500],
-                              backgroundColor: hexToRgba(
-                                SECONDARY_COLOUR[500],
-                                0.2
-                              ),
-                            },
-                          }
-                        : {
-                            color:
-                              item.path === pathname
-                                ? PRIMARY_COLOUR[500]
-                                : TEXT_COLOR.primary,
-                            backgroundColor:
-                              item.path === pathname
-                                ? hexToRgba(PRIMARY_COLOUR[500], 0.1)
-                                : "transparent",
-                            ":hover": {
-                              color: PRIMARY_COLOUR[500],
-                              backgroundColor: hexToRgba(
-                                PRIMARY_COLOUR[500],
-                                0.1
-                              ),
-                            },
-                          }),
-
-                      cursor: "pointer",
-                      fontWeight: 600,
-                      fontSize: "md",
+                      position: "relative",
+                      py: 2,
+                      ":hover": {
+                        ".subMenu": {
+                          display: "block",
+                        },
+                      },
                     }}
                   >
-                    {item.label}
-                  </Button>
-                  {item.children && (
-                    <Stack
-                      spacing={0}
-                      className="subMenu"
+                    <Button
+                      key={item.label}
+                      component={Link}
+                      variant="plain"
+                      href={item.path}
+                      endDecorator={item.children && <ExpandMore />}
                       sx={{
-                        display: "none",
-                        position: "absolute",
-                        backgroundColor: "white",
-                        boxShadow: "lg",
-                        minWidth: 190,
-                        py: 1,
-                        borderRadius: "lg",
-                        left: "50%",
-                        top: "100%",
-                        transform: "translateX(-50%)",
-                      }}
-                    >
-                      {item.children.map((dropdownItem) => (
-                        <Box
-                          key={dropdownItem.label}
-                          sx={{
-                            position: "relative",
-                            px: 1,
-                            ":hover": {
-                              "& .secondSubMenu": {
-                                display: "block",
-                              },
-                            },
-                          }}
-                        >
-                          <Button
-                            variant="plain"
-                            component={Link}
-                            fullWidth
-                            href={item.path + dropdownItem.path}
-                            sx={{
-                              fontWeight: 600,
-                              p: 1,
-                              px: 2,
-                              fontSize: "md",
-                              borderRadius: "sm",
-                              cursor: "pointer",
-                              justifyContent: "flex-start",
-                              color: TEXT_COLOR.primary,
+                        ...(isInverted
+                          ? {
+                              color:
+                                item.path === pathname
+                                  ? SECONDARY_COLOUR[500]
+                                  : "white",
+                              backgroundColor:
+                                item.path === pathname
+                                  ? hexToRgba(SECONDARY_COLOUR[500], 0.2)
+                                  : "transparent",
                               ":hover": {
+                                color: SECONDARY_COLOUR[500],
+                                backgroundColor: hexToRgba(
+                                  SECONDARY_COLOUR[500],
+                                  0.2
+                                ),
+                              },
+                            }
+                          : {
+                              color:
+                                item.path === pathname
+                                  ? PRIMARY_COLOUR[500]
+                                  : TEXT_COLOR.primary,
+                              backgroundColor:
+                                item.path === pathname
+                                  ? hexToRgba(PRIMARY_COLOUR[500], 0.1)
+                                  : "transparent",
+                              ":hover": {
+                                color: PRIMARY_COLOUR[500],
                                 backgroundColor: hexToRgba(
                                   PRIMARY_COLOUR[500],
                                   0.1
                                 ),
-                                color: PRIMARY_COLOUR[500],
+                              },
+                            }),
+
+                        cursor: "pointer",
+                        fontWeight: 600,
+                        fontSize: "md",
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                    {item.children && (
+                      <Stack
+                        spacing={0}
+                        className="subMenu"
+                        sx={{
+                          display: "none",
+                          position: "absolute",
+                          backgroundColor: "white",
+                          boxShadow: "lg",
+                          minWidth: 190,
+                          py: 1,
+                          borderRadius: "lg",
+                          left: "50%",
+                          top: "100%",
+                          transform: "translateX(-50%)",
+                        }}
+                      >
+                        {item.children.map((dropdownItem) => (
+                          <Box
+                            key={dropdownItem.label}
+                            sx={{
+                              position: "relative",
+                              px: 1,
+                              ":hover": {
+                                "& .secondSubMenu": {
+                                  display: "block",
+                                },
                               },
                             }}
                           >
-                            {dropdownItem.label}
-                          </Button>
-
-                          {dropdownItem.children && (
-                            <Stack
-                              spacing={0}
-                              className="secondSubMenu"
+                            <Button
+                              variant="plain"
+                              component={Link}
+                              fullWidth
+                              href={item.path + dropdownItem.path}
                               sx={{
-                                display: "none",
-                                position: "absolute",
-                                backgroundColor: "white",
-                                boxShadow: "lg",
-                                minWidth: 220,
+                                fontWeight: 600,
                                 p: 1,
-                                borderRadius: "lg",
-                                right: 0,
-                                left: "100%",
-                                top: 0,
-                                // transform: "translateX(-50%)",
+                                px: 2,
+                                fontSize: "md",
+                                borderRadius: "sm",
+                                cursor: "pointer",
+                                justifyContent: "flex-start",
+                                color: TEXT_COLOR.primary,
+                                ":hover": {
+                                  backgroundColor: hexToRgba(
+                                    PRIMARY_COLOUR[500],
+                                    0.1
+                                  ),
+                                  color: PRIMARY_COLOUR[500],
+                                },
                               }}
                             >
-                              {dropdownItem.children.map(
-                                (dropdownChildItem) => (
-                                  <Box key={dropdownChildItem.label}>
-                                    <Button
-                                      variant="plain"
-                                      component={Link}
-                                      fullWidth
-                                      href={
-                                        item.path +
-                                        dropdownItem.path +
-                                        dropdownChildItem.path
-                                      }
-                                      sx={{
-                                        fontWeight: 600,
-                                        p: 1,
-                                        px: 2,
-                                        fontSize: "md",
-                                        borderRadius: "sm",
-                                        cursor: "pointer",
-                                        color: TEXT_COLOR.primary,
-                                        justifyContent: "flex-start",
-                                        ":hover": {
-                                          backgroundColor: hexToRgba(
-                                            PRIMARY_COLOUR[500],
-                                            0.1
-                                          ),
-                                          color: PRIMARY_COLOUR[500],
-                                        },
-                                      }}
-                                    >
-                                      {dropdownChildItem.label}
-                                    </Button>
-                                  </Box>
-                                )
-                              )}
-                            </Stack>
-                          )}
-                        </Box>
-                      ))}
-                    </Stack>
-                  )}
-                </Box>
-              ))}
+                              {dropdownItem.label}
+                            </Button>
+
+                            {dropdownItem.children && (
+                              <Stack
+                                spacing={0}
+                                className="secondSubMenu"
+                                sx={{
+                                  display: "none",
+                                  position: "absolute",
+                                  backgroundColor: "white",
+                                  boxShadow: "lg",
+                                  minWidth: 220,
+                                  p: 1,
+                                  borderRadius: "lg",
+                                  right: 0,
+                                  left: "100%",
+                                  top: 0,
+                                  // transform: "translateX(-50%)",
+                                }}
+                              >
+                                {dropdownItem.children.map(
+                                  (dropdownChildItem) => (
+                                    <Box key={dropdownChildItem.label}>
+                                      <Button
+                                        variant="plain"
+                                        component={Link}
+                                        fullWidth
+                                        href={
+                                          item.path +
+                                          dropdownItem.path +
+                                          dropdownChildItem.path
+                                        }
+                                        sx={{
+                                          fontWeight: 600,
+                                          p: 1,
+                                          px: 2,
+                                          fontSize: "md",
+                                          borderRadius: "sm",
+                                          cursor: "pointer",
+                                          color: TEXT_COLOR.primary,
+                                          justifyContent: "flex-start",
+                                          ":hover": {
+                                            backgroundColor: hexToRgba(
+                                              PRIMARY_COLOUR[500],
+                                              0.1
+                                            ),
+                                            color: PRIMARY_COLOUR[500],
+                                          },
+                                        }}
+                                      >
+                                        {dropdownChildItem.label}
+                                      </Button>
+                                    </Box>
+                                  )
+                                )}
+                              </Stack>
+                            )}
+                          </Box>
+                        ))}
+                      </Stack>
+                    )}
+                  </Box>
+                );
+              })}
             </Stack>
             <Stack
               spacing={3}
