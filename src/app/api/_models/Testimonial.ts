@@ -1,10 +1,9 @@
 import { ITestimonial } from "@/types/testimonial";
-import mongoose, { Document } from "mongoose";
+import mongoose from "mongoose";
 
 const testimonialSchema = new mongoose.Schema<ITestimonial>(
   {
     name: { type: String, required: true },
-
     subject: { type: String, required: true },
     rating: { type: Number, required: true, min: 1, max: 5 },
     content: { type: String, required: true },

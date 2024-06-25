@@ -10,99 +10,11 @@ import GasOutlinedIcon from "@/app/_components/icons/gas-outlined-icon";
 import PatOutlinedIcon from "@/app/_components/icons/pat-outlined-icon";
 import ScrewDriverOutlinedIcon from "@/app/_components/icons/screw-driver-outlined-icon";
 
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import { NavItem, NavLeafItem } from "@/types/misc";
 
-export const NAV_ITEMS = [
-  { label: "Home", path: "/", icon: <HomeRoundedIcon /> },
-  { label: "About", path: "/about" },
-  {
-    label: "Services",
-    path: "/services",
-    children: [
-      {
-        label: "Electrical Services",
-        path: "/electrical-services",
-        children: [
-          {
-            label: "Energy Performance Certificate",
-            path: "/epc",
-            abbr: "EPC",
-            Icon: EpcOutlinedIcon,
-          },
-          {
-            label: "Electrical Installation Condition Report",
-            path: "/eicr",
-            abbr: "EICR",
-            Icon: EicrOutlinedTwoIcon,
-          },
-          {
-            label: "Portable Appliance Testing",
-            path: "/pat",
-            abbr: "PAT",
-            Icon: PatOutlinedIcon,
-          },
-          {
-            label: "Fuse Box Installation",
-            path: "/fuse-box-installation",
-            Icon: FuseBoxOutlinedIcon,
-          },
-          {
-            label: "Electrical Repairs",
-            path: "/electrical-repairs",
-            Icon: ScrewDriverOutlinedIcon,
-          },
-          {
-            label: "EV Charger Installation",
-            path: "/ev-charger-installation",
-            Icon: EvChargerOutlinedIcon,
-          },
-        ],
-      },
-      {
-        label: "Gas Services",
-        path: "/gas-services",
-        children: [
-          {
-            label: "Gas Certificate & Repairs",
-            path: "/gas-certificate-repair",
-            Icon: GasOutlinedIcon,
-          },
-          {
-            label: "Boiler Service & Repair",
-            path: "/boiler-service-repair",
-            Icon: BoilerOutlinedIcon,
-          },
-        ],
-      },
-      {
-        label: "Fire Services",
-        path: "/fire-services",
-        children: [
-          {
-            label: "Fire Risk Assessment",
-            path: "/fire-risk-assessment",
-            Icon: FireRiskOutlinedIcon,
-          },
-          {
-            label: "Fire Alarm Certificate",
-            path: "/fire-alarm-certificate",
-            Icon: FireAlarmOutlinedIcon,
-          },
-          {
-            label: "Fire Alarm Installation",
-            path: "/fire-alarm-installation",
-            Icon: FireAlarmOutlinedTwoIcon,
-          },
-        ],
-      },
-      {
-        label: "Health Services",
-        path: "/health-services",
-      },
-    ],
-  },
-  { label: "Contact", path: "/contact" },
-];
+import SvgIcon from "@mui/joy/SvgIcon";
+
+import backgroundImage from "@/images/about-bg.jpeg";
 
 export const OTHER_PAGES = [
   {
@@ -123,7 +35,132 @@ export const OTHER_PAGES = [
   },
 ];
 
-export const ALL_SERVICES =
+export const NAV_ITEMS: NavItem[] = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  {
+    label: "Services",
+    path: "/services",
+    children: [
+      {
+        label: "Electrical Services",
+        path: "/electrical-services",
+        children: [
+          {
+            label: "Energy Performance Certificate",
+            path: "/epc",
+            abbr: "EPC",
+            Icon: EpcOutlinedIcon,
+            description:
+              "Assess the energy efficiency of your home and get certified with our EPC service.",
+            image: backgroundImage,
+          },
+          {
+            label: "Electrical Installation Condition Report",
+            path: "/eicr",
+            abbr: "EICR",
+            Icon: EicrOutlinedTwoIcon,
+            image: backgroundImage,
+            description:
+              "Ensure the safety and compliance of your electrical installations with our thorough EICR.",
+          },
+          {
+            label: "Portable Appliance Testing",
+            path: "/pat",
+            abbr: "PAT",
+            Icon: PatOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Test the safety of your portable appliances to prevent electrical hazards with our PAT service.",
+          },
+          {
+            label: "Fuse Box Installation",
+            path: "/fuse-box-installation",
+            Icon: FuseBoxOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Upgrade or install a new fuse box to enhance your home's electrical safety and performance.",
+          },
+          {
+            label: "Electrical Repairs",
+            path: "/electrical-repairs",
+            Icon: ScrewDriverOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Get reliable and efficient electrical repairs from our certified professionals.",
+          },
+          {
+            label: "EV Charger Installation",
+            path: "/ev-charger-installation",
+            Icon: EvChargerOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Install a convenient and efficient EV charger at your home for your electric vehicle.",
+          },
+        ],
+      },
+      {
+        label: "Gas Services",
+        path: "/gas-services",
+        children: [
+          {
+            label: "Gas Certificate & Repairs",
+            path: "/gas-certificate-repair",
+            Icon: GasOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Ensure the safety of your gas appliances with our certification and repair services.",
+          },
+          {
+            label: "Boiler Service & Repair",
+            path: "/boiler-service-repair",
+            Icon: BoilerOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Maintain and repair your boiler to ensure efficient and safe operation.",
+          },
+        ],
+      },
+      {
+        label: "Fire Services",
+        path: "/fire-services",
+        children: [
+          {
+            label: "Fire Risk Assessment",
+            path: "/fire-risk-assessment",
+            Icon: FireRiskOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Identify and mitigate fire hazards in your home with our comprehensive fire risk assessments.",
+          },
+          {
+            label: "Fire Alarm Certificate",
+            path: "/fire-alarm-certificate",
+            Icon: FireAlarmOutlinedIcon,
+            image: backgroundImage,
+            description:
+              "Certify your fire alarm system to ensure it meets all safety regulations.",
+          },
+          {
+            label: "Fire Alarm Installation",
+            path: "/fire-alarm-installation",
+            Icon: FireAlarmOutlinedTwoIcon,
+            image: backgroundImage,
+            description:
+              "Install a reliable fire alarm system to protect your home and loved ones.",
+          },
+        ],
+      },
+      {
+        label: "Health Services",
+        path: "/health-services",
+      },
+    ],
+  },
+  { label: "Contact", path: "/contact" },
+];
+
+export const ALL_SERVICES: NavLeafItem[] =
   NAV_ITEMS.find((item) => item.label === "Services")?.children?.flatMap(
     (category) =>
       (category.children || []).map((service) => ({

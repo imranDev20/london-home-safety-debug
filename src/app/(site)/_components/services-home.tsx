@@ -98,13 +98,15 @@ export default function ServicesHome() {
                       height: 250,
                     }}
                   >
-                    <item.Icon
-                      sx={{
-                        fontSize: 65,
-                        color: TEXT_COLOR.primary,
-                        transition: "150ms ease",
-                      }}
-                    />
+                    {item.Icon && (
+                      <item.Icon
+                        sx={{
+                          fontSize: 65,
+                          color: TEXT_COLOR.primary,
+                          transition: "150ms ease",
+                        }}
+                      />
+                    )}
                   </Box>
                 </CardContent>
               </Card>
