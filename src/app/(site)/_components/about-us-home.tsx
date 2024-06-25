@@ -1,14 +1,14 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-  Link as JoyLink,
-  Divider,
-} from "@mui/joy";
+
+import Box from "@mui/joy/Box";
+import Button from "@mui/joy/Button";
+import Container from "@mui/joy/Container";
+import Grid from "@mui/joy/Grid";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import JoyLink from "@mui/joy/Link";
+import Divider from "@mui/joy/Divider";
+
 import { hexToRgba } from "@/shared/functions";
 import Link from "next/link";
 import { SECONDARY_COLOUR, TEXT_COLOR } from "@/shared/constants";
@@ -17,20 +17,12 @@ import Image from "next/image";
 import BackgroundImage from "@/images/hero-image-new.jpeg";
 import { PHONE_NO } from "@/shared/data";
 
-const categories = [
-  { text: "Our team is made up of highly skilled and certified experts." },
-  {
-    text: "We offer a wide range of services in electrical, gas, fire, and health and safety.",
-  },
-  {
-    text: "We prioritize your safety and satisfaction with top-quality service.",
-  },
-  {
-    text: "Serving the heart of London with a deep understanding of local needs and regulations.",
-  },
-  {
-    text: "Trusted by homeowners across London for our reliability and professionalism.",
-  },
+const ABOUT_FEATURE_POINTS = [
+  { text: "Highly skilled and certified experts." },
+  { text: "Wide range of electrical, gas, fire, and health safety services." },
+  { text: "Top-quality service prioritizing safety and satisfaction." },
+  { text: "Deep understanding of London's local needs and regulations." },
+  { text: "Trusted by homeowners for reliability and professionalism." },
 ];
 
 function DotIcon() {
@@ -184,12 +176,12 @@ export default function AboutUsHome() {
             </Typography>
 
             <Stack
-              spacing={2}
+              spacing={3}
               sx={{
                 my: 4,
               }}
             >
-              {categories.map((cat) => (
+              {ABOUT_FEATURE_POINTS.map((cat) => (
                 <Typography
                   sx={{
                     display: "flex",

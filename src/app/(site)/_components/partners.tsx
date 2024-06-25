@@ -69,38 +69,25 @@ export default function Partners({ isHome }: { isHome?: boolean }) {
           textAlign: "center",
         }}
       >
-        {isHome && (
-          <Divider sx={{ mb: 5 }}>
-            <Typography
-              component="h2"
-              level="h2"
-              sx={{
-                whiteSpace: "wrap",
-              }}
-            >
-              Proudly{" "}
-              <Typography component="span" color="primary">
-                Certified
-              </Typography>{" "}
-              &{" "}
-              <Typography component="span" color="primary">
-                Accredited
-              </Typography>{" "}
-              by Leading Authorities
-            </Typography>
-          </Divider>
-        )}
-
-        {!isHome && (
+        <Divider sx={{ mb: 5 }}>
           <Typography
+            component="h2"
             level="h2"
             sx={{
-              my: 3,
+              whiteSpace: "wrap",
             }}
           >
-            Certified and Trusted Professional Engineers
+            Proudly{" "}
+            <Typography component="span" color="primary">
+              Certified
+            </Typography>{" "}
+            &{" "}
+            <Typography component="span" color="primary">
+              Accredited
+            </Typography>{" "}
+            by Leading Authorities
           </Typography>
-        )}
+        </Divider>
       </Box>
 
       <div className={styles.carouselContainer}>

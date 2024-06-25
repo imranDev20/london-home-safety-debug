@@ -24,7 +24,7 @@ export const NAV_ITEMS = [
         path: "/electrical-services",
         children: [
           {
-            label: "Energy Certificate",
+            label: "Energy Performance Certificate",
             path: "/epc",
             abbr: "EPC",
             Icon: EpcOutlinedIcon,
