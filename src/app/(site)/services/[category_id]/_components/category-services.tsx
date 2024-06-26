@@ -10,6 +10,7 @@ import {
   Link as JoyLink,
   Box,
   Sheet,
+  Divider,
 } from "@mui/joy";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,15 +21,13 @@ import {
   TEXT_COLOR,
 } from "@/shared/constants";
 import { ALL_SERVICES } from "@/shared/data";
+import { kebabCaseToNormalText } from "@/shared/functions";
 
-function convertToNormalText(str: string): string {
-  return str
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-export default function CategoryServices({ category }: { category: string }) {
+export default function CategoryServices({
+  categoryId: category,
+}: {
+  categoryId: string;
+}) {
   const services = ALL_SERVICES.filter((item) =>
     item.categoryPath?.includes(category)
   );
@@ -50,7 +49,7 @@ export default function CategoryServices({ category }: { category: string }) {
           }}
           fontSize={36}
         >
-          Expert {convertToNormalText(category)} for Peace of Mind
+          Expert {kebabCaseToNormalText(category)} for Peace of Mind
         </Typography>
 
         <Grid container spacing={3}>
@@ -63,6 +62,8 @@ export default function CategoryServices({ category }: { category: string }) {
                   borderRadius: "lg",
                   backgroundColor: "white",
                   boxShadow: "md",
+                  height: "100%",
+                  p: 0,
                 }}
               >
                 <CardOverflow>
@@ -78,47 +79,54 @@ export default function CategoryServices({ category }: { category: string }) {
                   </AspectRatio>
                 </CardOverflow>
 
-                <CardContent
-                  sx={{
-                    p: 2,
-                  }}
-                >
-                  <JoyLink
-                    underline="none"
-                    component={Link}
-                    href={`/services${item.categoryPath}${item.path}`}
-                  >
-                    <Typography
-                      level="h3"
-                      component="h3"
-                      sx={{
-                        mb: 1,
-                        ":hover": {
-                          color: PRIMARY_COLOUR[500],
-                        },
-                      }}
-                    >
-                      {item.label}
-                    </Typography>
-                  </JoyLink>
-
-                  <Typography
-                    level="body-md"
+                <CardContent>
+                  <Box
                     sx={{
-                      my: 1,
-                      // textAlign: "justify",
+                      flex: 1,
+                      px: 3,
+                      py: 2,
                     }}
-                    color="neutral"
                   >
-                    {item.description}
-                  </Typography>
+                    <JoyLink
+                      underline="none"
+                      component={Link}
+                      href={`/services${item.categoryPath}${item.path}`}
+                    >
+                      <Typography
+                        level="h3"
+                        component="h3"
+                        sx={{
+                          mb: 1,
+                          ":hover": {
+                            color: PRIMARY_COLOUR[500],
+                          },
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    </JoyLink>
+
+                    <Typography
+                      level="body-md"
+                      sx={{
+                        my: 1,
+                        // textAlign: "justify",
+                      }}
+                      color="neutral"
+                    >
+                      {item.description}
+                    </Typography>
+                  </Box>
+
+                  <Divider />
 
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      mt: 2,
+                      px: 3,
+                      py: 2,
                     }}
                   >
                     <Box
@@ -155,7 +163,7 @@ export default function CategoryServices({ category }: { category: string }) {
                     <Button
                       variant="solid"
                       component={Link}
-                      href={`/services${item.categoryPath}${item.path}`}
+                      href={`/book-now`}
                       sx={{
                         backgroundColor: SECONDARY_COLOUR[500],
                         color: TEXT_COLOR.primary,
@@ -166,7 +174,7 @@ export default function CategoryServices({ category }: { category: string }) {
                         },
                       }}
                     >
-                      Find Out More
+                      Book Now
                     </Button>
                   </Box>
                 </CardContent>

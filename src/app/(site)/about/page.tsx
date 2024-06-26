@@ -6,10 +6,20 @@ import Achievements from "./_components/achievements";
 import AboutCallToAction from "./_components/about-cta";
 import Partners from "../_components/partners";
 
+const breadCrumbOptions = [
+  {
+    label: "About Us",
+    isCurrentPage: true,
+  },
+];
+
 export default function AboutPage() {
   return (
     <>
-      <PageHeader backgroundImage={backgroundImage} title="About Us" />
+      <PageHeader
+        backgroundImage={backgroundImage}
+        breadCrumbOptions={breadCrumbOptions}
+      />
       <AboutUsHome />
       <Advantages />
       <Achievements />

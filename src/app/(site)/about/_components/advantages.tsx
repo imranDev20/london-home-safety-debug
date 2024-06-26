@@ -6,38 +6,7 @@ import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 
 import { BACKGROUND_COLOUR } from "@/shared/constants";
-
-import BookingIcon from "@/app/_components/icons/booking-icon";
-import FastResponseIcon from "@/app/_components/icons/fast-response-icon";
-import EngineersIcon from "@/app/_components/icons/engineers-icon";
-import LowPriceIcon from "@/app/_components/icons/low-price-icon";
-
-const ADVANTAGES = [
-  {
-    id: 1,
-    advantageName: "Our Qualified Engineers",
-    advantageDetail: "Over 30 Years Experience",
-    Icon: EngineersIcon,
-  },
-  {
-    id: 2,
-    advantageName: "Low Price Promise",
-    advantageDetail: "We won't be beaten on price.",
-    Icon: LowPriceIcon,
-  },
-  {
-    id: 3,
-    advantageName: "Fast Response",
-    advantageDetail: "Arrange an appointment, as early as tomorrow",
-    Icon: FastResponseIcon,
-  },
-  {
-    id: 4,
-    advantageName: "Book Any Time",
-    advantageDetail: "Book at a time that works for you",
-    Icon: BookingIcon,
-  },
-];
+import { ADVANTAGES } from "@/shared/data";
 
 export default function Advantages() {
   return (
@@ -53,20 +22,26 @@ export default function Advantages() {
           sx={{
             textAlign: "center",
             mb: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <Typography component="h2" level="h2" sx={{ mb: 2 }}>
-            Reasons You Should Call Us
+            Why Choose London Home Safety Limited
           </Typography>
           <Typography
             color="neutral"
             sx={{
               mb: 5,
+              maxWidth: 900,
+              textAlign: "center",
             }}
           >
-            Electrician is your single source for a complete range of high
-            quality eletrical <br /> services, including design/build,
-            engineering and maintenance
+            We pride ourselves on delivering exceptional service and
+            unparalleled expertise. Our certified professionals, competitive
+            pricing, rapid response times, and flexible scheduling make us the
+            trusted choice for all your home safety needs.
           </Typography>
         </Box>
         <Grid container spacing={4}>
@@ -81,6 +56,7 @@ export default function Advantages() {
                   alignItems: "center",
                   background: "white",
                   borderRadius: "xl",
+                  boxShadow: "md",
                 }}
               >
                 <advan.Icon

@@ -6,7 +6,9 @@ const HealthHeartIcon = createSvgIcon(
     version="1.1"
     width="512"
     height="512"
-    viewBox="0 0 440 440"
+    x="0"
+    y="0"
+    viewBox="0 0 329.928 329.928"
     fill="currentColor"
   >
     <g>
@@ -22,6 +24,6 @@ const HealthHeartIcon = createSvgIcon(
       ></path>
     </g>
   </svg>,
-  "EicrOutlined"
+  "HealthHeartIcon"
 );
 export default HealthHeartIcon;

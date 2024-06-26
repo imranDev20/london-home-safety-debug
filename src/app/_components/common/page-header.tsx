@@ -9,10 +9,10 @@ import Link from "next/link";
 
 export default function PageHeader({
   backgroundImage,
-  title,
-  secondary,
-  tertiary,
+  breadCrumbOptions,
 }: PageHeaderProps) {
+  const title = breadCrumbOptions.find((item) => item.isCurrentPage)?.label;
+
   return (
     <Box component="section" sx={{ position: "relative", mt: -8.5 }}>
       <Image
@@ -20,7 +20,8 @@ export default function PageHeader({
         alt="Background"
         sizes="100vw"
         fill
-        loading="lazy"
+        rel="preload"
+        priority
         placeholder="blur"
         style={{ objectFit: "cover" }}
       />
@@ -73,29 +74,21 @@ export default function PageHeader({
               Home
             </JoyLink>
 
-            {secondary ? (
-              <JoyLink
-                href={`/${secondary.toLowerCase()}`}
-                component={Link}
-                sx={{
-                  color: "white",
-                }}
-              >
-                {secondary}
-              </JoyLink>
-            ) : null}
-
-            {tertiary ? (
-              <JoyLink
-                href={`/${tertiary.toLowerCase()}`}
-                component={Link}
-                sx={{
-                  color: "white",
-                }}
-              >
-                {tertiary}
-              </JoyLink>
-            ) : null}
+            {breadCrumbOptions
+              .filter((item) => !item.isCurrentPage)
+              .map((val) => (
+                <JoyLink
+                  key={val.path}
+                  href={val.path}
+                  component={JoyLink}
+                  underline="hover"
+                  sx={{
+                    color: "white",
+                  }}
+                >
+                  {val.label}
+                </JoyLink>
+              ))}
 
             <Typography color="secondary">{title}</Typography>
           </Breadcrumbs>

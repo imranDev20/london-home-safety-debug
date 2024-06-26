@@ -2,7 +2,6 @@ import React from "react";
 import TestimonialSlider from "./testimonial-slider";
 import { ITestimonial } from "@/types/testimonial";
 import Testimonial from "@/app/api/_models/Testimonial";
-import dbConnect from "@/app/api/_lib/dbConnect";
 
 async function fetchTestimonials(page: number): Promise<ITestimonial[]> {
   const limit = 10;
@@ -15,6 +14,8 @@ async function fetchTestimonials(page: number): Promise<ITestimonial[]> {
 
   return testimonials;
 }
+
+export const revalidate = 0;
 
 export default async function TestimonialDataWrapper() {
   const testimonialData = await fetchTestimonials(1);

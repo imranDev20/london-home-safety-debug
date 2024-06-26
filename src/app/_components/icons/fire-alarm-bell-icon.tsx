@@ -4,9 +4,11 @@ const FireAlarmBellIcon = createSvgIcon(
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
+    width="512"
+    height="512"
     x="0"
     y="0"
-    viewBox="0 0 40 40"
+    viewBox="0 0 32 32"
     fill="currentColor"
   >
     <g>
@@ -22,6 +24,6 @@ const FireAlarmBellIcon = createSvgIcon(
       ></path>
     </g>
   </svg>,
-  "EicrOutlined"
+  "FireAlarmBell"
 );
 export default FireAlarmBellIcon;

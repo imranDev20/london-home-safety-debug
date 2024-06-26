@@ -9,12 +9,19 @@ import FuseBoxOutlinedIcon from "@/app/_components/icons/fuse-box-outlined-icon"
 import GasOutlinedIcon from "@/app/_components/icons/gas-outlined-icon";
 import PatOutlinedIcon from "@/app/_components/icons/pat-outlined-icon";
 import ScrewDriverOutlinedIcon from "@/app/_components/icons/screw-driver-outlined-icon";
+import BookingIcon from "@/app/_components/icons/booking-icon";
+import FastResponseIcon from "@/app/_components/icons/fast-response-icon";
+import EngineersIcon from "@/app/_components/icons/engineers-icon";
+import LowPriceIcon from "@/app/_components/icons/low-price-icon";
 
 import { NavItem, NavLeafItem } from "@/types/misc";
 
-import SvgIcon from "@mui/joy/SvgIcon";
-
 import backgroundImage from "@/images/about-bg.jpeg";
+import EicrOutlinedIcon from "@/app/_components/icons/eicr-outlined-icon";
+import FireAlarmBellIcon from "@/app/_components/icons/fire-alarm-bell-icon";
+import HealthHeartIcon from "@/app/_components/icons/health-heart-icon";
+import HomeUndrawIcon from "@/app/_components/icons/home-undraw-icon";
+import BuildingUndrawIcon from "@/app/_components/icons/building-undraw-icon";
 
 export const OTHER_PAGES = [
   {
@@ -45,33 +52,179 @@ export const NAV_ITEMS: NavItem[] = [
       {
         label: "Electrical Services",
         path: "/electrical-services",
+        description:
+          "Ensure your home's electrical systems are safe and efficient with our expert services.",
+        Icon: EicrOutlinedIcon,
         children: [
           {
-            label: "Energy Performance Certificate",
-            path: "/epc",
-            abbr: "EPC",
-            Icon: EpcOutlinedIcon,
-            description:
-              "Assess the energy efficiency of your home and get certified with our EPC service.",
-            image: backgroundImage,
-          },
-          {
             label: "Electrical Installation Condition Report",
-            path: "/eicr",
+            path: "/electrical-installation-condition-report",
             abbr: "EICR",
             Icon: EicrOutlinedTwoIcon,
             image: backgroundImage,
             description:
               "Ensure the safety and compliance of your electrical installations with our thorough EICR.",
+            detailedDesc: {
+              details:
+                "Regular EICR inspections help identify and rectify any issues in your electrical installations. This service is crucial for ensuring the safety and compliance of your electrical systems with legal standards. Our comprehensive reports will detail any defects or necessary repairs for both homes and businesses.",
+              points: [
+                "Identifies potential electrical hazards",
+                "Ensures compliance with safety regulations",
+                "Provides a detailed report with recommendations",
+              ],
+            },
+
+            pricingDetails: [
+              {
+                type: "Residential",
+                unit: "bedroom",
+                Icon: HomeUndrawIcon,
+                description:
+                  "Ensure your home's electrical installations are safe and compliant.",
+                prices: [
+                  {
+                    unitCount: "Studio Flat",
+                    price: 79,
+                  },
+                  {
+                    unitCount: 1,
+                    price: 99,
+                  },
+                  {
+                    unitCount: 2,
+                    price: 99,
+                  },
+
+                  {
+                    unitCount: 3,
+                    price: 119,
+                  },
+                  {
+                    unitCount: 4,
+                    price: 119,
+                  },
+
+                  {
+                    unitCount: 5,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 6,
+                    price: 149,
+                  },
+                ],
+              },
+
+              {
+                type: "Commercial",
+                unit: "circuit",
+                Icon: BuildingUndrawIcon,
+                description:
+                  "Comprehensive electrical safety reports for commercial properties.",
+                prices: [
+                  {
+                    unitCount: 1,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 2,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 3,
+                    price: 149,
+                  },
+
+                  {
+                    unitCount: 4,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 5,
+                    price: 149,
+                  },
+
+                  {
+                    unitCount: 6,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 7,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 8,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 9,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 10,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 11,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 12,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 13,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 14,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 15,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 16,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 17,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 18,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 19,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 20,
+                    price: 249,
+                  },
+                ],
+              },
+            ],
           },
           {
             label: "Portable Appliance Testing",
-            path: "/pat",
+            path: "/portable-appliance-testing",
             abbr: "PAT",
             Icon: PatOutlinedIcon,
             image: backgroundImage,
             description:
               "Test the safety of your portable appliances to prevent electrical hazards with our PAT service.",
+            detailedDesc: {
+              details:
+                "PAT testing is essential for ensuring that all portable electrical appliances are safe to use. Our qualified technicians will inspect and test each appliance, providing you with documentation that confirms compliance with safety standards. This service helps prevent electrical hazards in both residential and commercial properties.",
+              points: [
+                "Tests the safety of portable appliances",
+                "Prevents electrical hazards",
+                "Provides certification of compliance",
+              ],
+            },
           },
           {
             label: "Fuse Box Installation",
@@ -80,6 +233,15 @@ export const NAV_ITEMS: NavItem[] = [
             image: backgroundImage,
             description:
               "Upgrade or install a new fuse box to enhance your home's electrical safety and performance.",
+            detailedDesc: {
+              details:
+                "Upgrading or installing a new fuse box (consumer unit) can significantly enhance the safety and reliability of your electrical system. Our skilled electricians will ensure your fuse box meets current regulations and is capable of handling your property's electrical load, whether it's a home or a business.",
+              points: [
+                "Enhances electrical safety",
+                "Meets current regulations",
+                "Capable of handling increased electrical load",
+              ],
+            },
           },
           {
             label: "Electrical Repairs",
@@ -88,6 +250,15 @@ export const NAV_ITEMS: NavItem[] = [
             image: backgroundImage,
             description:
               "Get reliable and efficient electrical repairs from our certified professionals.",
+            detailedDesc: {
+              details:
+                "Our team is available to handle any electrical repairs, from minor fixes to major overhauls. Whether you're dealing with faulty wiring, broken outlets, or any other electrical issue, our certified electricians will provide efficient and reliable repair services to ensure your systems are functioning correctly and safely.",
+              points: [
+                "Efficient and reliable repairs",
+                "Handles a wide range of electrical issues",
+                "Ensures systems function safely",
+              ],
+            },
           },
           {
             label: "EV Charger Installation",
@@ -96,12 +267,24 @@ export const NAV_ITEMS: NavItem[] = [
             image: backgroundImage,
             description:
               "Install a convenient and efficient EV charger at your home for your electric vehicle.",
+            detailedDesc: {
+              details:
+                "We provide professional installation of electric vehicle (EV) chargers, offering you the convenience of charging your EV at home or at your business premises. Our service includes assessing your electrical system, recommending the best charger, and ensuring a safe and efficient installation.",
+              points: [
+                "Professional installation of EV chargers",
+                "Assessment of electrical system",
+                "Safe and efficient installation",
+              ],
+            },
           },
         ],
       },
       {
         label: "Gas Services",
         path: "/gas-services",
+        description:
+          "Keep your home warm and secure with our reliable gas safety solutions.",
+        Icon: GasOutlinedIcon,
         children: [
           {
             label: "Gas Certificate & Repairs",
@@ -124,6 +307,9 @@ export const NAV_ITEMS: NavItem[] = [
       {
         label: "Fire Services",
         path: "/fire-services",
+        description:
+          "Protect your property and loved ones with our advanced fire safety measures.",
+        Icon: FireAlarmBellIcon,
         children: [
           {
             label: "Fire Risk Assessment",
@@ -152,8 +338,31 @@ export const NAV_ITEMS: NavItem[] = [
         ],
       },
       {
-        label: "Health Services",
-        path: "/health-services",
+        label: "Health & Safety Services",
+        path: "/health-and-safety-services",
+        description:
+          "Maintain a safe and healthy living environment with our comprehensive safety solutions.",
+        Icon: HealthHeartIcon,
+        children: [
+          {
+            label: "Energy Performance Certificate",
+            path: "/energy-performance-certificate",
+            abbr: "EPC",
+            Icon: EpcOutlinedIcon,
+            description:
+              "Assess the energy efficiency of your home and get certified with our EPC service.",
+            image: backgroundImage,
+            detailedDesc: {
+              details:
+                "An EPC provides an assessment of your property's energy efficiency and recommendations for improvement. It is essential for buying, selling, or renting both residential and commercial properties. Our experts will conduct a thorough inspection and provide you with an official certificate.",
+              points: [
+                "Detailed energy efficiency rating",
+                "Recommendations for improving energy efficiency",
+                "Mandatory for selling or renting properties",
+              ],
+            },
+          },
+        ],
       },
     ],
   },
@@ -246,4 +455,31 @@ export const WORKING_HOURS = [
   { dayOfWeek: "Friday", start: "08:00", end: "18:00" },
   { dayOfWeek: "Saturday", start: "09:00", end: "14:00" },
   { dayOfWeek: "Sunday", start: "Closed", end: "Closed" },
+];
+
+export const ADVANTAGES = [
+  {
+    id: 1,
+    advantageName: "Certified Experts",
+    advantageDetail: "Highly trained and accredited professionals.",
+    Icon: EngineersIcon,
+  },
+  {
+    id: 2,
+    advantageName: "Price Match Guarantee",
+    advantageDetail: "We promise unbeatable pricing.",
+    Icon: LowPriceIcon,
+  },
+  {
+    id: 3,
+    advantageName: "Rapid Response",
+    advantageDetail: "Appointments available as early as tomorrow.",
+    Icon: FastResponseIcon,
+  },
+  {
+    id: 4,
+    advantageName: "Flexible Scheduling",
+    advantageDetail: "Book appointments at your convenience.",
+    Icon: BookingIcon,
+  },
 ];

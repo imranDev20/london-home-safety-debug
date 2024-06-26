@@ -16,6 +16,7 @@ import { PhoneOutlined } from "@mui/icons-material";
 import Image from "next/image";
 import BackgroundImage from "@/images/hero-image-new.jpeg";
 import { PHONE_NO } from "@/shared/data";
+import DotIcon from "@/app/_components/icons/dot-icon";
 
 const ABOUT_FEATURE_POINTS = [
   { text: "Highly skilled and certified experts." },
@@ -24,35 +25,6 @@ const ABOUT_FEATURE_POINTS = [
   { text: "Deep understanding of London's local needs and regulations." },
   { text: "Trusted by homeowners for reliability and professionalism." },
 ];
-
-function DotIcon() {
-  return (
-    <Box
-      sx={{
-        backgroundColor: hexToRgba(SECONDARY_COLOUR[500], 0.3),
-        width: "16px",
-        height: "16px",
-        p: "2px",
-        borderRadius: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      component="span"
-    >
-      <Box
-        component="span"
-        sx={{
-          backgroundColor: SECONDARY_COLOUR[500],
-          width: "7px",
-          height: "7px",
-          p: "2px",
-          borderRadius: "50%",
-        }}
-      />
-    </Box>
-  );
-}
 
 export default function AboutUsHome() {
   return (

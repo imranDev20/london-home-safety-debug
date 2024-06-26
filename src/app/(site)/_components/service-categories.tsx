@@ -2,50 +2,13 @@ import Container from "@mui/joy/Container";
 import Grid from "@mui/joy/Grid";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
+
 import React from "react";
+
 import ServiceCategoryCard from "./service-category-card";
-import EicrOutlinedIcon from "@/app/_components/icons/eicr-outlined-icon";
-import GasOutlinedIcon from "@/app/_components/icons/gas-outlined-icon";
-import FireAlarmBellIcon from "@/app/_components/icons/fire-alarm-bell-icon";
-import HealthHeartIcon from "@/app/_components/icons/health-heart-icon";
+
 import { BACKGROUND_COLOUR } from "@/shared/constants";
-
-const SERVICES_PRICE = [
-  {
-    id: 1,
-    serviceName: "Electrical Services",
-    serviceDetail:
-      "Ensure your home's electrical systems are safe and efficient with our expert services.",
-    column: 6,
-    Icon: EicrOutlinedIcon,
-  },
-
-  {
-    id: 2,
-    serviceName: "Gas Services",
-    serviceDetail:
-      "Keep your home warm and secure with our reliable gas safety solutions.",
-    column: 6,
-    Icon: GasOutlinedIcon,
-  },
-  {
-    id: 3,
-    serviceName: "Fire Services",
-    serviceDetail:
-      "Protect your property and loved ones with our advanced fire safety measures.",
-    column: 6,
-    Icon: FireAlarmBellIcon,
-  },
-
-  {
-    id: 4,
-    serviceName: "Health & Safety",
-    serviceDetail:
-      "Maintain a safe and healthy living environment with our comprehensive safety solutions.",
-    column: 6,
-    Icon: HealthHeartIcon,
-  },
-];
+import { NAV_ITEMS } from "@/shared/data";
 
 export default function ServiceCategories() {
   return (
@@ -82,11 +45,13 @@ export default function ServiceCategories() {
             justifyContent: "center",
           }}
         >
-          {SERVICES_PRICE.map((service) => (
-            <Grid xs={12} sm={6} md={service.column} key={service.id}>
-              {service.id && <ServiceCategoryCard service={service} />}
-            </Grid>
-          ))}
+          {NAV_ITEMS.find((item) => item.label === "Services")?.children?.map(
+            (service) => (
+              <Grid xs={12} sm={6} md={6} key={service.path}>
+                <ServiceCategoryCard service={service} />
+              </Grid>
+            )
+          )}
         </Grid>
       </Container>
     </Sheet>

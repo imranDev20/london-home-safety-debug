@@ -8,23 +8,13 @@ import Typography from "@mui/joy/Typography";
 import Link from "next/link";
 import React from "react";
 import { PRIMARY_COLOUR } from "@/shared/constants";
+import { NavItem } from "@/types/misc";
 
-interface ServiceProps {
-  service: {
-    id: number;
-    serviceName: string;
-    serviceDetail: string;
-    Icon: React.ComponentType<SvgIconProps>;
-  };
-}
+export default function ServiceCategoryCard({ service }: { service: NavItem }) {
+  const { path, Icon, label, description } = service;
 
-export default function ServiceCategoryCard({ service }: ServiceProps) {
   return (
-    <JoyLink
-      component={Link}
-      href={`/services/${customSlugify(service.serviceName)}`}
-      underline="none"
-    >
+    <JoyLink component={Link} href={`/services${path}`} underline="none">
       <Card
         variant="plain"
         sx={{
@@ -44,13 +34,15 @@ export default function ServiceCategoryCard({ service }: ServiceProps) {
           },
         }}
       >
-        <Stack direction="row" spacing={1}>
-          <service.Icon
-            sx={{
-              fontSize: 100,
-            }}
-            color="primary"
-          />
+        <Stack direction="row" spacing={3}>
+          {Icon && (
+            <Icon
+              sx={{
+                fontSize: 75,
+              }}
+              color="primary"
+            />
+          )}
           <Stack>
             <Typography
               level="h3"
@@ -58,9 +50,9 @@ export default function ServiceCategoryCard({ service }: ServiceProps) {
                 mb: 2,
               }}
             >
-              {service.serviceName}
+              {label}
             </Typography>
-            <Typography color="neutral">{service.serviceDetail}</Typography>
+            <Typography color="neutral">{description}</Typography>
           </Stack>
         </Stack>
       </Card>

@@ -143,7 +143,7 @@ export default function Navbar({
                           position: "absolute",
                           backgroundColor: "white",
                           boxShadow: "lg",
-                          minWidth: 190,
+                          minWidth: 220,
                           py: 1,
                           borderRadius: "lg",
                           left: "50%",
@@ -157,6 +157,7 @@ export default function Navbar({
                             sx={{
                               position: "relative",
                               px: 1,
+
                               ":hover": {
                                 "& .secondSubMenu": {
                                   display: "block",
@@ -167,6 +168,15 @@ export default function Navbar({
                             <Button
                               variant="plain"
                               component={Link}
+                              startDecorator={
+                                dropdownItem?.Icon && (
+                                  <dropdownItem.Icon
+                                    sx={{
+                                      color: PRIMARY_COLOUR[500],
+                                    }}
+                                  />
+                                )
+                              }
                               fullWidth
                               href={item.path + dropdownItem.path}
                               sx={{
@@ -177,6 +187,7 @@ export default function Navbar({
                                 borderRadius: "sm",
                                 cursor: "pointer",
                                 justifyContent: "flex-start",
+                                alignItems: "center",
                                 color: TEXT_COLOR.primary,
                                 ":hover": {
                                   backgroundColor: hexToRgba(
@@ -199,7 +210,7 @@ export default function Navbar({
                                   position: "absolute",
                                   backgroundColor: "white",
                                   boxShadow: "lg",
-                                  minWidth: 220,
+                                  minWidth: 250,
                                   p: 1,
                                   borderRadius: "lg",
                                   right: 0,
@@ -215,6 +226,17 @@ export default function Navbar({
                                         variant="plain"
                                         component={Link}
                                         fullWidth
+                                        startDecorator={
+                                          dropdownChildItem?.Icon && (
+                                            <dropdownChildItem.Icon
+                                              sx={{
+                                                fontSize: 25,
+                                                color: PRIMARY_COLOUR[500],
+                                                mr: 1,
+                                              }}
+                                            />
+                                          )
+                                        }
                                         href={
                                           item.path +
                                           dropdownItem.path +
@@ -224,6 +246,7 @@ export default function Navbar({
                                           fontWeight: 600,
                                           p: 1,
                                           px: 2,
+                                          my: 0.5,
                                           fontSize: "md",
                                           borderRadius: "sm",
                                           cursor: "pointer",
