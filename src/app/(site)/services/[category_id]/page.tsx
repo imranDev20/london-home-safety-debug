@@ -16,16 +16,26 @@ export default function CategoryDetailsPage({
 }) {
   const { category_id } = params;
 
+  const breadCrumbOptions = [
+    {
+      label: "Services",
+      path: "/services",
+    },
+    {
+      label: kebabCaseToNormalText(category_id),
+      isCurrentPage: true,
+    },
+  ];
+
   return (
     <>
       <PageHeader
         backgroundImage={backgroundImage}
-        title={kebabCaseToNormalText(category_id)}
-        secondary="Services"
+        breadCrumbOptions={breadCrumbOptions}
       />
 
-      <CategoryServices category={category_id} />
-      <AboutCategory category={category_id} />
+      <CategoryServices categoryId={category_id} />
+      <AboutCategory categoryId={category_id} />
 
       <CallToAction />
 

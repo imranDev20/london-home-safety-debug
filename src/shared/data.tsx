@@ -20,6 +20,8 @@ import backgroundImage from "@/images/about-bg.jpeg";
 import EicrOutlinedIcon from "@/app/_components/icons/eicr-outlined-icon";
 import FireAlarmBellIcon from "@/app/_components/icons/fire-alarm-bell-icon";
 import HealthHeartIcon from "@/app/_components/icons/health-heart-icon";
+import HomeUndrawIcon from "@/app/_components/icons/home-undraw-icon";
+import BuildingUndrawIcon from "@/app/_components/icons/building-undraw-icon";
 
 export const OTHER_PAGES = [
   {
@@ -71,6 +73,140 @@ export const NAV_ITEMS: NavItem[] = [
                 "Provides a detailed report with recommendations",
               ],
             },
+
+            pricingDetails: [
+              {
+                type: "Residential",
+                unit: "bedroom",
+                Icon: HomeUndrawIcon,
+                description:
+                  "Ensure your home's electrical installations are safe and compliant.",
+                prices: [
+                  {
+                    unitCount: "Studio Flat",
+                    price: 79,
+                  },
+                  {
+                    unitCount: 1,
+                    price: 99,
+                  },
+                  {
+                    unitCount: 2,
+                    price: 99,
+                  },
+
+                  {
+                    unitCount: 3,
+                    price: 119,
+                  },
+                  {
+                    unitCount: 4,
+                    price: 119,
+                  },
+
+                  {
+                    unitCount: 5,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 6,
+                    price: 149,
+                  },
+                ],
+              },
+
+              {
+                type: "Commercial",
+                unit: "circuit",
+                Icon: BuildingUndrawIcon,
+                description:
+                  "Comprehensive electrical safety reports for commercial properties.",
+                prices: [
+                  {
+                    unitCount: 1,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 2,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 3,
+                    price: 149,
+                  },
+
+                  {
+                    unitCount: 4,
+                    price: 149,
+                  },
+                  {
+                    unitCount: 5,
+                    price: 149,
+                  },
+
+                  {
+                    unitCount: 6,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 7,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 8,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 9,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 10,
+                    price: 199,
+                  },
+                  {
+                    unitCount: 11,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 12,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 13,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 14,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 15,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 16,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 17,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 18,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 19,
+                    price: 249,
+                  },
+                  {
+                    unitCount: 20,
+                    price: 249,
+                  },
+                ],
+              },
+            ],
           },
           {
             label: "Portable Appliance Testing",

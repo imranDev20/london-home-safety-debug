@@ -8,7 +8,11 @@ import Box from "@mui/joy/Box";
 import CategoryServiceDetails from "./category-service-details";
 import { PRIMARY_COLOUR } from "@/shared/constants";
 
-export default function AboutCategory({ category }: { category: string }) {
+export default function AboutCategory({
+  categoryId: category,
+}: {
+  categoryId: string;
+}) {
   const services = ALL_SERVICES.filter((item) =>
     item.categoryPath?.includes(category)
   );

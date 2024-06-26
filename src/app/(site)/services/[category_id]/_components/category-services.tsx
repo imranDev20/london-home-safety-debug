@@ -10,6 +10,7 @@ import {
   Link as JoyLink,
   Box,
   Sheet,
+  Divider,
 } from "@mui/joy";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +23,11 @@ import {
 import { ALL_SERVICES } from "@/shared/data";
 import { kebabCaseToNormalText } from "@/shared/functions";
 
-export default function CategoryServices({ category }: { category: string }) {
+export default function CategoryServices({
+  categoryId: category,
+}: {
+  categoryId: string;
+}) {
   const services = ALL_SERVICES.filter((item) =>
     item.categoryPath?.includes(category)
   );
@@ -58,6 +63,7 @@ export default function CategoryServices({ category }: { category: string }) {
                   backgroundColor: "white",
                   boxShadow: "md",
                   height: "100%",
+                  p: 0,
                 }}
               >
                 <CardOverflow>
@@ -73,14 +79,12 @@ export default function CategoryServices({ category }: { category: string }) {
                   </AspectRatio>
                 </CardOverflow>
 
-                <CardContent
-                  sx={{
-                    p: 2,
-                  }}
-                >
+                <CardContent>
                   <Box
                     sx={{
                       flex: 1,
+                      px: 3,
+                      py: 2,
                     }}
                   >
                     <JoyLink
@@ -114,12 +118,15 @@ export default function CategoryServices({ category }: { category: string }) {
                     </Typography>
                   </Box>
 
+                  <Divider />
+
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      mt: 2,
+                      px: 3,
+                      py: 2,
                     }}
                   >
                     <Box

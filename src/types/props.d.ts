@@ -13,9 +13,12 @@ export type HideOnScrollProps = {
 
 export type PageHeaderProps = {
   backgroundImage: StaticImageData;
-  title: string;
-  secondary?: string;
-  tertiary?: string;
+
+  breadCrumbOptions: {
+    label: string;
+    path?: string;
+    isCurrentPage?: boolean;
+  }[];
 };
 
 export type ParagraphProps = TypographyProps & {
