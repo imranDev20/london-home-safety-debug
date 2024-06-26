@@ -20,7 +20,8 @@ export default function PageHeader({
         alt="Background"
         sizes="100vw"
         fill
-        loading="lazy"
+        rel="preload"
+        priority
         placeholder="blur"
         style={{ objectFit: "cover" }}
       />

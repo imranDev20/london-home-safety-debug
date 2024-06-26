@@ -20,13 +20,7 @@ import {
   TEXT_COLOR,
 } from "@/shared/constants";
 import { ALL_SERVICES } from "@/shared/data";
-
-function convertToNormalText(str: string): string {
-  return str
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
+import { kebabCaseToNormalText } from "@/shared/functions";
 
 export default function CategoryServices({ category }: { category: string }) {
   const services = ALL_SERVICES.filter((item) =>
@@ -50,7 +44,7 @@ export default function CategoryServices({ category }: { category: string }) {
           }}
           fontSize={36}
         >
-          Expert {convertToNormalText(category)} for Peace of Mind
+          Expert {kebabCaseToNormalText(category)} for Peace of Mind
         </Typography>
 
         <Grid container spacing={3}>
@@ -63,6 +57,7 @@ export default function CategoryServices({ category }: { category: string }) {
                   borderRadius: "lg",
                   backgroundColor: "white",
                   boxShadow: "md",
+                  height: "100%",
                 }}
               >
                 <CardOverflow>
@@ -83,35 +78,41 @@ export default function CategoryServices({ category }: { category: string }) {
                     p: 2,
                   }}
                 >
-                  <JoyLink
-                    underline="none"
-                    component={Link}
-                    href={`/services${item.categoryPath}${item.path}`}
-                  >
-                    <Typography
-                      level="h3"
-                      component="h3"
-                      sx={{
-                        mb: 1,
-                        ":hover": {
-                          color: PRIMARY_COLOUR[500],
-                        },
-                      }}
-                    >
-                      {item.label}
-                    </Typography>
-                  </JoyLink>
-
-                  <Typography
-                    level="body-md"
+                  <Box
                     sx={{
-                      my: 1,
-                      // textAlign: "justify",
+                      flex: 1,
                     }}
-                    color="neutral"
                   >
-                    {item.description}
-                  </Typography>
+                    <JoyLink
+                      underline="none"
+                      component={Link}
+                      href={`/services${item.categoryPath}${item.path}`}
+                    >
+                      <Typography
+                        level="h3"
+                        component="h3"
+                        sx={{
+                          mb: 1,
+                          ":hover": {
+                            color: PRIMARY_COLOUR[500],
+                          },
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    </JoyLink>
+
+                    <Typography
+                      level="body-md"
+                      sx={{
+                        my: 1,
+                        // textAlign: "justify",
+                      }}
+                      color="neutral"
+                    >
+                      {item.description}
+                    </Typography>
+                  </Box>
 
                   <Box
                     sx={{
@@ -155,7 +156,7 @@ export default function CategoryServices({ category }: { category: string }) {
                     <Button
                       variant="solid"
                       component={Link}
-                      href={`/services${item.categoryPath}${item.path}`}
+                      href={`/book-now`}
                       sx={{
                         backgroundColor: SECONDARY_COLOUR[500],
                         color: TEXT_COLOR.primary,
@@ -166,7 +167,7 @@ export default function CategoryServices({ category }: { category: string }) {
                         },
                       }}
                     >
-                      Find Out More
+                      Book Now
                     </Button>
                   </Box>
                 </CardContent>

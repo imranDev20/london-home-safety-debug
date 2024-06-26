@@ -26,6 +26,10 @@ export type NavItem = {
   Icon?: typeof SvgIcon;
   image?: StaticImageData;
   description?: string;
+  detailedDesc?: {
+    details: string;
+    points: string[];
+  };
 };
 
 export type NavLeafItem = Omit<NavItem, "children"> & {

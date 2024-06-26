@@ -61,9 +61,9 @@ const SPONSER_PARTNER = [
   },
 ];
 
-export default function Partners({ isHome }: { isHome?: boolean }) {
+export default function Partners() {
   return (
-    <Container sx={{ my: isHome ? 3 : 15 }} id="partners">
+    <Container sx={{ my: 3, mb: 10 }} id="partners">
       <Box
         sx={{
           textAlign: "center",

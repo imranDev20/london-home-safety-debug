@@ -4,8 +4,12 @@ const EicrOutlinedIcon = createSvgIcon(
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"
+    width="512"
+    height="512"
+    x="0"
+    y="0"
+    viewBox="0 0 16.933 16.933"
     fill="currentColor"
-    viewBox="0 0 24 24"
   >
     <g>
       <path

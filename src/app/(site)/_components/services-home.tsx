@@ -50,7 +50,7 @@ export default function ServicesHome() {
               <Card
                 variant="plain"
                 component={Link}
-                href={`/categories${item.categoryPath}${item.path}`}
+                href={`/services${item.categoryPath}${item.path}`}
                 sx={{
                   textDecoration: "none",
                   transition: ".3s ease-in-out",
@@ -114,7 +114,7 @@ export default function ServicesHome() {
               <JoyLink
                 underline="none"
                 component={Link}
-                href={`/categories${item.categoryPath}${item.path}`}
+                href={`/services${item.categoryPath}${item.path}`}
                 sx={{
                   color: TEXT_COLOR.primary,
                   display: "flex",

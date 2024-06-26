@@ -37,10 +37,10 @@ export default function ServiceCard({ service }: { service: NavLeafItem }) {
           p: 3,
           display: "flex",
           flexDirection: "column",
-          height: "100%",
           backgroundColor: BACKGROUND_COLOUR.level5,
           boxShadow: "xl",
           borderRadius: "lg",
+          height: "100%",
         }}
       >
         <Box
