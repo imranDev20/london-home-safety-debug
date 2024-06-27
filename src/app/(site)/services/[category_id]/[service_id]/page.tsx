@@ -65,7 +65,7 @@ export default function ServiceDetailsPage({
       <Container
         maxWidth="md"
         sx={{
-          mt: 10,
+          my: 10,
         }}
       >
         <Typography
@@ -186,10 +186,6 @@ export default function ServiceDetailsPage({
           </AccordionGroup>
         )}
       </Container>
-
-      {currentService && <RelatedServices currentService={currentService} />}
-
-      <Testimonials />
     </>
   );
 }

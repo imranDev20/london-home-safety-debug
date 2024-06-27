@@ -332,7 +332,138 @@ export const NAV_ITEMS: NavItem[] = [
                 "Provides certification of compliance",
               ],
             },
+            pricingDetails: [
+              {
+                type: "Residential",
+                unit: "item",
+                Icon: HomeUndrawIcon,
+                description:
+                  "Ensure your home's portable appliances are safe and compliant.",
+                prices: [
+                  {
+                    unitCount: 1,
+                    price: 50,
+                  },
+                  {
+                    unitCount: 5,
+                    price: 75,
+                  },
+                  {
+                    unitCount: 10,
+                    price: 100,
+                  },
+                  {
+                    unitCount: 20,
+                    price: 150,
+                  },
+                ],
+              },
+              {
+                type: "Commercial",
+                unit: "item",
+                Icon: BuildingUndrawIcon,
+                description:
+                  "Comprehensive PAT testing for commercial properties.",
+                prices: [
+                  {
+                    unitCount: 1,
+                    price: 60,
+                  },
+                  {
+                    unitCount: 5,
+                    price: 85,
+                  },
+                  {
+                    unitCount: 10,
+                    price: 110,
+                  },
+                  {
+                    unitCount: 20,
+                    price: 160,
+                  },
+                ],
+              },
+            ],
+            pageContent: {
+              title: "Ensuring Appliance Safety with Professional PAT Testing",
+              html: `
+                <p>Portable Appliance Testing (PAT) is a vital process to ensure that electrical appliances in your property are safe to use. Our PAT service involves thorough inspections and tests conducted by qualified technicians, ensuring compliance with safety standards and preventing potential electrical hazards.</p>
+                
+                <h2>What Appliances Need PAT Testing?</h2>
+                <p>PAT testing is necessary for various types of portable electrical appliances, including but not limited to:</p>
+                <ul>
+                  <li>Computers and peripherals</li>
+                  <li>Kitchen appliances (e.g., kettles, toasters)</li>
+                  <li>Office equipment (e.g., printers, copiers)</li>
+                  <li>Power tools</li>
+                  <li>Extension cords and chargers</li>
+                </ul>
+                
+                <h2>Who Should Get PAT Testing?</h2>
+                <p>PAT testing is recommended for a wide range of property owners and users:</p>
+                <ul>
+                  <li><strong>Landlords:</strong> To ensure rental properties are safe and comply with regulations.</li>
+                  <li><strong>Homeowners:</strong> For peace of mind and to ensure the safety of appliances in the home.</li>
+                  <li><strong>Business Owners:</strong> To comply with health and safety regulations and protect employees and customers.</li>
+                  <li><strong>Educational Institutions:</strong> To ensure the safety of students and staff.</li>
+                </ul>
+                
+                <h2>What Happens During PAT Testing?</h2>
+                <p>During PAT testing, a qualified technician will perform a thorough examination of your portable appliances.</p>
+                <p><strong>Inspection Process:</strong></p>
+                <ul>
+                  <li><strong>Pre-Testing Inspection:</strong> Initial visual inspection to check for any visible damage or wear.</li>
+                  <li><strong>Electrical Testing:</strong> Conducts electrical tests to ensure appliances are functioning correctly and safely.</li>
+                  <li><strong>Documentation:</strong> Records the findings and provides a detailed report, including any defects and recommendations.</li>
+                </ul>
+                
+                <h2>What Happens After PAT Testing?</h2>
+                <p>After the PAT testing, you will receive a comprehensive report detailing the condition of your appliances and any required actions.</p>
+                <p><strong>Post-Testing Steps:</strong></p>
+                <ul>
+                  <li><strong>Review Report:</strong> Go through the findings with the technician to understand the condition of your appliances.</li>
+                  <li><strong>Address Faults:</strong> Schedule necessary repairs or replacements as recommended in the report.</li>
+                  <li><strong>Certification:</strong> Once any required work is completed, you will receive a certificate confirming that your appliances meet the required safety standards.</li>
+                </ul>
+                <p>By following these steps, you can ensure that your property’s electrical appliances are safe, compliant, and functioning properly. Regular PAT testing is a proactive measure to protect your property and its occupants from electrical hazards.</p>
+              `,
+            },
+            faqs: [
+              {
+                ques: "What types of appliances need PAT testing?",
+                ans: "Any portable electrical appliances that are plugged into the mains, such as computers, kitchen appliances, office equipment, power tools, and extension cords, need PAT testing to ensure they are safe to use.",
+              },
+              {
+                ques: "How often should PAT testing be conducted?",
+                ans: "The frequency of PAT testing depends on the type of appliance and its usage environment. Generally, it is recommended to test appliances annually, but high-risk environments may require more frequent testing.",
+              },
+              {
+                ques: "What are the benefits of regular PAT testing?",
+                ans: "Regular PAT testing helps prevent electrical hazards, ensures compliance with safety standards, provides documentation for insurance purposes, and gives peace of mind knowing that your appliances are safe to use.",
+              },
+              {
+                ques: "Who is responsible for ensuring appliances are PAT tested?",
+                ans: "Employers, landlords, and business owners are responsible for ensuring that all portable electrical appliances in their premises are PAT tested and safe to use.",
+              },
+              {
+                ques: "What does the PAT testing process involve?",
+                ans: "PAT testing includes a visual inspection of the appliance, an electrical test to check for safety, and documentation of the results. The appliance will receive a pass or fail label based on the findings.",
+              },
+              {
+                ques: "What should I do if an appliance fails the PAT test?",
+                ans: "If an appliance fails the PAT test, it should be removed from use immediately and either repaired by a qualified technician or replaced. A follow-up PAT test may be required after repairs.",
+              },
+              {
+                ques: "Is PAT testing a legal requirement?",
+                ans: "While PAT testing itself is not a legal requirement, ensuring electrical safety is. PAT testing is a widely accepted method for complying with electrical safety regulations in workplaces and rental properties.",
+              },
+              {
+                ques: "Can new appliances skip PAT testing?",
+                ans: "New appliances should be visually inspected before use but may not require immediate PAT testing. However, they should be included in the regular PAT testing schedule based on their usage environment.",
+              },
+            ],
           },
+
           {
             label: "Fuse Box Installation",
             path: "/fuse-box-installation",
