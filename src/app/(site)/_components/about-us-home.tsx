@@ -9,7 +9,6 @@ import Typography from "@mui/joy/Typography";
 import JoyLink from "@mui/joy/Link";
 import Divider from "@mui/joy/Divider";
 
-import { hexToRgba } from "@/shared/functions";
 import Link from "next/link";
 import { SECONDARY_COLOUR, TEXT_COLOR } from "@/shared/constants";
 import { PhoneOutlined } from "@mui/icons-material";

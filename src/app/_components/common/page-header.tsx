@@ -2,6 +2,8 @@ import Box from "@mui/joy/Box";
 import Breadcrumbs from "@mui/joy/Breadcrumbs";
 import JoyLink from "@mui/joy/Link";
 import Typography from "@mui/joy/Typography";
+import Container from "@mui/joy/Container";
+
 import Image from "next/image";
 import { PageHeaderProps } from "@/types/props";
 import { hexToRgba } from "@/shared/functions";
@@ -43,56 +45,68 @@ export default function PageHeader({
           },
         }}
       >
-        <Typography
-          sx={{
-            position: "relative",
-            zIndex: 1,
-            textAlign: "center",
-            color: "white",
-          }}
-          component="h1"
-          level="h1"
-        >
-          {title}
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Breadcrumbs sx={{ position: "relative", zIndex: 1, color: "white" }}>
-            <JoyLink
-              href="/"
-              component={JoyLink}
-              underline="hover"
-              sx={{
-                color: "white",
+        <Container maxWidth="lg">
+          <Typography
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              textAlign: "center",
+              color: "white",
+            }}
+            component="h1"
+            level="h1"
+          >
+            {title}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Breadcrumbs
+              slotProps={{
+                ol: {
+                  sx: {
+                    display: "flex",
+                    justifyContent: "center",
+                  },
+                },
               }}
+              sx={{ position: "relative", zIndex: 1, color: "white" }}
             >
-              Home
-            </JoyLink>
+              <JoyLink
+                href="/"
+                component={JoyLink}
+                underline="hover"
+                sx={{
+                  color: "white",
+                }}
+              >
+                Home
+              </JoyLink>
 
-            {breadCrumbOptions
-              .filter((item) => !item.isCurrentPage)
-              .map((val) => (
-                <JoyLink
-                  key={val.path}
-                  href={val.path}
-                  component={JoyLink}
-                  underline="hover"
-                  sx={{
-                    color: "white",
-                  }}
-                >
-                  {val.label}
-                </JoyLink>
-              ))}
+              {breadCrumbOptions
+                .filter((item) => !item.isCurrentPage)
+                .map((val) => (
+                  <JoyLink
+                    key={val.path}
+                    href={val.path}
+                    component={JoyLink}
+                    underline="hover"
+                    sx={{
+                      color: "white",
+                    }}
+                  >
+                    {val.label}
+                  </JoyLink>
+                ))}
 
-            <Typography color="secondary">{title}</Typography>
-          </Breadcrumbs>
-        </Box>
+              <Typography color="secondary">{title}</Typography>
+            </Breadcrumbs>
+          </Box>
+        </Container>
       </Box>
     </Box>
   );

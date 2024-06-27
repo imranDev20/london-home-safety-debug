@@ -42,6 +42,16 @@ export type NavItem = {
       price: number;
     }[];
   }[];
+
+  pageContent?: {
+    title: string;
+    html: string;
+  };
+
+  faqs?: {
+    ques: string;
+    ans: string;
+  }[];
 };
 
 export type NavLeafItem = Omit<NavItem, "children"> & {

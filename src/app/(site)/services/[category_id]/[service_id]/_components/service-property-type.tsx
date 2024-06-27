@@ -9,7 +9,6 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Button from "@mui/joy/Button";
 import Container from "@mui/joy/Container";
 import Sheet from "@mui/joy/Sheet";
-import Stack from "@mui/joy/Stack";
 
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import {
@@ -18,7 +17,6 @@ import {
   SECONDARY_COLOUR,
   TEXT_COLOR,
 } from "@/shared/constants";
-import HomeUndrawIcon from "@/app/_components/icons/home-undraw-icon";
 import { ALL_SERVICES } from "@/shared/data";
 import Link from "next/link";
 
@@ -42,7 +40,7 @@ export default function ServicePropertyType({
       }}
     >
       <Container
-        maxWidth="lg"
+        maxWidth="md"
         sx={{
           py: 10,
         }}
@@ -53,8 +51,11 @@ export default function ServicePropertyType({
             mb: 5,
             textAlign: "center",
           }}
-          fontSize={36}
-        ></Typography>
+          fontSize={30}
+        >
+          Pricing for Every Home and Business
+        </Typography>
+
         <Grid
           container
           spacing={0}
@@ -111,7 +112,13 @@ export default function ServicePropertyType({
                           {item.type}{" "}
                           {currentService.abbr || currentService.label}
                         </Typography>
-                        <Typography level="body-md" color="neutral">
+                        <Typography
+                          level="body-md"
+                          color="neutral"
+                          sx={{
+                            textAlign: "center",
+                          }}
+                        >
                           Ensure your home&apos;s electrical installations are
                           safe and compliant.
                         </Typography>
