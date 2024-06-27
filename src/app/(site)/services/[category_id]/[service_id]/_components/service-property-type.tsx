@@ -62,7 +62,7 @@ export default function ServicePropertyType({
           sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "lg" }}
         >
           {propertyTypePriceDetails &&
-            propertyTypePriceDetails.map((item) => {
+            propertyTypePriceDetails.map((item, index) => {
               const simplifiedPricesArray = simplifyPrices(
                 item.unit,
                 item.prices
@@ -72,8 +72,22 @@ export default function ServicePropertyType({
                 <Grid xs={12} sm={12} md={6} key={item.type}>
                   <Sheet
                     sx={{
-                      borderRight: "1px solid",
-                      borderRightColor: "var(--joy-palette-divider)",
+                      borderBottom: {
+                        xs: "1px solid",
+                        md: "0px solid",
+                      },
+
+                      borderBottomColor: {
+                        xs: "var(--joy-palette-divider)",
+                      },
+
+                      borderRight: {
+                        md:
+                          propertyTypePriceDetails.length - 1 !== index
+                            ? "1px solid"
+                            : "0px solid",
+                      },
+                      borderRightColor: { md: "var(--joy-palette-divider)" },
                       height: "100%",
                     }}
                   >
@@ -107,6 +121,7 @@ export default function ServicePropertyType({
                           sx={{
                             mb: 0.5,
                             mt: 4,
+                            textAlign: "center",
                           }}
                         >
                           {item.type}{" "}

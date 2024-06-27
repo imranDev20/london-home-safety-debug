@@ -18,6 +18,7 @@
     "@mui/material": "npm:@mui/joy@latest",
     "@tanstack/react-query": "^5.44.0",
     "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
     "dayjs": "^1.11.11",
     "embla-carousel": "^8.1.5",
     "embla-carousel-react": "^8.1.5",
@@ -40,6 +41,7 @@
     "@mui/material": "npm:@mui/joy@latest"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18",

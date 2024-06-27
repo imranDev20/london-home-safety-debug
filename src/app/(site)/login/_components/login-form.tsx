@@ -92,7 +92,7 @@ export default function LoginForm() {
           </Typography>
           <Typography level="body-md">
             New to the site?{" "}
-            <JoyLink component={Link} href="/register" level="title-sm">
+            <JoyLink component={Link} href="/register" level="title-md">
               Register!
             </JoyLink>
           </Typography>
