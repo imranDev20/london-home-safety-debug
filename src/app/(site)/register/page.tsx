@@ -1,13 +1,13 @@
 import { Card, CardContent, Container, Grid, Sheet } from "@mui/joy";
-import LoginForm from "./_components/login-form";
+import RegisterForm from "./_components/register-form";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <>
       <Sheet variant="soft">
         <Container sx={{ py: 4 }}>
           <Grid container>
-            <Grid xs={12} sm={8} md={5} sx={{ mx: "auto" }}>
+            <Grid xs={5} sx={{ mx: "auto" }}>
               <Card
                 variant="plain"
                 sx={{
@@ -15,7 +15,7 @@ export default function LoginPage() {
                 }}
               >
                 <CardContent>
-                  <LoginForm />
+                  <RegisterForm />
                 </CardContent>
               </Card>
             </Grid>

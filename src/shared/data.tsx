@@ -480,7 +480,113 @@ export const NAV_ITEMS: NavItem[] = [
                 "Capable of handling increased electrical load",
               ],
             },
+            pricingDetails: [
+              {
+                type: "Residential",
+                unit: "installation",
+                Icon: HomeUndrawIcon,
+                description:
+                  "Enhance your home's electrical safety with a new fuse box.",
+                prices: [
+                  {
+                    unitCount: "Standard Installation",
+                    price: 300,
+                  },
+                  {
+                    unitCount: "Advanced Installation with Upgrades",
+                    price: 450,
+                  },
+                ],
+              },
+              {
+                type: "Commercial",
+                unit: "installation",
+                Icon: BuildingUndrawIcon,
+                description:
+                  "Ensure your business is compliant and safe with a new fuse box.",
+                prices: [
+                  {
+                    unitCount: "Standard Installation",
+                    price: 500,
+                  },
+                  {
+                    unitCount: "Advanced Installation with Upgrades",
+                    price: 700,
+                  },
+                ],
+              },
+            ],
+            pageContent: {
+              title:
+                "Boost Electrical Safety with Professional Fuse Box Installation",
+              html: `
+                <p>A properly installed fuse box is critical for maintaining the safety and efficiency of your property's electrical system. At London Home Safety Limited, our experienced electricians provide expert fuse box installations and upgrades to meet the latest safety standards and handle the electrical demands of modern homes and businesses.</p>
+                
+                <h2>Why Upgrade Your Fuse Box?</h2>
+                <p>Upgrading your fuse box can address several issues and improve the overall safety and performance of your electrical system:</p>
+                <ul>
+                  <li><strong>Enhanced Safety:</strong> Reduces the risk of electrical fires and other hazards.</li>
+                  <li><strong>Regulatory Compliance:</strong> Ensures your electrical system meets current regulations.</li>
+                  <li><strong>Increased Capacity:</strong> Supports the electrical load of modern appliances and devices.</li>
+                  <li><strong>Improved Reliability:</strong> Minimizes the likelihood of electrical faults and power outages.</li>
+                </ul>
+                
+                <h2>Who Needs a Fuse Box Upgrade?</h2>
+                <p>Several scenarios may necessitate a fuse box upgrade:</p>
+                <ul>
+                  <li><strong>Older Properties:</strong> Homes and businesses with outdated fuse boxes may not meet current safety standards.</li>
+                  <li><strong>Home Renovations:</strong> Upgrades are often needed when adding new rooms or major appliances.</li>
+                  <li><strong>Increased Electrical Demand:</strong> Properties that have seen an increase in electrical usage.</li>
+                  <li><strong>Safety Concerns:</strong> Addressing frequent electrical issues or concerns about safety.</li>
+                </ul>
+                
+                <h2>What Happens During Fuse Box Installation?</h2>
+                <p>Our professional installation process ensures your new fuse box is safely and efficiently installed:</p>
+                <ul>
+                  <li><strong>Assessment:</strong> Initial assessment of your current electrical system and fuse box.</li>
+                  <li><strong>Installation:</strong> Safe removal of the old fuse box and installation of the new one.</li>
+                  <li><strong>Testing:</strong> Comprehensive testing to ensure the new fuse box is functioning correctly.</li>
+                  <li><strong>Documentation:</strong> Providing you with all necessary certifications and documentation.</li>
+                </ul>
+                
+                <h2>What to Expect After Installation?</h2>
+                <p>After the installation of your new fuse box, you can expect several benefits:</p>
+                <ul>
+                  <li><strong>Improved Safety:</strong> Reduced risk of electrical hazards and enhanced safety for occupants.</li>
+                  <li><strong>Increased Reliability:</strong> More stable and reliable electrical system performance.</li>
+                  <li><strong>Peace of Mind:</strong> Knowing that your property meets current safety standards and regulations.</li>
+                </ul>
+                <p>By upgrading or installing a new fuse box, you are taking a proactive step towards ensuring the safety and efficiency of your property's electrical system. Contact London Home Safety Limited today to schedule your fuse box installation.</p>
+              `,
+            },
+            faqs: [
+              {
+                ques: "Why should I upgrade my fuse box?",
+                ans: "Upgrading your fuse box enhances the safety and reliability of your electrical system, ensures compliance with current regulations, and supports the increased electrical load of modern appliances.",
+              },
+              {
+                ques: "How often should a fuse box be replaced?",
+                ans: "Fuse boxes should typically be inspected every 10 years for homeowners and every 5 years for rental properties. Replacement may be necessary if the fuse box is outdated or showing signs of wear.",
+              },
+              {
+                ques: "What are the signs that my fuse box needs replacing?",
+                ans: "Common signs include frequent electrical issues, such as blown fuses, tripped breakers, or flickering lights, as well as visible signs of damage or wear on the fuse box.",
+              },
+              {
+                ques: "How long does a fuse box installation take?",
+                ans: "The installation of a new fuse box typically takes a few hours, depending on the complexity of the job and the condition of the existing electrical system.",
+              },
+              {
+                ques: "Can I install a fuse box myself?",
+                ans: "No, fuse box installation should be performed by a qualified electrician to ensure safety and compliance with regulations.",
+              },
+              {
+                ques: "What should I do if I experience electrical issues after installation?",
+                ans: "If you experience any issues after installation, contact our team immediately. We will address and resolve any problems to ensure your electrical system is functioning correctly.",
+              },
+            ],
           },
+
           {
             label: "Electrical Repairs",
             path: "/electrical-repairs",
@@ -497,7 +603,123 @@ export const NAV_ITEMS: NavItem[] = [
                 "Ensures systems function safely",
               ],
             },
+            pricingDetails: [
+              {
+                type: "Residential",
+                unit: "repair",
+                Icon: HomeUndrawIcon,
+                description:
+                  "Comprehensive electrical repair services for your home.",
+                prices: [
+                  {
+                    unitCount: "Minor Repairs",
+                    price: 80,
+                  },
+                  {
+                    unitCount: "Major Repairs",
+                    price: 200,
+                  },
+                  {
+                    unitCount: "Emergency Call-Out",
+                    price: 150,
+                  },
+                ],
+              },
+              {
+                type: "Commercial",
+                unit: "repair",
+                Icon: BuildingUndrawIcon,
+                description:
+                  "Professional electrical repair services for businesses.",
+                prices: [
+                  {
+                    unitCount: "Minor Repairs",
+                    price: 120,
+                  },
+                  {
+                    unitCount: "Major Repairs",
+                    price: 300,
+                  },
+                  {
+                    unitCount: "Emergency Call-Out",
+                    price: 200,
+                  },
+                ],
+              },
+            ],
+            pageContent: {
+              title: "Reliable and Efficient Electrical Repairs",
+              html: `
+                <p>At London Home Safety Limited, we understand the importance of having a reliable and safe electrical system. Our certified professionals offer comprehensive electrical repair services, ensuring that any issues you face are resolved efficiently and effectively.</p>
+                
+                <h2>Why Choose Our Electrical Repair Services?</h2>
+                <p>We provide a wide range of repair services to address all your electrical needs, whether it's a simple fix or a complex problem:</p>
+                <ul>
+                  <li><strong>Minor Repairs:</strong> Fixes for common issues such as broken outlets, switches, and minor wiring problems.</li>
+                  <li><strong>Major Repairs:</strong> Handling more complex issues including faulty wiring, circuit breaker problems, and system overhauls.</li>
+                  <li><strong>Emergency Call-Out:</strong> Rapid response for urgent electrical issues that require immediate attention.</li>
+                </ul>
+                
+                <h2>Who Can Benefit from Our Services?</h2>
+                <p>Our electrical repair services are designed for a variety of clients:</p>
+                <ul>
+                  <li><strong>Homeowners:</strong> Ensuring your home’s electrical system is safe and functional.</li>
+                  <li><strong>Landlords:</strong> Maintaining electrical safety and compliance in rental properties.</li>
+                  <li><strong>Business Owners:</strong> Keeping your business’s electrical systems operational to avoid downtime.</li>
+                  <li><strong>Property Managers:</strong> Managing electrical repairs and maintenance for multiple properties.</li>
+                </ul>
+                
+                <h2>What Happens During an Electrical Repair?</h2>
+                <p>Our repair process is thorough and designed to address any issues effectively:</p>
+                <ul>
+                  <li><strong>Initial Assessment:</strong> Identifying the problem through a detailed inspection.</li>
+                  <li><strong>Repair Work:</strong> Conducting the necessary repairs using high-quality materials and professional techniques.</li>
+                  <li><strong>Testing:</strong> Ensuring that the repaired system is functioning safely and correctly.</li>
+                  <li><strong>Documentation:</strong> Providing a detailed report of the work carried out and any further recommendations.</li>
+                </ul>
+                
+                <h2>What to Expect After the Repair?</h2>
+                <p>After completing the repair, we ensure your electrical system is safe and reliable:</p>
+                <ul>
+                  <li><strong>Improved Safety:</strong> Addressing potential hazards to prevent future issues.</li>
+                  <li><strong>Enhanced Reliability:</strong> Ensuring your electrical system operates smoothly and efficiently.</li>
+                  <li><strong>Ongoing Support:</strong> Offering advice and support for maintaining your electrical system.</li>
+                </ul>
+                <p>With our professional electrical repair services, you can have peace of mind knowing that your electrical systems are in safe hands. Contact London Home Safety Limited today to schedule a repair.</p>
+              `,
+            },
+            faqs: [
+              {
+                ques: "What types of electrical repairs do you handle?",
+                ans: "We handle a wide range of repairs, from minor issues like broken outlets and switches to major problems such as faulty wiring, circuit breaker issues, and complete system overhauls.",
+              },
+              {
+                ques: "How quickly can you respond to an emergency electrical issue?",
+                ans: "We offer an emergency call-out service for urgent electrical issues. Our team aims to respond as quickly as possible to ensure your safety and resolve the problem promptly.",
+              },
+              {
+                ques: "Are your electricians certified?",
+                ans: "Yes, all our electricians are fully certified and experienced professionals who adhere to the highest standards of safety and quality.",
+              },
+              {
+                ques: "What should I do if I experience frequent electrical issues?",
+                ans: "If you experience frequent electrical issues, it's important to have your system inspected by a professional. Our team can identify the root cause of the problems and provide effective solutions.",
+              },
+              {
+                ques: "Can you help with electrical upgrades as part of the repair service?",
+                ans: "Yes, we can recommend and perform electrical upgrades as needed to improve the safety and efficiency of your system during the repair process.",
+              },
+              {
+                ques: "Do you provide repair services for both residential and commercial properties?",
+                ans: "Yes, we offer comprehensive electrical repair services for both residential and commercial properties, tailored to meet the specific needs of each client.",
+              },
+              {
+                ques: "What safety measures do you take during repairs?",
+                ans: "Safety is our top priority. Our electricians follow strict safety protocols and use high-quality materials and tools to ensure all repairs are carried out safely and effectively.",
+              },
+            ],
           },
+
           {
             label: "EV Charger Installation",
             path: "/ev-charger-installation",
@@ -514,6 +736,115 @@ export const NAV_ITEMS: NavItem[] = [
                 "Safe and efficient installation",
               ],
             },
+            pricingDetails: [
+              {
+                type: "Residential",
+                unit: "installation",
+                Icon: HomeUndrawIcon,
+                description:
+                  "Install a home EV charger for convenient and efficient charging.",
+                prices: [
+                  {
+                    unitCount: "Standard Charger",
+                    price: 500,
+                  },
+                  {
+                    unitCount: "Fast Charger",
+                    price: 750,
+                  },
+                ],
+              },
+              {
+                type: "Commercial",
+                unit: "installation",
+                Icon: BuildingUndrawIcon,
+                description:
+                  "Install EV chargers at your business premises for employees and customers.",
+                prices: [
+                  {
+                    unitCount: "Standard Charger",
+                    price: 800,
+                  },
+                  {
+                    unitCount: "Fast Charger",
+                    price: 1000,
+                  },
+                ],
+              },
+            ],
+            pageContent: {
+              title: "Convenient and Efficient EV Charger Installation",
+              html: `
+                <p>Electric vehicle (EV) chargers provide the convenience of charging your vehicle at home or at your business premises. At London Home Safety Limited, we offer professional EV charger installation services, ensuring safe and efficient setups tailored to your specific needs.</p>
+                
+                <h2>Why Install an EV Charger?</h2>
+                <p>Installing an EV charger at your home or business offers numerous benefits:</p>
+                <ul>
+                  <li><strong>Convenience:</strong> Charge your EV at your own premises without relying on public charging stations.</li>
+                  <li><strong>Cost Savings:</strong> Reduce the cost of charging compared to using public charging points.</li>
+                  <li><strong>Increased Property Value:</strong> Enhance the value of your property by adding modern EV charging facilities.</li>
+                  <li><strong>Environmental Benefits:</strong> Support sustainable practices by promoting the use of electric vehicles.</li>
+                </ul>
+                
+                <h2>Our EV Charger Installation Process</h2>
+                <p>Our professional installation process ensures a seamless and efficient setup:</p>
+                <ul>
+                  <li><strong>Assessment:</strong> Evaluate your electrical system and determine the best location for the charger.</li>
+                  <li><strong>Recommendation:</strong> Suggest the most suitable EV charger based on your vehicle and usage needs.</li>
+                  <li><strong>Installation:</strong> Safely install the charger, ensuring it meets all safety and regulatory standards.</li>
+                  <li><strong>Testing:</strong> Conduct thorough testing to ensure the charger is functioning correctly and safely.</li>
+                </ul>
+                
+                <h2>Who Can Benefit from EV Charger Installation?</h2>
+                <p>Our EV charger installation services are ideal for a variety of clients:</p>
+                <ul>
+                  <li><strong>Homeowners:</strong> Install a charger for personal use, enhancing convenience and property value.</li>
+                  <li><strong>Landlords:</strong> Provide EV charging options for tenants, making your property more attractive.</li>
+                  <li><strong>Business Owners:</strong> Offer charging facilities for employees and customers, supporting sustainability initiatives.</li>
+                  <li><strong>Property Developers:</strong> Include EV chargers in new developments to meet growing demand.</li>
+                </ul>
+                
+                <h2>What to Expect After Installation?</h2>
+                <p>Once the installation is complete, you can enjoy the following benefits:</p>
+                <ul>
+                  <li><strong>Seamless Charging:</strong> Easily charge your EV at home or work.</li>
+                  <li><strong>Reduced Costs:</strong> Save money on charging compared to public stations.</li>
+                  <li><strong>Enhanced Convenience:</strong> Charge your vehicle at your convenience, without the need to visit public chargers.</li>
+                  <li><strong>Ongoing Support:</strong> Receive support and maintenance services to ensure your charger remains in optimal condition.</li>
+                </ul>
+                <p>By installing an EV charger, you take a significant step towards sustainable living and support the growing infrastructure for electric vehicles. Contact London Home Safety Limited today to schedule your EV charger installation.</p>
+              `,
+            },
+            faqs: [
+              {
+                ques: "What types of EV chargers do you install?",
+                ans: "We install a variety of EV chargers, including standard and fast chargers, suitable for both residential and commercial properties.",
+              },
+              {
+                ques: "How long does it take to install an EV charger?",
+                ans: "The installation typically takes a few hours, depending on the complexity of the setup and the condition of your electrical system.",
+              },
+              {
+                ques: "Do I need any special permits for EV charger installation?",
+                ans: "Permits may be required depending on local regulations. Our team will handle all necessary permits and ensure the installation meets all regulatory standards.",
+              },
+              {
+                ques: "Can I install an EV charger myself?",
+                ans: "No, EV charger installation should be performed by a qualified electrician to ensure safety and compliance with regulations.",
+              },
+              {
+                ques: "What maintenance is required for an EV charger?",
+                ans: "EV chargers require minimal maintenance. We recommend periodic inspections to ensure everything is functioning correctly and safely.",
+              },
+              {
+                ques: "What should I do if my EV charger is not working?",
+                ans: "If you encounter any issues with your EV charger, contact our support team immediately. We will diagnose and resolve the problem promptly.",
+              },
+              {
+                ques: "How much does it cost to install an EV charger?",
+                ans: "The cost of installation varies based on the type of charger and the specifics of the installation site. We offer competitive pricing for both standard and fast chargers.",
+              },
+            ],
           },
         ],
       },
@@ -531,6 +862,61 @@ export const NAV_ITEMS: NavItem[] = [
             image: backgroundImage,
             description:
               "Ensure the safety of your gas appliances with our certification and repair services.",
+
+            detailedDesc: {
+              details:
+                "Our gas certificate and repair services ensure that your gas appliances are safe and compliant with current regulations. Whether you need a safety certificate for your property or repairs to fix any gas-related issues, our certified professionals are here to help.",
+              points: [
+                "Certified gas safety inspections",
+                "Comprehensive gas appliance repairs",
+                "Ensures compliance with safety regulations",
+              ],
+            },
+
+            pricingDetails: [
+              {
+                type: "Residential",
+                unit: "service",
+                Icon: HomeUndrawIcon,
+                description:
+                  "Comprehensive gas safety checks and repairs for your home.",
+                prices: [
+                  {
+                    unitCount: "Gas Safety Certificate",
+                    price: 80,
+                  },
+                  {
+                    unitCount: "Minor Gas Appliance Repair",
+                    price: 100,
+                  },
+                  {
+                    unitCount: "Major Gas Appliance Repair",
+                    price: 200,
+                  },
+                ],
+              },
+              {
+                type: "Commercial",
+                unit: "service",
+                Icon: BuildingUndrawIcon,
+                description:
+                  "Professional gas safety services and repairs for businesses.",
+                prices: [
+                  {
+                    unitCount: "Gas Safety Certificate",
+                    price: 120,
+                  },
+                  {
+                    unitCount: "Minor Gas Appliance Repair",
+                    price: 150,
+                  },
+                  {
+                    unitCount: "Major Gas Appliance Repair",
+                    price: 300,
+                  },
+                ],
+              },
+            ],
           },
           {
             label: "Boiler Service & Repair",
