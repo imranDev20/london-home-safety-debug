@@ -23,6 +23,10 @@ import HealthHeartIcon from "@/app/_components/icons/health-heart-icon";
 import HomeUndrawIcon from "@/app/_components/icons/home-undraw-icon";
 import BuildingUndrawIcon from "@/app/_components/icons/building-undraw-icon";
 import { BACKGROUND_COLOUR } from "./constants";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import XIcon from "@mui/icons-material/X";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 
 export const OTHER_PAGES = [
   {
@@ -1105,5 +1109,28 @@ export const ADVANTAGES = [
     advantageName: "Flexible Scheduling",
     advantageDetail: "Book appointments at your convenience.",
     Icon: BookingIcon,
+  },
+];
+
+export const SOCIALS = [
+  {
+    href: "Facebook",
+    label: "Facebook",
+    Icon: FacebookIcon,
+  },
+  {
+    href: "Facebook",
+    label: "X",
+    Icon: XIcon,
+  },
+  {
+    href: "YouTube",
+    label: "YouTube",
+    Icon: YouTubeIcon,
+  },
+  {
+    href: "Instagram",
+    label: "Instagram",
+    Icon: InstagramIcon,
   },
 ];
