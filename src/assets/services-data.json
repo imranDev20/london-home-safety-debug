@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "title": "Electrical Services",
+    "route": "/electrical-services",
+    "description": "Description of Electrical Services goes here...",
+    "image": "electrical.jpg",
+    "sub_services": [
+      {
+        "id": 1,
+        "route": "/eicr",
+        "title": "EICR",
+        "commercial": [
+          { "units": "1-5 circuits", "price": 150 },
+          { "units": "6-10 circuits", "price": 199 },
+          { "units": "11-20 circuits", "price": 249 }
+        ],
+        "residential": [{ "units": "Studio Flat", "price": 79 }]
+      },
+      {
+        "id": 1,
+        "route": "/pat",
+        "title": "Portable Appliance Testing",
+        "accronym": "PAT",
+        "commercial": [
+          { "units": "1-5 circuits", "price": 150 },
+          { "units": "6-10 circuits", "price": 199 },
+          { "units": "11-20 circuits", "price": 249 }
+        ],
+        "residential": [{ "units": "Studio Flat", "price": 79 }]
+      }
+    ],
+    "price": 100
+  },
+  {
+    "id": 2,
+    "title": "Gas Services",
+    "route": "/gas-services",
+    "description": "Description of Gas Services goes here...",
+    "image": "gas.jpg",
+    "price": 150
+  },
+  {
+    "id": 3,
+    "title": "Fire Services",
+    "route": "/fire-services",
+    "description": "Description of Fire Services goes here...",
+    "image": "fire.jpg",
+    "price": 200
+  },
+  {
+    "id": 4,
+    "title": "Health & Safety",
+    "route": "/health-safety",
+    "description": "Description of Health & Safety Services goes here...",
+    "image": "health.jpg",
+    "price": 120
+  }
+]

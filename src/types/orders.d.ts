@@ -1,5 +1,5 @@
 import { Document, Types } from "mongoose";
-import { IUser } from "./users";
+import { UserType } from "./users";
 
 export type PropertyType = "residential" | "commercial";
 export type ResidentType<T extends PropertyType> = T extends "residential"
@@ -39,7 +39,7 @@ export type OrderStatusValues = Pick<OrderStatus, "status">[keyof Pick<
   "status"
 >];
 
-export interface IOrderItem extends Pick<Document, "_id"> {
+export interface IOrderItem extends Pick<Document<Types.ObjectId>, "_id"> {
   name: string;
   price: number;
   quantity: number;
@@ -51,8 +51,11 @@ export interface IOrderItemWithEngineers extends IOrderItem {
   assigned_engineers: Types.ObjectId[];
 }
 
-interface IPreOrder<T extends IUser | undefined = undefined>
-  extends Pick<Document, "_id"> {
+export type PreOrderType<
+  HasId extends boolean = false,
+  T extends UserType | undefined = undefined
+> = {
+  _id?: HasId extends true ? Types.ObjectId : never;
   service_info: {
     property_type: PropertyType;
     resident_type?: ResidentType<PropertyType>;
@@ -60,7 +63,7 @@ interface IPreOrder<T extends IUser | undefined = undefined>
     order_items: IOrderItem[];
   };
   personal_info?: {
-    customer: T extends IUser ? Partial<IUser> : Types.ObjectId;
+    customer: T extends UserType ? Partial<UserType> : Types.ObjectId;
     parking_options: {
       parking_type: ParkingType;
       parking_cost: number;
@@ -73,24 +76,24 @@ interface IPreOrder<T extends IUser | undefined = undefined>
     inspection_time: string;
     order_notes?: string;
   };
-
   payment_info?: {
     payment_method: PaymentMethod;
   };
-
   status: PreOrderStepStatus;
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
 
-export interface IOrder<T extends IUser | undefined = undefined>
-  extends Pick<Document, "_id"> {
+export type OrderType<
+  HasId extends boolean = false,
+  T extends UserType | undefined = undefined
+> = {
+  _id?: HasId extends true ? Types.ObjectId : never;
   property_type: PropertyType;
   resident_type?: ResidentType<PropertyType>;
   bedrooms?: BedroomsType<PropertyType>;
-
   order_items: IOrderItemWithEngineers[];
-  customer: T extends IUser ? Partial<IUser> : Types.ObjectId;
+  customer: T extends UserType ? Partial<UserType> : Types.ObjectId;
   parking_options: {
     parking_type: ParkingType;
     parking_cost: number;
@@ -109,7 +112,7 @@ export interface IOrder<T extends IUser | undefined = undefined>
   invoice_id: string;
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
 
 export type InvoiceData = {
   data: string;

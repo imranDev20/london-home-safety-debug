@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "../../_lib/dbConnect";
 import User from "../../_models/User";
 import { formatResponse } from "@/shared/functions";
-import { IUser } from "@/types/users";
+import { UserType } from "@/types/users";
 
 export async function GET(
   req: NextRequest,
@@ -36,7 +36,8 @@ export async function PATCH(
   try {
     await dbConnect();
     const { user_id } = params;
-    const data: Partial<IUser> = await req.json();
+
+    const data: Partial<UserType> = await req.json();
 
     // Find the user by ID
     const user = await User.findById(user_id);
@@ -46,11 +47,10 @@ export async function PATCH(
     }
 
     // Update the user fields with the new data
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        (user as any)[key] = data[key as keyof IUser];
-      }
-    }
+    // Fix any type later here
+    (Object.keys(data) as (keyof UserType)[]).forEach((key) => {
+      (user as any)[key] = data[key]!;
+    });
 
     // Save the updated user
     await user.save();

@@ -5,15 +5,8 @@ import JoyLink from "@mui/joy/Link";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
 
-import backgroundImage from "@/images/about-bg.jpeg";
-
-import Image from "next/image";
-import { hexToRgba, toTitleCase } from "@/shared/functions";
-import {
-  PRIMARY_COLOUR,
-  SECONDARY_COLOUR,
-  TEXT_COLOR,
-} from "@/shared/constants";
+import { toTitleCase } from "@/shared/functions";
+import { SECONDARY_COLOUR, TEXT_COLOR } from "@/shared/constants";
 import Link from "next/link";
 import { PHONE_NO } from "@/shared/data";
 

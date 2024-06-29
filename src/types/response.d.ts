@@ -1,7 +1,12 @@
 import { Pagination } from "./misc";
-import { IOrder, IPreOrder, InvoiceData } from "./orders";
+import { OrderType, PreOrderType, InvoiceData } from "./orders";
 import { ITestimonial } from "./testimonial";
-import { ICustomer, IEngineer, IUser, IUserBasicInfo } from "./users";
+import {
+  CustomerType,
+  EngineerType,
+  UserType,
+  UserBasicInfoType,
+} from "./users";
 
 export type SuccessResponseWithArray<T> = {
   data: T[];
@@ -23,16 +28,20 @@ export type ErrorResponse = {
 
 export type GetTestimonialsResponse = SuccessResponseWithArray<ITestimonial>;
 
-export type GetEngineersResponse = SuccessResponseWithArray<IEngineer>;
-export type GetEngineerDetailsResponse = SuccessResponse<IEngineer>;
-export type GetCustomersResponse = SuccessResponseWithArray<ICustomer>;
-export type AuthUserResponse = SuccessResponse<IUserBasicInfo>;
+export type GetEngineersResponse = SuccessResponseWithArray<EngineerType>;
+export type GetEngineerDetailsResponse = SuccessResponse<EngineerType>;
+export type GetCustomersResponse = SuccessResponseWithArray<CustomerType>;
+export type AuthUserResponse = SuccessResponse<UserBasicInfoType>;
 
-export type GetOrdersResponse = SuccessResponseWithArray<IOrder<IUser>>;
-export type GetOrderDetailsResponse = SuccessResponse<IOrder<IUser>>;
+export type GetOrdersResponse = SuccessResponseWithArray<
+  OrderType<false, UserType>
+>;
+export type GetOrderDetailsResponse = SuccessResponse<
+  OrderType<true, UserType>
+>;
 
-export type PreOrderResponse = SuccessResponse<Partial<IPreOrder<IUser>>>;
-export type CreateOrderResponse = SuccessResponse<IOrder<IUser>>;
-export type UpdateOrderResponse = SuccessResponse<IOrder>;
+export type PreOrderResponse = SuccessResponse<PreOrderType<true, UserType>>;
+export type CreateOrderResponse = SuccessResponse<OrderType<false, UserType>>;
+export type UpdateOrderResponse = SuccessResponse<OrderType>;
 
 export type DataLessResponse = SuccessResponse<undefined>;

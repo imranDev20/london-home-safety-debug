@@ -1,7 +1,7 @@
-import { IUser } from "@/types/users";
+import { UserType } from "@/types/users";
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema<IUser>(
+const userSchema = new mongoose.Schema<UserType<true>>(
   {
     name: {
       type: String,
@@ -105,7 +105,7 @@ userSchema.pre("validate", function (next) {
   next();
 });
 
-const User: mongoose.Model<IUser> =
-  mongoose.models.User || mongoose.model<IUser>("User", userSchema);
+const User: mongoose.Model<UserType<true>> =
+  mongoose.models.User || mongoose.model<UserType<true>>("User", userSchema);
 
 export default User;

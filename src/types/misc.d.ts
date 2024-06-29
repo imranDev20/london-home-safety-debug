@@ -35,7 +35,7 @@ export type NavItem = {
   pricingDetails?: {
     type: string;
     unit: string;
-    Icon: HomeUndrawIcon;
+    Icon: any;
     description: string;
     prices: {
       unitCount: string | number;

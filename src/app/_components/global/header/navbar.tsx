@@ -15,7 +15,6 @@ import { usePathname } from "next/navigation";
 import NavbarDropdown from "./navbar-dropdown";
 
 import { hexToRgba } from "@/shared/functions";
-import useCurrentUser from "@/shared/hooks/use-current-user";
 import { NAV_ITEMS } from "@/shared/data";
 import {
   ACCENT_COLOR,
@@ -23,6 +22,7 @@ import {
   SECONDARY_COLOUR,
   TEXT_COLOR,
 } from "@/shared/constants";
+import useCurrentUser from "@/shared/hooks/use-current-user";
 
 export default function Navbar({
   setOpenMobileDrawer,
@@ -94,11 +94,15 @@ export default function Navbar({
                         ...(isInverted
                           ? {
                               color:
-                                item.path === pathname
+                                (item.path === "/" && pathname === "/") ||
+                                (item.path !== "/" &&
+                                  pathname.startsWith(item.path))
                                   ? SECONDARY_COLOUR[500]
                                   : "white",
                               backgroundColor:
-                                item.path === pathname
+                                (item.path === "/" && pathname === "/") ||
+                                (item.path !== "/" &&
+                                  pathname.startsWith(item.path))
                                   ? hexToRgba(SECONDARY_COLOUR[500], 0.2)
                                   : "transparent",
                               ":hover": {
@@ -111,11 +115,15 @@ export default function Navbar({
                             }
                           : {
                               color:
-                                item.path === pathname
+                                (item.path === "/" && pathname === "/") ||
+                                (item.path !== "/" &&
+                                  pathname.startsWith(item.path))
                                   ? PRIMARY_COLOUR[500]
                                   : TEXT_COLOR.primary,
                               backgroundColor:
-                                item.path === pathname
+                                (item.path === "/" && pathname === "/") ||
+                                (item.path !== "/" &&
+                                  pathname.startsWith(item.path))
                                   ? hexToRgba(PRIMARY_COLOUR[500], 0.1)
                                   : "transparent",
                               ":hover": {

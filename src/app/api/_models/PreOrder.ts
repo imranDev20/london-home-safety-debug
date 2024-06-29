@@ -1,5 +1,5 @@
-import { IOrderItem, IPreOrder } from "@/types/orders";
-import { IUser } from "@/types/users";
+import { IOrderItem, PreOrderType } from "@/types/orders";
+import { UserType } from "@/types/users";
 import mongoose, { Schema } from "mongoose";
 
 const orderItemSchema = new Schema<IOrderItem>({
@@ -25,7 +25,7 @@ const orderItemSchema = new Schema<IOrderItem>({
   },
 });
 
-const preOrderSchema = new mongoose.Schema<IPreOrder>(
+const preOrderSchema = new mongoose.Schema<PreOrderType<true>>(
   {
     service_info: {
       property_type: {
@@ -133,7 +133,8 @@ preOrderSchema.pre("save", function (next) {
   next();
 });
 
-const PreOrder: mongoose.Model<IPreOrder<IUser>> =
-  mongoose.models.PreOrder || mongoose.model("PreOrder", preOrderSchema);
+const PreOrder: mongoose.Model<PreOrderType<true, UserType>> =
+  mongoose.models.PreOrder ||
+  mongoose.model<PreOrderType<true>>("PreOrder", preOrderSchema);
 
 export default PreOrder;
