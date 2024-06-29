@@ -1,4 +1,4 @@
-import { IOrder, IPreOrder } from "@/types/orders";
+import { OrderType, PreOrderType } from "@/types/orders";
 
 import jsPDF from "jspdf";
 
@@ -6,7 +6,7 @@ import {
   calculateOrderTotalCost,
   calculatePreOrderTotalCost,
 } from "@/shared/functions";
-import { IUser } from "@/types/users";
+import { UserType } from "@/types/users";
 import { ADDRESS, EMAIL_ADDRESS, PHONE_NO } from "@/shared/data";
 import { CONGESTION_ZONE_OPTIONS, PARKING_OPTIONS } from "@/shared/data";
 import Order from "@/app/api/_models/Order";
@@ -46,7 +46,7 @@ export async function generateInvoiceId() {
 
 export async function generateInvoicePdfFromPreOrder(
   invoiceId: string,
-  preOrder: IPreOrder<IUser>
+  preOrder: PreOrderType<true, UserType>
 ) {
   const doc = new jsPDF();
 
@@ -173,7 +173,7 @@ export async function generateInvoicePdfFromPreOrder(
 
 export async function generateInvoicePdfFromOrder(
   invoiceId: string,
-  order: IOrder<IUser>
+  order: OrderType<true, UserType>
 ) {
   const doc = new jsPDF();
 

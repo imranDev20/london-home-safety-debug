@@ -1,7 +1,8 @@
 import mongoose, { Schema } from "mongoose";
-import { IOrderItemWithEngineers, IOrder } from "@/types/orders";
+import { IOrderItemWithEngineers, OrderType } from "@/types/orders";
 import { ORDER_STATUS } from "@/shared/constants";
 import { OrderStatus } from "@/types/orders";
+import { UserType } from "@/types/users";
 
 const orderStatusSchema = new Schema<OrderStatus>({
   status: {
@@ -46,7 +47,7 @@ const orderItemWithEngineersSchema = new Schema<IOrderItemWithEngineers>({
   ],
 });
 
-const orderSchema = new Schema<IOrder>(
+const orderSchema = new Schema<OrderType<true, UserType>>(
   {
     property_type: {
       type: String,
@@ -142,7 +143,8 @@ orderSchema.pre("save", function (next) {
   next();
 });
 
-const Order: mongoose.Model<IOrder> =
-  mongoose.models.Order || mongoose.model<IOrder>("Order", orderSchema);
+const Order: mongoose.Model<OrderType<true, UserType>> =
+  mongoose.models.Order ||
+  mongoose.model<OrderType<true, UserType>>("Order", orderSchema);
 
 export default Order;

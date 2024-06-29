@@ -1,10 +1,10 @@
-import { IUser } from "@/types/users";
+import { UserType } from "@/types/users";
 import { SignJWT } from "jose";
 
 const secretKey = process.env.JWT_SECRET;
 
 export async function generateAccessToken(
-  user: Partial<IUser>
+  user: Partial<UserType<true>>
 ): Promise<string> {
   try {
     if (!secretKey) {
@@ -31,7 +31,7 @@ export async function generateAccessToken(
 }
 
 export async function generateRefreshToken(
-  user: Partial<IUser>
+  user: Partial<UserType<true>>
 ): Promise<string> {
   try {
     if (!secretKey) {

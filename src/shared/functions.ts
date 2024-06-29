@@ -2,13 +2,13 @@ import slugify from "slugify";
 import dayjs from "dayjs";
 import { Pagination } from "@/types/misc";
 import {
-  IOrder,
+  OrderType,
   IOrderItemWithEngineers,
-  IPreOrder,
+  PreOrderType,
   OrderStatus,
   OrderStatusValues,
 } from "@/types/orders";
-import { IUser } from "@/types/users";
+import { UserType } from "@/types/users";
 
 import Mailjet from "node-mailjet";
 
@@ -155,7 +155,9 @@ export const debounce = (func: (...args: any[]) => void, delay: number) => {
   };
 };
 
-export function calculatePreOrderTotalCost(order: IPreOrder<IUser>) {
+export function calculatePreOrderTotalCost(
+  order: PreOrderType<true, UserType>
+) {
   if (!order.personal_info) {
     console.log("Personal info is needed to calculate total cost");
     return;
@@ -180,7 +182,9 @@ export function calculatePreOrderTotalCost(order: IPreOrder<IUser>) {
   return totalCost;
 }
 
-export function calculateOrderTotalCost(order: IOrder<IUser>): number {
+export function calculateOrderTotalCost(
+  order: OrderType<true, UserType>
+): number {
   // Calculate the total cost of order items
   const orderItemsCost = order.order_items.reduce(
     (total, item: IOrderItemWithEngineers) => {
