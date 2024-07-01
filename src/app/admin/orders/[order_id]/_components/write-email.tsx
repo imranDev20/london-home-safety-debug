@@ -6,15 +6,12 @@ import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import Sheet from "@mui/joy/Sheet";
 import { IconButton, Input, Stack, Typography } from "@mui/joy";
-
 import FormatColorTextRoundedIcon from "@mui/icons-material/FormatColorTextRounded";
 import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 import InsertPhotoRoundedIcon from "@mui/icons-material/InsertPhotoRounded";
 import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBulletedRounded";
 import { EMAIL_ADDRESS } from "@/shared/data";
-import { EngineerType } from "@/types/users";
-import { forwardRef, useEffect, useState } from "react";
-import { Assignment } from "./assigned-and-time-info";
+import { forwardRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { sendEmailToEngineer } from "@/services/send-email.services";
 import { AxiosError } from "axios";
@@ -30,12 +27,10 @@ interface ServiceEmailContent {
 interface WriteEmailProps {
   open?: boolean;
   onClose?: () => void;
-  engineerDetails: EngineerType;
-  assignment: Assignment;
 }
 
 const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
-  function WriteEmail({ open, onClose, engineerDetails, assignment }, ref) {
+  function WriteEmail({ open, onClose }, ref) {
     const [receiver, setReceiver] = useState<string>("");
     const [emailContent, setEmailContent] = useState<string>("");
     const [emailSubject, setEmailSubject] = useState<string>("");
@@ -65,7 +60,6 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
         receiver_email: receiver,
         content: emailContent,
         subject: emailSubject,
-        assignment,
         orderDetails,
       };
 
@@ -196,74 +190,3 @@ interface ServiceEmailContent {
   subject: string;
   body: string;
 }
-
-const getEmailContent = (serviceName: string): ServiceEmailContent => {
-  let subject: string;
-  let body: string;
-
-  switch (serviceName) {
-    case "eicr":
-      subject = "EICR - Electrical Certificate Service";
-      body =
-        "Please conduct the EICR - Electrical Certificate service as per the scheduled time. Ensure all necessary equipment is available.";
-      break;
-    case "gas_cert":
-      subject = "Gas Safety Certificate Service";
-      body =
-        "Please conduct the Gas Safety Certificate service as per the scheduled time. Ensure all safety protocols are followed.";
-      break;
-    case "epc":
-      subject = "Energy Performance Certificate Service";
-      body =
-        "Please conduct the Energy Performance Certificate service as per the scheduled time. Ensure all required inspections are completed.";
-      break;
-    case "pat":
-      subject = "PAT Testing Service";
-      body =
-        "Please conduct the PAT Testing service as per the scheduled time. Ensure all electrical appliances are tested thoroughly.";
-      break;
-    case "gas_boiler":
-      subject = "Gas Safety Certificate + Boiler Service";
-      body =
-        "Please conduct the Gas Safety Certificate and Boiler service as per the scheduled time. Ensure both safety checks and maintenance are performed.";
-      break;
-    case "fire_safety":
-      subject = "Fire Safety Certificate Service";
-      body =
-        "Please conduct the Fire Safety Certificate service as per the scheduled time. Ensure all fire safety equipment is inspected.";
-      break;
-    case "fire_risk":
-      subject = "Fire Risk Assessment Service";
-      body =
-        "Please conduct the Fire Risk Assessment service as per the scheduled time. Ensure all potential fire hazards are evaluated.";
-      break;
-    case "emergency_light":
-      subject = "Emergency Lighting Certificate Service";
-      body =
-        "Please conduct the Emergency Lighting Certificate service as per the scheduled time. Ensure all emergency lighting systems are operational.";
-      break;
-    default:
-      subject = "Service Request";
-      body =
-        "Please conduct the requested service as per the scheduled time. Ensure all necessary protocols are followed.";
-      break;
-  }
-
-  return { subject, body };
-};
-
-const generateEmailForServices = (
-  services: string[]
-): { subject: string; body: string } => {
-  const emailParts = services.map((serviceName) => {
-    const { subject, body } = getEmailContent(serviceName);
-    return { subject, body };
-  });
-
-  const combinedSubject = emailParts.map((part) => part.subject).join(", ");
-  const combinedBody = emailParts
-    .map((part) => `${part.body}\n\n`)
-    .join("\n---------------------------------\n");
-
-  return { subject: combinedSubject, body: combinedBody };
-};

@@ -1,6 +1,8 @@
 "use client";
 import useOrderDetails from "@/shared/hooks/use-order-details";
 import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
+import { OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
 import {
   Card,
   CardContent,
@@ -11,12 +13,11 @@ import {
 } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 
-export default function OrderNotes() {
-  const { orderDetails } = useOrderDetails();
-
-  const { updateOrderMutate, isPending: isUpdateOrderPending } =
-    useUpdateOrderDetails();
-
+export default function OrderNotes({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   if (!orderDetails) {
     return "Failed to load data...";
   }

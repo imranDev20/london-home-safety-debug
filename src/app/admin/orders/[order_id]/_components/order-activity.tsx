@@ -1,6 +1,8 @@
 "use client";
 import { snakeCaseToNormalText } from "@/shared/functions";
 import useOrderDetails from "@/shared/hooks/use-order-details";
+import { OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
 import { Circle, KeyboardArrowRightRounded } from "@mui/icons-material";
 import {
   Avatar,
@@ -17,8 +19,11 @@ import {
 } from "@mui/joy";
 import dayjs from "dayjs";
 
-export default function OrderActivity() {
-  const { orderDetails } = useOrderDetails();
+export default function OrderActivity({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   const theme = useTheme();
 
   return (

@@ -1,24 +1,9 @@
 "use client";
 
-import { Close, Done, Edit } from "@mui/icons-material";
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  IconButton,
-  Sheet,
-  Stack,
-  Typography,
-} from "@mui/joy";
-import React, { useState } from "react";
-import { OrderItemType } from "@/types/orders";
-import useOrderDetails from "@/shared/hooks/use-order-details";
-import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
+import { Sheet, Typography } from "@mui/joy";
+import { OrderItemType, OrderTypeForResponse } from "@/types/orders";
 import DataTable from "@/app/_components/common/data-table";
+import { UserType } from "@/types/users";
 
 const columns = [
   {
@@ -46,13 +31,11 @@ const columns = [
   },
 ];
 
-export default function OrderItems() {
-  const { orderDetails } = useOrderDetails();
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-
-  const { updateOrderMutate, isPending: isUpdateOrderPending } =
-    useUpdateOrderDetails();
-
+export default function OrderItems({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   return (
     <>
       <Typography
@@ -71,7 +54,11 @@ export default function OrderItems() {
         }}
       >
         {orderDetails?.order_status && (
-          <DataTable data={orderDetails?.order_items} columns={columns} />
+          <DataTable
+            data={orderDetails?.order_items}
+            columns={columns}
+            checkboxSelection={false}
+          />
         )}
       </Sheet>
     </>

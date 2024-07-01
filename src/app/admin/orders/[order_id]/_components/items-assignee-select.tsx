@@ -1,18 +1,9 @@
 import { UnfoldMore } from "@mui/icons-material";
 import { CircularProgress, FormControl, Option, Select } from "@mui/joy";
 import React, { useState } from "react";
-import { Assignment } from "./assigned-and-time-info";
 import { useEngineersData } from "@/shared/hooks/use-engineers";
 
-type ItemsAssigneeSelectProps = {
-  index: number;
-  setToStateEngineer: (param1: Assignment, index: number) => void;
-};
-
-export default function ItemsAssigneeSelect({
-  index,
-  setToStateEngineer,
-}: ItemsAssigneeSelectProps) {
+export default function ItemsAssigneeSelect() {
   const [listBoxOpen, setListBoxOpen] = useState<boolean>(false);
 
   const {

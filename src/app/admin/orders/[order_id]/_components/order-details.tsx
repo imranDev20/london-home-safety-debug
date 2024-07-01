@@ -4,46 +4,26 @@ import OrderItems from "./order-items";
 import OrderNotes from "./order-notes";
 import OrderActivity from "./order-activity";
 import PropertyDetails from "./property-details";
-import AssignedAndTimeInfo from "./assigned-and-time-info";
-import PriceDetails from "./price-details";
-import OrderDetailsHeader from "./order-details-header";
-import { Box, CircularProgress, Grid, Sheet } from "@mui/joy";
+import { Box, Grid } from "@mui/joy";
 import useOrderDetails from "@/shared/hooks/use-order-details";
+import OrderDetailsHeader from "./order-details-header";
+import AssignedAndTimeInfo from "./assigned-and-time-info";
 
 export default function OrderDetails() {
-  //   const {
-  //     orderDetails,
-  //     isPending: isOrderDetailsPending,
-  //     isFetching: isOrderDetailsFetching,
-  //   } = useOrderDetails();
+  const { orderDetails, isPending: isOrderDetailsPending } = useOrderDetails();
 
-  //   if (isOrderDetailsPending || isOrderDetailsFetching) {
-  //     return (
-  //       <Box
-  //         sx={{
-  //           width: "100%",
-  //           borderRadius: "sm",
-  //           flexShrink: 1,
-  //           overflow: "auto",
-  //           display: "flex",
-  //           justifyContent: "center",
-  //           alignItems: "center",
-  //         }}
-  //       >
-  //         <CircularProgress
-  //           thickness={3}
-  //           sx={{
-  //             "--CircularProgress-size": "60px",
-  //           }}
-  //         />
-  //       </Box>
-  //     );
-  //   }
+  if (isOrderDetailsPending) {
+    return "Loading...";
+  }
+
+  if (!orderDetails) {
+    return "order details not available";
+  }
 
   return (
     <Box>
-      <OrderDetailsHeader />
-      <AssignedAndTimeInfo />
+      <OrderDetailsHeader orderDetails={orderDetails} />
+      <AssignedAndTimeInfo orderDetails={orderDetails} />
 
       <Grid
         container
@@ -53,25 +33,25 @@ export default function OrderDetails() {
         }}
       >
         <Grid md={9}>
-          <OrderItems />
-          <PriceDetails />
+          <OrderItems orderDetails={orderDetails} />
+          {/* <PriceDetails /> */}
         </Grid>
         <Grid md={3}>
-          <OrderNotes />
+          <OrderNotes orderDetails={orderDetails} />
         </Grid>
       </Grid>
 
       <Grid container spacing={3} mt={3}>
         <Grid md={4}>
-          <CustomerDetails />
+          <CustomerDetails orderDetails={orderDetails} />
         </Grid>
 
         <Grid md={4}>
-          <PropertyDetails />
+          <PropertyDetails orderDetails={orderDetails} />
         </Grid>
 
         <Grid md={4}>
-          <OrderActivity />
+          <OrderActivity orderDetails={orderDetails} />
         </Grid>
       </Grid>
     </Box>

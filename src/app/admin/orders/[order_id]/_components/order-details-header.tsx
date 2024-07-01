@@ -9,7 +9,8 @@ import {
 import { getMostRecentStatus, snakeCaseToNormalText } from "@/shared/functions";
 import useOrderDetails from "@/shared/hooks/use-order-details";
 import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
-import { OrderStatusValues } from "@/types/orders";
+import { OrderStatusValues, OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
 import {
   DeleteForever,
   Download,
@@ -41,8 +42,11 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function OrderDetailsHeader() {
-  const { orderDetails, isPending: isOrderDetailsPending } = useOrderDetails();
+export default function OrderDetailsHeader({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   const { updateOrderMutate } = useUpdateOrderDetails();
   const theme = useTheme();
   const [orderStatus, setOrderStatus] = useState<OrderStatusValues>(

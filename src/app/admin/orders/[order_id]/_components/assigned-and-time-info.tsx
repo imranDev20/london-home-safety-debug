@@ -1,52 +1,27 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Box, Button, Grid, Typography } from "@mui/joy";
-import { AddRounded, Check } from "@mui/icons-material";
-
+import { Box, Grid, Typography } from "@mui/joy";
 import ScheduleInfo from "./schedule-info";
-import { OrderType } from "@/types/orders";
-import { Types } from "mongoose";
-import useOrderDetails from "@/shared/hooks/use-order-details";
-import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 import ItemsAssigneeSelect from "./items-assignee-select";
 import SendEmailEngineer from "./send-email-engineer";
+import { UserType } from "@/types/users";
+import { OrderTypeForResponse } from "@/types/orders";
 
-export type Assignment = {
-  id: number;
-  engineer: Types.ObjectId | "";
-  tasks: Types.ObjectId[];
-  isEmailSent: boolean;
-};
-
-interface TaskWithEngineers {
-  task: Types.ObjectId;
-  engineers: Types.ObjectId[];
-}
-
-const assignment: Assignment = {
-  id: 1,
-  engineer: "",
-  tasks: [],
-  isEmailSent: false,
-};
-
-export default function AssignedAndTimeInfo() {
-  const { orderDetails } = useOrderDetails();
-  const [assignments, setAssignments] = useState([assignment]);
-  const { updateOrderMutate, isPending: isUpdateOrderDetailsPending } =
-    useUpdateOrderDetails();
-
+export default function AssignedAndTimeInfo({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   const { enqueueSnackbar } = useSnackbar();
 
   if (!orderDetails) {
-    return "Loading...";
+    return "no order data found";
   }
 
   return (
     <>
       <Grid container spacing={3} mt={3}>
-        <Grid md={9}>
+        <Grid xs={12} md={9}>
           <Box
             sx={{
               width: "100%",
@@ -62,15 +37,17 @@ export default function AssignedAndTimeInfo() {
             </Typography>
 
             <Grid container spacing={2}>
-              <Grid md={4}>{/* <ItemsAssigneeSelect /> */}</Grid>
+              <Grid xs={8} md={4}>
+                <ItemsAssigneeSelect />
+              </Grid>
 
-              <Grid md={2}>
+              <Grid xs={4} md={2}>
                 <SendEmailEngineer />
               </Grid>
             </Grid>
           </Box>
         </Grid>
-        <Grid md={3}>
+        <Grid xs={12} md={3}>
           <ScheduleInfo />
         </Grid>
       </Grid>

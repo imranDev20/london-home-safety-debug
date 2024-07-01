@@ -1,34 +1,24 @@
 "use client";
+import CongestionChargeIcon from "@/app/_components/icons/congestion-charge-icon";
 import { CONGESTION_ZONE_OPTIONS, PARKING_OPTIONS } from "@/shared/data";
 import useOrderDetails from "@/shared/hooks/use-order-details";
 import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
+import { OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
 import {
-  Apartment,
   ApartmentOutlined,
   BedOutlined,
-  Close,
   DirectionsCarOutlined,
-  Done,
-  Edit,
   HomeOutlined,
 } from "@mui/icons-material";
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/joy";
-import React, { useState } from "react";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/joy";
+import React from "react";
 
-export default function PropertyDetails() {
-  const { orderDetails } = useOrderDetails();
-
-  const { updateOrderMutate, isPending: isUpdateOrderPending } =
-    useUpdateOrderDetails();
-
+export default function PropertyDetails({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   if (!orderDetails) {
     return "Failed to load data...";
   }
@@ -121,11 +111,11 @@ export default function PropertyDetails() {
             </Stack>
 
             <Stack direction="row" spacing={1}>
-              {/* <CongestionChargeIcon
+              <CongestionChargeIcon
                 sx={{
                   fontSize: 20,
                 }}
-              /> */}
+              />
               <Typography
                 level="title-sm"
                 sx={{

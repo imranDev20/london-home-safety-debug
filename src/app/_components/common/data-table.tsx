@@ -21,6 +21,7 @@ interface TableProps<T> {
   onRowClick?: (row: T) => void;
   onSelectionChange?: (selected: T[]) => void;
   isAction?: boolean;
+  checkboxSelection?: boolean;
 }
 
 function RowMenu() {
@@ -46,6 +47,7 @@ const DataTable = <T extends object>({
   onRowClick,
   onSelectionChange,
   isAction,
+  checkboxSelection = true,
 }: TableProps<T>) => {
   const [selected, setSelected] = useState<T[]>([]);
 
@@ -94,40 +96,44 @@ const DataTable = <T extends object>({
     >
       <thead>
         <tr>
-          <th
-            style={{
-              width: 40,
-              textAlign: "center",
-              padding: "12px 6px",
-            }}
-          >
-            <Checkbox
-              size="sm"
-              indeterminate={
-                selected.length > 0 && selected.length !== data.length
-              }
-              checked={selected.length === data.length}
-              onChange={handleSelectAll}
-              color={
-                selected.length > 0 || selected.length === data.length
-                  ? "primary"
-                  : undefined
-              }
-              sx={{ verticalAlign: "text-bottom" }}
-            />
-          </th>
+          {checkboxSelection && (
+            <th
+              style={{
+                width: 40,
+                textAlign: "center",
+                padding: "12px 6px",
+              }}
+            >
+              <Checkbox
+                size="sm"
+                indeterminate={
+                  selected.length > 0 && selected.length !== data.length
+                }
+                checked={selected.length === data.length}
+                onChange={handleSelectAll}
+                color={
+                  selected.length > 0 || selected.length === data.length
+                    ? "primary"
+                    : undefined
+                }
+                sx={{ verticalAlign: "text-bottom" }}
+              />
+            </th>
+          )}
+
           {columns.map((column) => (
             <th
               key={column.key}
               style={{
                 width: column.width,
-                padding: "12px 6px",
+                padding: "12px 12px",
                 textAlign: column.align || "left",
               }}
             >
               {column.label}
             </th>
           ))}
+
           {isAction && (
             <th style={{ width: 50, padding: "12px 6px" }}>ACTION</th>
           )}
@@ -143,29 +149,37 @@ const DataTable = <T extends object>({
               cursor: "pointer",
             }}
           >
-            <td
-              style={{
-                textAlign: "center",
-                width: 120,
-                paddingBottom: "10px",
-                paddingTop: "10px",
-              }}
-              onClick={(event) => event.stopPropagation()}
-            >
-              <Checkbox
-                size="sm"
-                checked={selected.includes(row)}
-                color={selected.includes(row) ? "primary" : undefined}
+            {checkboxSelection && (
+              <td
+                style={{
+                  textAlign: "center",
+                  width: 120,
+                  paddingBottom: "10px",
+                  paddingTop: "10px",
+                }}
                 onClick={(event) => event.stopPropagation()}
-                onChange={(event) =>
-                  handleSelectionChange(row, event.target.checked)
-                }
-                slotProps={{ checkbox: { sx: { textAlign: "left" } } }}
-                sx={{ verticalAlign: "text-bottom" }}
-              />
-            </td>
+              >
+                <Checkbox
+                  size="sm"
+                  checked={selected.includes(row)}
+                  color={selected.includes(row) ? "primary" : undefined}
+                  onClick={(event) => event.stopPropagation()}
+                  onChange={(event) =>
+                    handleSelectionChange(row, event.target.checked)
+                  }
+                  slotProps={{ checkbox: { sx: { textAlign: "left" } } }}
+                  sx={{ verticalAlign: "text-bottom" }}
+                />
+              </td>
+            )}
+
             {columns.map((column) => (
-              <td key={column.key}>
+              <td
+                key={column.key}
+                style={{
+                  padding: "5px 12px",
+                }}
+              >
                 {column.render
                   ? column.render(row[column.key], row)
                   : row[column.key]}

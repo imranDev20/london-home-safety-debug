@@ -1,33 +1,16 @@
 "use client";
 
-import useOrderDetails from "@/shared/hooks/use-order-details";
-import {
-  Close,
-  Done,
-  Edit,
-  MapOutlined,
-  PhoneOutlined,
-} from "@mui/icons-material";
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/joy";
-import { Types } from "mongoose";
-import React, { useEffect, useState } from "react";
+import { OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
+import { MapOutlined, PhoneOutlined } from "@mui/icons-material";
+import { Avatar, Box, Card, CardContent, Stack, Typography } from "@mui/joy";
+import React from "react";
 
-interface InfoCellsProps {
-  title: string;
-  info: string | undefined;
-}
-
-export default function CustomerDetails() {
-  const { orderDetails } = useOrderDetails();
-
+export default function CustomerDetails({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   if (!orderDetails) {
     return "Failed to load data...";
   }
