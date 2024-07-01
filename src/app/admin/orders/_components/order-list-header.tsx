@@ -5,37 +5,10 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { exportOrders } from "@/services/orders.services";
 import dayjs from "dayjs";
-import { useOrdersData } from "@/shared/hooks/use-orders";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useQueryString } from "@/shared/hooks/use-query-string";
 
 export default function OrderListHeader() {
   const [openCreateCustomerDrawer, setOpenCreateCustomerDrawer] =
     useState<boolean>(false);
-
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { createQueryString } = useQueryString();
-  const searchTerm = searchParams.get("q") || "";
-  const orderStatus = searchParams.get("order_status") || "";
-  const assignedTo = searchParams.get("assigned_to") || "";
-  const sortBy = searchParams.get("sort_by") || "";
-  const sortOrder = searchParams.get("sort_order") || "";
-  const page = searchParams.get("page") || "";
-
-  const {
-    ordersData,
-    isGetOrdersDataFetching,
-    isGetOrdersDataPending,
-    refetchGetOrders,
-  } = useOrdersData(true, {
-    q: searchTerm,
-    order_status: orderStatus,
-    assigned_to: assignedTo,
-    sort_by: sortBy,
-    sort_order: sortOrder,
-    page,
-  });
 
   const { isLoading: isExportOrdersLoading, refetch: refetchExportOrders } =
     useQuery({

@@ -17,7 +17,7 @@ import {
   ORDER_STATUS_COLORS,
   ORDER_STATUS_ICONS,
 } from "@/shared/constants";
-import { OrderType, OrderTypeForResponse } from "@/types/orders";
+import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
 import InvoiceDownloadButton from "./invoice-download-button";
 import { useQueryString } from "@/shared/hooks/use-query-string";
@@ -136,20 +136,21 @@ export default function OrderTable() {
     page,
   });
 
-  // useEffect(() => {
-  //   const loadOrders = async () => {
-  //     await refetchGetOrders();
-  //   };
-  //   loadOrders();
-  // }, [
-  //   searchTerm,
-  //   orderStatus,
-  //   refetchGetOrders,
-  //   sortBy,
-  //   sortOrder,
-  //   assignedTo,
-  //   page,
-  // ]);
+  useEffect(() => {
+    const loadOrders = async () => {
+      await refetchGetOrders();
+    };
+
+    loadOrders();
+  }, [
+    searchTerm,
+    orderStatus,
+    refetchGetOrders,
+    sortBy,
+    sortOrder,
+    assignedTo,
+    page,
+  ]);
 
   const handleRowClick = (order: OrderTypeForResponse<UserType>) => {
     router.push(`/admin/orders/${order._id.toString()}`);
