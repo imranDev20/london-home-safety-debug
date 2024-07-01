@@ -8,6 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createQueryString } from "@/shared/functions";
 import { useQuery } from "@tanstack/react-query";
 import { getPreOrder } from "@/services/pre-order.services";
+import { Grid, Skeleton } from "@mui/joy";
 
 const steps = [
   {
@@ -41,12 +42,51 @@ export default function BookNowStepper() {
   const handleStep = (stepNumber: number) => {
     router.push(
       pathname + "?" + createQueryString("active_step", stepNumber.toString()),
-      { scroll: false }
+      { scroll: true }
     );
   };
 
   if (isPreOrderDataPending) {
-    return "loading...";
+    return (
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          mb: 5,
+        }}
+      >
+        <Grid xs={4}>
+          <Skeleton
+            variant="rectangular"
+            sx={{
+              width: "100%",
+              height: "20px",
+              borderRadius: "xl",
+            }}
+          />
+        </Grid>
+        <Grid xs={4}>
+          <Skeleton
+            variant="rectangular"
+            sx={{
+              width: "100%",
+              height: "20px",
+              borderRadius: "xl",
+            }}
+          />
+        </Grid>
+        <Grid xs={4}>
+          <Skeleton
+            variant="rectangular"
+            sx={{
+              width: "100%",
+              height: "20px",
+              borderRadius: "xl",
+            }}
+          />
+        </Grid>
+      </Grid>
+    );
   }
 
   return (

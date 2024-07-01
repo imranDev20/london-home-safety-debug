@@ -113,9 +113,9 @@ export default function BookNowPage({
               {activeStep === 1 || Number.isNaN(activeStep) ? (
                 <ServiceDetails />
               ) : null}
-              {/* 
+
               {activeStep === 2 ? <PersonalDetails /> : null}
-              {activeStep === 3 || activeStep === 4 ? <Confirmation /> : null} */}
+              {activeStep === 3 || activeStep === 4 ? <Confirmation /> : null}
             </CardContent>
           </Card>
         </Box>

@@ -24,7 +24,8 @@ export const useOrdersData = (enabled?: boolean, queries?: OrderQueries) => {
     queryFn: () =>
       getOrders(q, order_status, assigned_to, sort_by, sort_order, page),
     enabled: enabled ?? true,
-    refetchOnMount: true,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   return {

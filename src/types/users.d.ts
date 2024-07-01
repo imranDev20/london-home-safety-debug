@@ -29,7 +29,10 @@ export type UserType<HasId extends boolean = false> = {
   createdAt: string;
 };
 
-export type EngineerType = Omit<UserType, "orders_placed"> & {
+export type EngineerType<HasId extends boolean = false> = Omit<
+  UserType<HasId>,
+  "orders_placed"
+> & {
   role: "engineer";
   orders_received: OrderType[];
   skills: string[];

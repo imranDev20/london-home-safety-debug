@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import AdminNavigation from "./_components/admin-navigation";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,10 +13,10 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <main>{children}</main>
-      </body>
-    </html>
+    <main>
+      {/* <Suspense> */}
+      <AdminNavigation>{children}</AdminNavigation>
+      {/* </Suspense> */}
+    </main>
   );
 }

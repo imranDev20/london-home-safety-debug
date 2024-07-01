@@ -1,13 +1,17 @@
 import { ADDRESS, BUSINESS_NAME, WEBSITE_URL } from "@/shared/data";
-import { OrderType, IOrderItemWithEngineers } from "@/types/orders";
+import {
+  OrderType,
+  OrderItemWithEngineerType,
+  OrderTypeForResponse,
+} from "@/types/orders";
 import { UserType } from "@/types/users";
 
 export const customerEmailSubject = "Your request to contact us was successful";
 
 export const notifyEngineerEmailHtml = (
-  orderDetails: OrderType<false, UserType>,
+  orderDetails: OrderTypeForResponse<UserType>,
   content: string,
-  orderItemsForEngineer: IOrderItemWithEngineers[]
+  orderItemsForEngineer: OrderItemWithEngineerType[]
 ) => `
 <!DOCTYPE html>
 <html lang="en">

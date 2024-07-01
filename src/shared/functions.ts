@@ -3,10 +3,12 @@ import dayjs from "dayjs";
 import { Pagination } from "@/types/misc";
 import {
   OrderType,
-  IOrderItemWithEngineers,
+  OrderItemWithEngineerType,
   PreOrderType,
   OrderStatus,
   OrderStatusValues,
+  PreOrderTypeForResponse,
+  OrderTypeForResponse,
 } from "@/types/orders";
 import { UserType } from "@/types/users";
 
@@ -101,7 +103,6 @@ export const formatResponse = <T>(
   message: string;
   pagination?: Pagination;
 } => {
-  console.log("first");
   return {
     success,
     ...(data ? { data } : {}),
@@ -156,7 +157,7 @@ export const debounce = (func: (...args: any[]) => void, delay: number) => {
 };
 
 export function calculatePreOrderTotalCost(
-  order: PreOrderType<true, UserType>
+  order: PreOrderTypeForResponse<UserType>
 ) {
   if (!order.personal_info) {
     console.log("Personal info is needed to calculate total cost");
@@ -183,11 +184,11 @@ export function calculatePreOrderTotalCost(
 }
 
 export function calculateOrderTotalCost(
-  order: OrderType<true, UserType>
+  order: OrderTypeForResponse<UserType>
 ): number {
   // Calculate the total cost of order items
   const orderItemsCost = order.order_items.reduce(
-    (total, item: IOrderItemWithEngineers) => {
+    (total, item: OrderItemWithEngineerType) => {
       return total + item.price * item.quantity;
     },
     0

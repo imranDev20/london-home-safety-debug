@@ -43,10 +43,10 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const accessTokenExpiry = 60 * 60 * 24;
+    const accessTokenExpiry = 60 * 15; // 15 minutes
     const refreshTokenExpiry = rememberMe
-      ? 60 * 60 * 24 * 30
-      : 60 * 60 * 24 * 7; // 30 days or 7 days in seconds
+      ? 60 * 60 * 24 * 30 // 30 days
+      : 60 * 60 * 24 * 7; // 7 days
 
     response.cookies.set("accessToken", accessToken, {
       httpOnly: true,
