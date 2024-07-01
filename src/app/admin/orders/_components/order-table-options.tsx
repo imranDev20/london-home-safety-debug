@@ -20,21 +20,13 @@ import OrderTable from "./order-table";
 export default function OrderTableOptions() {
   const searchParams = useSearchParams();
   const orderStatus = searchParams.get("order_status") || "";
-  const filterCond = searchParams.get("filter");
 
   const { createQueryString, removeQueryString } = useQueryString();
   const router = useRouter();
   const pathname = usePathname();
 
   const handleDebounce = (value: string): void => {
-    if (value !== "" && !filterCond) {
-      router.push(
-        `${pathname}?${createQueryString("q", value)}&${createQueryString(
-          "filter",
-          "applied"
-        )}`
-      );
-    } else if (value !== "") {
+    if (value !== "") {
       router.push(`${pathname}?${createQueryString("q", value)}`);
     } else {
       router.push(`${pathname}?${removeQueryString("q")}`);
@@ -79,15 +71,15 @@ export default function OrderTableOptions() {
                 },
               }}
               value={orderStatus || ""}
-              onChange={(_, value) =>
+              onChange={(_, value) => {
                 router.push(
                   `${pathname}?${createQueryString(
                     "order_status",
                     value as string
                   )}`,
                   { scroll: false }
-                )
-              }
+                );
+              }}
             >
               <Option
                 value=""

@@ -51,6 +51,10 @@ export default function OrderItems({
         variant="outlined"
         sx={{
           borderRadius: "sm",
+          display: {
+            xs: "none",
+            md: "block",
+          },
         }}
       >
         {orderDetails?.order_status && (

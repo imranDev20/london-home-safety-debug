@@ -1,13 +1,16 @@
 "use client";
-import useOrderDetails from "@/shared/hooks/use-order-details";
+import { OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
 import { Event, Schedule } from "@mui/icons-material";
 import { Card, CardContent, Stack, Typography } from "@mui/joy";
 import dayjs from "dayjs";
 import React from "react";
 
-export default function ScheduleInfo() {
-  const { orderDetails } = useOrderDetails();
-
+export default function ScheduleInfo({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   if (!orderDetails) {
     return "Failed to load data...";
   }

@@ -1,10 +1,17 @@
 import { UnfoldMore } from "@mui/icons-material";
 import { CircularProgress, FormControl, Option, Select } from "@mui/joy";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useEngineersData } from "@/shared/hooks/use-engineers";
+import { OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
 
-export default function ItemsAssigneeSelect() {
+export default function ItemsAssigneeSelect({
+  orderDetails,
+}: {
+  orderDetails: OrderTypeForResponse<UserType>;
+}) {
   const [listBoxOpen, setListBoxOpen] = useState<boolean>(false);
+  const [selectedEngineer, setSelectedEngineer] = useState("");
 
   const {
     data,
@@ -12,6 +19,12 @@ export default function ItemsAssigneeSelect() {
     refetch: refetchGetEngineers,
   } = useEngineersData();
   const engineersData = data?.data;
+
+  useEffect(() => {
+    if (orderDetails) {
+      setSelectedEngineer("");
+    }
+  }, [orderDetails]);
 
   return (
     <FormControl size="sm">
@@ -39,6 +52,8 @@ export default function ItemsAssigneeSelect() {
             <UnfoldMore />
           )
         }
+        value={selectedEngineer}
+        onChange={(_, value) => value && setSelectedEngineer(value)}
         placeholder="Filter by assignee"
         slotProps={{
           button: {

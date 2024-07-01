@@ -1,9 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import {
-  OrderItemWithEngineerType,
-  OrderType,
-  OrderTypeForResponse,
-} from "@/types/orders"; // Changed the type name here
+import { OrderItemType, OrderType, OrderTypeForResponse } from "@/types/orders"; // Changed the type name here
 import { ORDER_STATUS } from "@/shared/constants";
 import { OrderStatus } from "@/types/orders";
 import { UserType } from "@/types/users";
@@ -21,7 +17,7 @@ const orderStatusSchema = new Schema<OrderStatus>({
   },
 });
 
-const orderItemWithEngineerSchema = new Schema<OrderItemWithEngineerType>({
+const orderItemSchema = new Schema<OrderItemType>({
   // Changed the schema name here
   name: {
     type: String,
@@ -43,14 +39,9 @@ const orderItemWithEngineerSchema = new Schema<OrderItemWithEngineerType>({
     type: String,
     required: true,
   },
-  assigned_engineer: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
 });
 
-const orderSchema = new Schema<OrderType<UserType>>(
+const orderSchema = new Schema<OrderType>(
   {
     property_type: {
       type: String,
@@ -71,7 +62,7 @@ const orderSchema = new Schema<OrderType<UserType>>(
       },
     },
     order_items: {
-      type: [orderItemWithEngineerSchema],
+      type: [orderItemSchema],
       required: true,
     },
     customer: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -116,6 +107,11 @@ const orderSchema = new Schema<OrderType<UserType>>(
       type: [orderStatusSchema],
       required: true,
     },
+    assigned_engineer: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     remaining_amount: {
       type: Number,
       required: true,
@@ -145,7 +141,6 @@ orderSchema.pre("save", function (next) {
 });
 
 const Order: mongoose.Model<OrderTypeForResponse<UserType>> =
-  mongoose.models.Order ||
-  mongoose.model<OrderType<UserType>>("Order", orderSchema);
+  mongoose.models.Order || mongoose.model<OrderType>("Order", orderSchema);
 
 export default Order;

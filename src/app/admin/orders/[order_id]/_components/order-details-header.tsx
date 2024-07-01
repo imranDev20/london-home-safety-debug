@@ -7,7 +7,6 @@ import {
   ORDER_STATUS_ICONS,
 } from "@/shared/constants";
 import { getMostRecentStatus, snakeCaseToNormalText } from "@/shared/functions";
-import useOrderDetails from "@/shared/hooks/use-order-details";
 import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
 import { OrderStatusValues, OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";

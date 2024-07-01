@@ -1,17 +1,12 @@
 import { ADDRESS, BUSINESS_NAME, WEBSITE_URL } from "@/shared/data";
-import {
-  OrderType,
-  OrderItemWithEngineerType,
-  OrderTypeForResponse,
-} from "@/types/orders";
+import { OrderType, OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
 
 export const customerEmailSubject = "Your request to contact us was successful";
 
 export const notifyEngineerEmailHtml = (
   orderDetails: OrderTypeForResponse<UserType>,
-  content: string,
-  orderItemsForEngineer: OrderItemWithEngineerType[]
+  content: string
 ) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -93,16 +88,12 @@ export const notifyEngineerEmailHtml = (
       <div class="message-box">
         <p style="font-weight: bold;">Customer Details:</p>
         <p style="margin-left: 20px;">
-          Address: ${orderDetails.customer.address?.street}, ${
-  orderDetails.customer.address?.postcode
-}, ${orderDetails.customer.address?.city}<br>
+          Address: ${orderDetails.customer.address?.street}, ${orderDetails.customer.address?.postcode}, ${orderDetails.customer.address?.city}<br>
           Phone: ${orderDetails.customer.phone}<br>
           Email: ${orderDetails.customer.email}
         </p>
         <p style="font-weight: bold;">Desired Services:</p>
-        <p style="margin-left: 20px;">${orderItemsForEngineer
-          .map((item) => item.title)
-          .join(", ")}</p>
+        <p style="margin-left: 20px;">Items will be here</p>
         <p style="font-weight: bold;">Message from Kamal:</p>
         <p style="margin-left: 20px;">${content}</p>
       </div>

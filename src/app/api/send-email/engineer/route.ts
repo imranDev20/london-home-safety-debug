@@ -10,25 +10,14 @@ export async function POST(req: NextRequest) {
 
     const data = await req.json();
 
-    const {
-      receiver_email,
-      subject,
-      assignment,
-      orderDetails,
-      content,
-      orderItemsForEngineer,
-    } = data;
+    const { receiver_email, subject, orderDetails, content } = data;
 
     await sendEmail({
       fromEmail: "info@londonhomesafety.co.uk",
       fromName: "London Home Safety",
       to: receiver_email,
       subject: subject,
-      html: notifyEngineerEmailHtml(
-        orderDetails,
-        content,
-        orderItemsForEngineer
-      ),
+      html: notifyEngineerEmailHtml(orderDetails, content),
     });
 
     return NextResponse.json(

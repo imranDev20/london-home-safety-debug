@@ -37,18 +37,18 @@ export default function AssignedAndTimeInfo({
             </Typography>
 
             <Grid container spacing={2}>
-              <Grid xs={8} md={4}>
-                <ItemsAssigneeSelect />
+              <Grid xs={12} md={4}>
+                <ItemsAssigneeSelect orderDetails={orderDetails} />
               </Grid>
 
-              <Grid xs={4} md={2}>
+              <Grid xs={12} md={2}>
                 <SendEmailEngineer />
               </Grid>
             </Grid>
           </Box>
         </Grid>
         <Grid xs={12} md={3}>
-          <ScheduleInfo />
+          <ScheduleInfo orderDetails={orderDetails} />
         </Grid>
       </Grid>
     </>

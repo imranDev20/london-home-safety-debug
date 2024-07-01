@@ -4,16 +4,37 @@ import OrderItems from "./order-items";
 import OrderNotes from "./order-notes";
 import OrderActivity from "./order-activity";
 import PropertyDetails from "./property-details";
-import { Box, Grid } from "@mui/joy";
+import { Box, CircularProgress, Grid } from "@mui/joy";
 import useOrderDetails from "@/shared/hooks/use-order-details";
 import OrderDetailsHeader from "./order-details-header";
 import AssignedAndTimeInfo from "./assigned-and-time-info";
+import PriceDetails from "./price-details";
 
 export default function OrderDetails() {
-  const { orderDetails, isPending: isOrderDetailsPending } = useOrderDetails();
+  const {
+    orderDetails,
+    isPending: isOrderDetailsPending,
+    isFetching: isOrderDetailsFetching,
+  } = useOrderDetails();
 
-  if (isOrderDetailsPending) {
-    return "Loading...";
+  if (isOrderDetailsPending || isOrderDetailsFetching) {
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress
+          thickness={3}
+          sx={{
+            "--CircularProgress-size": "60px",
+          }}
+        />
+      </Box>
+    );
   }
 
   if (!orderDetails) {
@@ -21,7 +42,15 @@ export default function OrderDetails() {
   }
 
   return (
-    <Box>
+    <Box
+      sx={{
+        maxHeight: "95vh",
+        overflowY: {
+          md: "auto",
+          xs: "unset",
+        },
+      }}
+    >
       <OrderDetailsHeader orderDetails={orderDetails} />
       <AssignedAndTimeInfo orderDetails={orderDetails} />
 
@@ -34,7 +63,7 @@ export default function OrderDetails() {
       >
         <Grid md={9}>
           <OrderItems orderDetails={orderDetails} />
-          {/* <PriceDetails /> */}
+          <PriceDetails />
         </Grid>
         <Grid md={3}>
           <OrderNotes orderDetails={orderDetails} />
@@ -42,15 +71,15 @@ export default function OrderDetails() {
       </Grid>
 
       <Grid container spacing={3} mt={3}>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <CustomerDetails orderDetails={orderDetails} />
         </Grid>
 
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <PropertyDetails orderDetails={orderDetails} />
         </Grid>
 
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <OrderActivity orderDetails={orderDetails} />
         </Grid>
       </Grid>

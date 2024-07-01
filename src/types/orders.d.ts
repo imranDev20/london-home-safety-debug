@@ -51,14 +51,6 @@ export type OrderItemForResponseType = OrderItemType & {
   _id: Types.ObjectId;
 };
 
-export type OrderItemWithEngineerType = OrderItemType & {
-  assigned_engineer: Types.ObjectId;
-};
-
-export type OrderItemWithEngineerForResponseType = OrderItemWithEngineerType & {
-  _id: Types.ObjectId;
-};
-
 export type PreOrderType<T extends UserType | undefined = undefined> = {
   service_info: {
     property_type: PropertyType;
@@ -98,7 +90,7 @@ export type OrderType<T extends UserType | undefined = undefined> = {
   property_type: PropertyType;
   resident_type?: ResidentType<PropertyType>;
   bedrooms?: BedroomsType<PropertyType>;
-  order_items: OrderItemWithEngineerType[]; // Changed here
+  order_items: OrderItemType[]; // Changed here
   customer: T extends UserType ? Partial<UserType> : Types.ObjectId;
   parking_options: {
     parking_type: ParkingType;
@@ -113,6 +105,7 @@ export type OrderType<T extends UserType | undefined = undefined> = {
   order_notes?: string;
   payment_method: PaymentMethod;
   order_status: OrderStatus[];
+  assigned_engineer: Types.ObjectId;
   remaining_amount: number;
   paid_amount: number;
   invoice_id: string;

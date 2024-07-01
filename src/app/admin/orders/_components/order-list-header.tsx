@@ -79,12 +79,23 @@ export default function OrderListHeader() {
 
       <Stack
         spacing={2}
+        sx={{
+          width: {
+            xs: "100%",
+            sm: "unset",
+          },
+        }}
         direction={{
-          xs: "column",
-          sm: "row",
+          xs: "row",
         }}
       >
         <Button
+          sx={{
+            flexGrow: {
+              xs: 1,
+              md: "unset",
+            },
+          }}
           size="sm"
           variant="outlined"
           startDecorator={<Download />}
@@ -95,6 +106,12 @@ export default function OrderListHeader() {
           Download Excel
         </Button>
         <Button
+          sx={{
+            flexGrow: {
+              xs: 1,
+              md: "unset",
+            },
+          }}
           size="sm"
           startDecorator={<Add />}
           onClick={() => setOpenCreateCustomerDrawer(true)}

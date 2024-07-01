@@ -17,7 +17,6 @@ import { sendEmailToEngineer } from "@/services/send-email.services";
 import { AxiosError } from "axios";
 import { ErrorResponse } from "@/types/response";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
-import useOrderDetails from "@/shared/hooks/use-order-details";
 
 interface ServiceEmailContent {
   subject: string | "";
@@ -35,8 +34,6 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
     const [emailContent, setEmailContent] = useState<string>("");
     const [emailSubject, setEmailSubject] = useState<string>("");
     const { enqueueSnackbar } = useSnackbar();
-
-    const { orderDetails } = useOrderDetails();
 
     const { isPending: isSendEmailPending, mutateAsync: sendEmailMutate } =
       useMutation({
@@ -60,7 +57,6 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
         receiver_email: receiver,
         content: emailContent,
         subject: emailSubject,
-        orderDetails,
       };
 
       await sendEmailMutate(payload);
