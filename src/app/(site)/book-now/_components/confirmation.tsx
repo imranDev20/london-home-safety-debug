@@ -1,3 +1,4 @@
+"use client";
 import { createPreOrder, getPreOrder } from "@/services/pre-order.services";
 import { snakeCaseToNormalText, toSnakeCase } from "@/shared/functions";
 import {
@@ -55,7 +56,7 @@ export default function Confirmation() {
   // pre order mutate for changing payment method
   const { mutateAsync: preOrderMutate, isPending: isPreOrderMutatePending } =
     useMutation({
-      mutationFn: async (preOrder: Partial<PreOrderType<false>>) =>
+      mutationFn: async (preOrder: Partial<PreOrderType>) =>
         createPreOrder(preOrder),
       onSuccess: (response) => {
         console.log(response);
@@ -113,7 +114,7 @@ export default function Confirmation() {
       throw new Error("No customer ID found");
     }
 
-    const payload: PreOrderType<false> = {
+    const payload: PreOrderType = {
       service_info: preOrderData?.service_info,
       personal_info: {
         ...preOrderData.personal_info,

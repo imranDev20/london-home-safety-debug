@@ -95,7 +95,7 @@ export default function PersonalDetails() {
 
   const { mutateAsync: preOrderMutate, isPending: isPreOrderMutatePending } =
     useMutation({
-      mutationFn: (preOrder: PreOrderType<false, UserType>) =>
+      mutationFn: (preOrder: PreOrderType<UserType>) =>
         createPreOrder<UserType>(preOrder),
 
       onSuccess: (response) => {
@@ -151,7 +151,7 @@ export default function PersonalDetails() {
       (option) => option.value === data.parkingOptions
     );
 
-    const payload: PreOrderType<false, UserType> = {
+    const payload: PreOrderType<UserType> = {
       service_info: preOrderData.service_info,
       personal_info: {
         customer: {

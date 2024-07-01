@@ -67,3 +67,5 @@ export const ORDER_STATUS = [
   "completed",
   "cancelled",
 ];
+
+export const FIXED_HEIGHT: number = 285;

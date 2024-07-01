@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "../../_lib/dbConnect";
 import Order from "../../_models/Order";
 import { formatResponse } from "@/shared/functions";
-import { OrderType } from "@/types/orders";
+import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function GET(
   req: NextRequest,
@@ -13,10 +15,12 @@ export async function GET(
     await dbConnect();
     const orderId = params.order_id;
 
+    // await delay(1000); // 1-second delay
+
     const order = (await Order.findById(orderId).populate({
       path: "customer",
       select: "-password", // Exclude the password field
-    })) as OrderType<true, UserType>;
+    })) as OrderTypeForResponse<UserType>;
 
     if (!order) {
       return NextResponse.json(formatResponse(false, null, "Order not found"), {

@@ -5,8 +5,10 @@ import Order from "../_models/Order";
 import { sendEmail } from "../_lib/send-email";
 import { placedOrderEmailHtml } from "../_templates/order-placed-email";
 import PreOrder from "../_models/PreOrder";
-import { PreOrderType } from "@/types/orders";
+import { PreOrderTypeForResponse } from "@/types/orders";
+
 import mongoose, { Types } from "mongoose";
+
 import {
   generateInvoiceId,
   generateInvoicePdfFromPreOrder,
@@ -29,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     const preOrder = (await PreOrder.findById(pre_order_id).populate(
       "personal_info.customer"
-    )) as PreOrderType<true, UserType>;
+    )) as PreOrderTypeForResponse<UserType>;
 
     if (!preOrder) {
       return NextResponse.json(
@@ -175,23 +177,32 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Create an aggregation pipeline
+    function getSortField(sortBy: string) {
+      switch (sortBy) {
+        case "name":
+          return "customer.name";
+        case "email":
+          return "customer.email";
+        case "phone":
+          return "customer.phone";
+        case "createdAt":
+        default:
+          return "createdAt";
+      }
+    }
+
+    const sortField = getSortField(sortBy);
+
     const pipeline: any[] = [
+      // Match customer and search term
       {
         $match: {
           ...(customerId
             ? { customer: new mongoose.Types.ObjectId(customerId) }
             : {}),
-          ...(searchTerm && {
-            $or: [
-              { invoice_id: { $regex: searchTerm, $options: "i" } },
-              { customer_name: { $regex: searchTerm, $options: "i" } },
-              { email: { $regex: searchTerm, $options: "i" } },
-              { phone: { $regex: searchTerm, $options: "i" } },
-            ],
-          }),
         },
       },
+      // Sort order_status array by timestamp
       {
         $addFields: {
           order_status: {
@@ -202,6 +213,7 @@ export async function GET(req: NextRequest) {
           },
         },
       },
+      // Add most recent status field
       {
         $addFields: {
           mostRecentStatus: {
@@ -209,18 +221,18 @@ export async function GET(req: NextRequest) {
           },
         },
       },
+      // Match based on orderStatus and assignedTo filters
       {
         $match: {
           ...(orderStatus ? { "mostRecentStatus.status": orderStatus } : {}),
           ...(assignedTo
             ? {
-                "order_items.assigned_engineers": new mongoose.Types.ObjectId(
-                  assignedTo
-                ),
+                "order_items.assigned_engineer": new Types.ObjectId(assignedTo),
               }
             : {}),
         },
       },
+      // Join with the users collection to get customer details
       {
         $lookup: {
           from: "users",
@@ -229,13 +241,34 @@ export async function GET(req: NextRequest) {
           as: "customer",
         },
       },
+      // Unwind customer array to get a single customer object
       {
         $unwind: {
           path: "$customer",
           preserveNullAndEmptyArrays: true,
         },
       },
-      { $sort: { [sortBy]: sortOrder === "asc" ? 1 : -1 } },
+
+      {
+        $match: {
+          ...(searchTerm && {
+            $or: [
+              { invoice_id: { $regex: searchTerm, $options: "i" } },
+              { "customer.name": { $regex: searchTerm, $options: "i" } },
+              { "customer.email": { $regex: searchTerm, $options: "i" } },
+              { "customer.phone": { $regex: searchTerm, $options: "i" } },
+            ],
+          }),
+        },
+      },
+
+      // Sort, skip, and limit for pagination
+      {
+        $sort: {
+          [sortField]: sortOrder === "asc" ? 1 : -1,
+          createdAt: sortOrder === "asc" ? 1 : -1,
+        },
+      },
       { $skip: skip },
       { $limit: limit },
     ];

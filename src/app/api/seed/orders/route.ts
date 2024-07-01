@@ -56,9 +56,7 @@ export async function POST(req: NextRequest) {
       .select("_id")
       .exec();
 
-    console.log(engineers.map((engineer) => engineer._id.toString()));
-
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 200; i++) {
       // Generate fake data for PreOrder
       const fakePreOrder: PreOrderType = {
         service_info: {
@@ -157,23 +155,17 @@ export async function POST(req: NextRequest) {
         invoice_id: await generateInvoiceId(), // Generate the invoice ID
         order_items: preOrder.service_info.order_items.map((item) => ({
           ...item,
-          assigned_engineers: faker.helpers.arrayElements(
-            engineers
-              .map((engineer) => engineer._id)
-              .reduce((acc, curr) => {
-                if (!acc.includes(curr)) {
-                  acc.push(curr);
-                }
-                return acc;
-              }, [] as Types.ObjectId[]),
-            { min: 1, max: 3 }
+          assigned_engineer: faker.helpers.arrayElement(
+            engineers.map((engineer) => engineer._id)
           ),
         })),
       };
 
       // Create a new Order document
-      const order = await Order.create(fakeOrder);
-      orders.push(order);
+      const newOrder = new Order(fakeOrder);
+      await newOrder.save();
+
+      orders.push(newOrder);
     }
 
     return NextResponse.json(

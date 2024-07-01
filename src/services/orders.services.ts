@@ -7,7 +7,7 @@ import {
   GetOrdersResponse,
   UpdateOrderResponse,
 } from "@/types/response";
-import { OrderType } from "@/types/orders";
+import { OrderType, OrderTypeForResponse } from "@/types/orders";
 import { Types } from "mongoose";
 
 const ORDERS_PATH = "/orders";
@@ -52,7 +52,7 @@ export const createOrder = async (
 };
 
 export const updateOrder = async (
-  orderData: OrderType
+  orderData: OrderTypeForResponse
 ): Promise<UpdateOrderResponse> => {
   const response: UpdateOrderResponse = await http.patch(
     `${ORDERS_PATH}/${orderData._id}`,

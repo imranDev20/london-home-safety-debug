@@ -1,4 +1,9 @@
-import { OrderType, PreOrderType } from "@/types/orders";
+import {
+  OrderType,
+  OrderTypeForResponse,
+  PreOrderType,
+  PreOrderTypeForResponse,
+} from "@/types/orders";
 
 import jsPDF from "jspdf";
 
@@ -46,7 +51,7 @@ export async function generateInvoiceId() {
 
 export async function generateInvoicePdfFromPreOrder(
   invoiceId: string,
-  preOrder: PreOrderType<true, UserType>
+  preOrder: PreOrderTypeForResponse<UserType>
 ) {
   const doc = new jsPDF();
 
@@ -173,7 +178,7 @@ export async function generateInvoicePdfFromPreOrder(
 
 export async function generateInvoicePdfFromOrder(
   invoiceId: string,
-  order: OrderType<true, UserType>
+  order: OrderTypeForResponse<UserType>
 ) {
   const doc = new jsPDF();
 

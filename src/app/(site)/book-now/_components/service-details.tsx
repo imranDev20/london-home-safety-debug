@@ -74,7 +74,6 @@ export default function ServiceDetails() {
         window.scrollTo(0, 300);
         enqueueSnackbar(response.message, "success");
       },
-
       onError: (error: AxiosError<ErrorResponse>) => {
         console.log(error);
         enqueueSnackbar(error.response?.data.message || error.message, "error");

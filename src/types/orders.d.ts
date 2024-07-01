@@ -39,28 +39,32 @@ export type OrderStatusValues = Pick<OrderStatus, "status">[keyof Pick<
   "status"
 >];
 
-export interface IOrderItem extends Pick<Document<Types.ObjectId>, "_id"> {
+export type OrderItemType = {
   name: string;
   price: number;
   quantity: number;
   unit: string;
   title: string;
-}
+};
 
-export interface IOrderItemWithEngineers extends IOrderItem {
-  assigned_engineers: Types.ObjectId[];
-}
+export type OrderItemForResponseType = OrderItemType & {
+  _id: Types.ObjectId;
+};
 
-export type PreOrderType<
-  HasId extends boolean = false,
-  T extends UserType | undefined = undefined
-> = {
-  _id?: HasId extends true ? Types.ObjectId : never;
+export type OrderItemWithEngineerType = OrderItemType & {
+  assigned_engineer: Types.ObjectId;
+};
+
+export type OrderItemWithEngineerForResponseType = OrderItemWithEngineerType & {
+  _id: Types.ObjectId;
+};
+
+export type PreOrderType<T extends UserType | undefined = undefined> = {
   service_info: {
     property_type: PropertyType;
     resident_type?: ResidentType<PropertyType>;
     bedrooms?: BedroomsType<PropertyType>;
-    order_items: IOrderItem[];
+    order_items: OrderItemType[];
   };
   personal_info?: {
     customer: T extends UserType ? Partial<UserType> : Types.ObjectId;
@@ -84,15 +88,17 @@ export type PreOrderType<
   updatedAt?: Date;
 };
 
-export type OrderType<
-  HasId extends boolean = false,
+export type PreOrderTypeForResponse<
   T extends UserType | undefined = undefined
-> = {
-  _id?: HasId extends true ? Types.ObjectId : never;
+> = PreOrderType<T> & {
+  _id: Types.ObjectId;
+};
+
+export type OrderType<T extends UserType | undefined = undefined> = {
   property_type: PropertyType;
   resident_type?: ResidentType<PropertyType>;
   bedrooms?: BedroomsType<PropertyType>;
-  order_items: IOrderItemWithEngineers[];
+  order_items: OrderItemWithEngineerType[]; // Changed here
   customer: T extends UserType ? Partial<UserType> : Types.ObjectId;
   parking_options: {
     parking_type: ParkingType;
@@ -113,6 +119,11 @@ export type OrderType<
   createdAt?: Date;
   updatedAt?: Date;
 };
+
+export type OrderTypeForResponse<T extends UserType | undefined = undefined> =
+  OrderType<T> & {
+    _id: Types.ObjectId;
+  };
 
 export type InvoiceData = {
   data: string;

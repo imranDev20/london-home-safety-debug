@@ -3,6 +3,7 @@ import QueryProvider from "./_components/providers/query-provider";
 import ThemeRegistry from "./_components/providers/theme-registry";
 import { SnackbarProvider } from "./_components/providers/snackbar-provider";
 import TopLoader from "./_components/global/top-loader";
+import TokenRefresh from "./_components/providers/token-refresh";
 
 export const metadata = {
   title: "Create Next App",
@@ -17,6 +18,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           <ThemeRegistry>
             <SnackbarProvider>
               <TopLoader />
+              <TokenRefresh />
               <>{props.children}</>
             </SnackbarProvider>
           </ThemeRegistry>

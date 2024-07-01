@@ -1,8 +1,12 @@
-import { IOrderItem, PreOrderType } from "@/types/orders";
+import {
+  OrderItemType,
+  PreOrderType,
+  PreOrderTypeForResponse,
+} from "@/types/orders";
 import { UserType } from "@/types/users";
 import mongoose, { Schema } from "mongoose";
 
-const orderItemSchema = new Schema<IOrderItem>({
+const orderItemSchema = new Schema<OrderItemType>({
   name: {
     type: String,
     required: true,
@@ -25,7 +29,7 @@ const orderItemSchema = new Schema<IOrderItem>({
   },
 });
 
-const preOrderSchema = new mongoose.Schema<PreOrderType<true>>(
+const preOrderSchema = new mongoose.Schema<PreOrderType>(
   {
     service_info: {
       property_type: {
@@ -133,8 +137,8 @@ preOrderSchema.pre("save", function (next) {
   next();
 });
 
-const PreOrder: mongoose.Model<PreOrderType<true, UserType>> =
+const PreOrder: mongoose.Model<PreOrderTypeForResponse<UserType>> =
   mongoose.models.PreOrder ||
-  mongoose.model<PreOrderType<true>>("PreOrder", preOrderSchema);
+  mongoose.model<PreOrderType>("PreOrder", preOrderSchema);
 
 export default PreOrder;

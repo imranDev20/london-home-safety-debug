@@ -69,7 +69,7 @@ export default function PaymentDetails() {
       setLoading(true);
 
       // first set the payment method in the pre-order
-      const payload: PreOrderType<false> = {
+      const payload: PreOrderType = {
         service_info: preOrderData?.service_info,
         personal_info: {
           ...preOrderData?.personal_info,

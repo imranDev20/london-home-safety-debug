@@ -27,6 +27,13 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import EngineeringIcon from "@mui/icons-material/Engineering";
+import GroupIcon from "@mui/icons-material/Group";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SupportIcon from "@mui/icons-material/Support";
 
 export const OTHER_PAGES = [
   {
@@ -1039,7 +1046,6 @@ export const PARKING_OPTIONS = [
   },
 ];
 
-export const FIXED_HEIGHT: number = 285;
 export const BUSINESS_NAME: string = "London Home Safety Limited";
 export const ADDRESS: string = "43 Felton Road, Barking, London IG11 7YA";
 export const PHONE_NO: string = "020 8146 6698";
@@ -1359,5 +1365,43 @@ export const COMMERCIAL_SERVICES = [
     ],
     quantity: 1,
     unit: "something",
+  },
+];
+
+export const ADMIN_OPTIONS = [
+  {
+    route: "/admin",
+    label: "Dashboard",
+    Icon: DashboardIcon,
+  },
+  {
+    route: "/admin/orders",
+    label: "Orders",
+    Icon: ShoppingCartIcon,
+  },
+  {
+    route: "/admin/customers",
+    label: "Customers",
+    Icon: GroupIcon,
+  },
+  {
+    route: "/admin/engineers",
+    label: "Engineers",
+    Icon: EngineeringIcon,
+  },
+  {
+    route: "/admin/notifications",
+    label: "Notifications",
+    Icon: NotificationsIcon,
+  },
+  {
+    route: "/admin/support",
+    label: "Support",
+    Icon: SupportIcon,
+  },
+  {
+    route: "/admin/settings",
+    label: "Settings",
+    Icon: SettingsIcon,
   },
 ];

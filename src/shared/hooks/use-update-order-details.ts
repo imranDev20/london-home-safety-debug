@@ -1,5 +1,5 @@
 import { updateOrder } from "@/services/orders.services";
-import { OrderType } from "@/types/orders";
+import { OrderType, OrderTypeForResponse } from "@/types/orders";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserType } from "@/types/users";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
@@ -9,7 +9,7 @@ export default function useUpdateOrderDetails() {
   const { enqueueSnackbar } = useSnackbar();
 
   const { mutateAsync: updateOrderMutate, ...rest } = useMutation({
-    mutationFn: (orderData: OrderType) => updateOrder(orderData),
+    mutationFn: (orderData: OrderTypeForResponse) => updateOrder(orderData),
 
     onSuccess: (response) => {
       queryClient.invalidateQueries({

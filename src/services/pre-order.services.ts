@@ -12,8 +12,8 @@ export const createPreOrder = async <
   T extends UserType | undefined = undefined
 >(
   preOrder: T extends UserType
-    ? Partial<PreOrderType<false, UserType>>
-    : Partial<PreOrderType<false>>
+    ? Partial<PreOrderType<UserType>>
+    : Partial<PreOrderType>
 ): Promise<PreOrderResponse> => {
   const response: PreOrderResponse = await http.post(`/pre-order`, preOrder);
   return response;

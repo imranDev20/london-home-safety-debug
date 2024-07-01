@@ -1,5 +1,9 @@
 import mongoose, { Schema } from "mongoose";
-import { IOrderItemWithEngineers, OrderType } from "@/types/orders";
+import {
+  OrderItemWithEngineerType,
+  OrderType,
+  OrderTypeForResponse,
+} from "@/types/orders"; // Changed the type name here
 import { ORDER_STATUS } from "@/shared/constants";
 import { OrderStatus } from "@/types/orders";
 import { UserType } from "@/types/users";
@@ -17,7 +21,8 @@ const orderStatusSchema = new Schema<OrderStatus>({
   },
 });
 
-const orderItemWithEngineersSchema = new Schema<IOrderItemWithEngineers>({
+const orderItemWithEngineerSchema = new Schema<OrderItemWithEngineerType>({
+  // Changed the schema name here
   name: {
     type: String,
     required: true,
@@ -31,23 +36,21 @@ const orderItemWithEngineersSchema = new Schema<IOrderItemWithEngineers>({
     required: true,
   },
   quantity: {
-    type: Number, // Change from Schema.Types.Mixed to Number
+    type: Number,
     required: true,
   },
   unit: {
     type: String,
     required: true,
   },
-  assigned_engineers: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-  ],
+  assigned_engineer: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
-const orderSchema = new Schema<OrderType<true, UserType>>(
+const orderSchema = new Schema<OrderType<UserType>>(
   {
     property_type: {
       type: String,
@@ -56,24 +59,22 @@ const orderSchema = new Schema<OrderType<true, UserType>>(
     },
     resident_type: {
       type: String,
-      enum: ["house", "flat", "hmo"], // Fix the typo "enun" to "enum"
+      enum: ["house", "flat", "hmo"],
       required: function () {
         return this.property_type === "residential";
       },
     },
     bedrooms: {
-      type: Number, // Change from String to Number
+      type: Number,
       required: function () {
         return this.property_type === "residential";
       },
     },
     order_items: {
-      type: [orderItemWithEngineersSchema],
+      type: [orderItemWithEngineerSchema],
       required: true,
     },
-
     customer: { type: Schema.Types.ObjectId, ref: "User", required: true },
-
     parking_options: {
       parking_type: {
         type: String,
@@ -143,8 +144,8 @@ orderSchema.pre("save", function (next) {
   next();
 });
 
-const Order: mongoose.Model<OrderType<true, UserType>> =
+const Order: mongoose.Model<OrderTypeForResponse<UserType>> =
   mongoose.models.Order ||
-  mongoose.model<OrderType<true, UserType>>("Order", orderSchema);
+  mongoose.model<OrderType<UserType>>("Order", orderSchema);
 
 export default Order;
