@@ -14,7 +14,6 @@ import {
   DeleteForever,
   Download,
   Email,
-  MoreVert,
   MoreVertRounded,
   West,
 } from "@mui/icons-material";
@@ -31,7 +30,6 @@ import {
   MenuItem,
   Option,
   Select,
-  Skeleton,
   Stack,
   Typography,
   useTheme,
@@ -153,17 +151,32 @@ export default function OrderDetailsHeader({
             xs: "flex-start",
             md: "center",
           }}
+          sx={{
+            width: {
+              xs: "100%",
+              md: "unset",
+            },
+          }}
         >
-          <FormControl size="sm">
+          <FormControl
+            size="sm"
+            sx={{
+              width: "100%",
+            }}
+          >
             <Select
               placeholder="Change order status"
               slotProps={{
                 button: {
+                  fullWidth: true,
                   id: "select-field-demo-button",
                   sx: {
                     textTransform: "capitalize",
                     fontWeight: 600,
                     color: theme.palette.neutral[700],
+                    display: "flex",
+                    justifyContent: "center",
+                    textAlign: "center",
                   },
                 },
               }}
@@ -195,6 +208,7 @@ export default function OrderDetailsHeader({
 
           <Button
             size="sm"
+            fullWidth
             startDecorator={<Download />}
             color="neutral"
             variant="outlined"

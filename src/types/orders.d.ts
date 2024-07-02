@@ -105,7 +105,7 @@ export type OrderType<T extends UserType | undefined = undefined> = {
   order_notes?: string;
   payment_method: PaymentMethod;
   order_status: OrderStatus[];
-  assigned_engineer: Types.ObjectId;
+  assigned_engineer: Types.ObjectId | null;
   remaining_amount: number;
   paid_amount: number;
   invoice_id: string;

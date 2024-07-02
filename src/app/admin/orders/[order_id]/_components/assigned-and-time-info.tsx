@@ -1,23 +1,16 @@
 "use client";
 import { Box, Grid, Typography } from "@mui/joy";
 import ScheduleInfo from "./schedule-info";
-import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 import ItemsAssigneeSelect from "./items-assignee-select";
 import SendEmailEngineer from "./send-email-engineer";
-import { UserType } from "@/types/users";
 import { OrderTypeForResponse } from "@/types/orders";
+import { UserType } from "@/types/users";
 
 export default function AssignedAndTimeInfo({
   orderDetails,
 }: {
   orderDetails: OrderTypeForResponse<UserType>;
 }) {
-  const { enqueueSnackbar } = useSnackbar();
-
-  if (!orderDetails) {
-    return "no order data found";
-  }
-
   return (
     <>
       <Grid container spacing={3} mt={3}>
@@ -37,11 +30,11 @@ export default function AssignedAndTimeInfo({
             </Typography>
 
             <Grid container spacing={2}>
-              <Grid xs={12} md={4}>
+              <Grid xs={12} md={6} lg={6}>
                 <ItemsAssigneeSelect orderDetails={orderDetails} />
               </Grid>
 
-              <Grid xs={12} md={2}>
+              <Grid xs={12} md={5} lg={3}>
                 <SendEmailEngineer />
               </Grid>
             </Grid>

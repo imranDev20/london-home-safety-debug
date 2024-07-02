@@ -1,27 +1,38 @@
 "use client";
-import CustomerDetails from "./customer-details";
-import OrderItems from "./order-items";
-import OrderNotes from "./order-notes";
-import OrderActivity from "./order-activity";
-import PropertyDetails from "./property-details";
-import { Box, CircularProgress, Grid } from "@mui/joy";
 import useOrderDetails from "@/shared/hooks/use-order-details";
+import { Box, CircularProgress, Grid } from "@mui/joy";
+import React from "react";
 import OrderDetailsHeader from "./order-details-header";
 import AssignedAndTimeInfo from "./assigned-and-time-info";
+import OrderItems from "./order-items";
 import PriceDetails from "./price-details";
+import OrderNotes from "./order-notes";
+import CustomerDetails from "./customer-details";
+import OrderActivity from "./order-activity";
+import PropertyDetails from "./property-details";
 
 export default function OrderDetails() {
   const {
     orderDetails,
     isPending: isOrderDetailsPending,
     isFetching: isOrderDetailsFetching,
+    isError,
+    isFetchedAfterMount,
+    error,
   } = useOrderDetails();
 
-  if (isOrderDetailsPending || isOrderDetailsFetching) {
+  if (
+    (isOrderDetailsFetching && !isFetchedAfterMount) ||
+    isOrderDetailsPending
+  ) {
     return (
       <Box
         sx={{
-          height: "100vh",
+          width: "100%",
+          borderRadius: "sm",
+          flexShrink: 1,
+          overflow: "auto",
+          height: "90vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -37,8 +48,12 @@ export default function OrderDetails() {
     );
   }
 
+  if (isError) {
+    return <Box>{error.message}</Box>;
+  }
+
   if (!orderDetails) {
-    return "order details not available";
+    return <Box>No order details found</Box>;
   }
 
   return (
@@ -63,7 +78,7 @@ export default function OrderDetails() {
       >
         <Grid md={9}>
           <OrderItems orderDetails={orderDetails} />
-          <PriceDetails />
+          <PriceDetails orderDetails={orderDetails} />
         </Grid>
         <Grid md={3}>
           <OrderNotes orderDetails={orderDetails} />

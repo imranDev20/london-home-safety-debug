@@ -110,8 +110,9 @@ const orderSchema = new Schema<OrderType>(
     assigned_engineer: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      default: null,
     },
+
     remaining_amount: {
       type: Number,
       required: true,
