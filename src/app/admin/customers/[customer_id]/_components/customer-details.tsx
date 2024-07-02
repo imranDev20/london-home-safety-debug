@@ -88,7 +88,6 @@ export default function CustomerDetails() {
       >
         <Grid xs={12} lg={4}>
           <CustomerInfo userDetails={userDetails} />
-          {/* <RecentActivities /> */}
         </Grid>
         <Grid xs={12} lg={8}>
           <CustomerOrders />
