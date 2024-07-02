@@ -1,23 +1,27 @@
 import { UnfoldMore } from "@mui/icons-material";
 import { CircularProgress, FormControl, Option, Select } from "@mui/joy";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useEngineersData } from "@/shared/hooks/use-engineers";
-import { OrderType, OrderTypeForResponse } from "@/types/orders";
-import { UserType } from "@/types/users";
+import { OrderTypeForResponse } from "@/types/orders";
+import { EngineerType, UserType } from "@/types/users";
 import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
-import { Types } from "mongoose";
+
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 
 export default function ItemsAssigneeSelect({
   orderDetails,
+  selectedEngineer,
+  setSelectedEngineer,
 }: {
   orderDetails: OrderTypeForResponse<UserType>;
+  selectedEngineer: EngineerType<true> | null;
+  setSelectedEngineer: Dispatch<SetStateAction<EngineerType<true> | null>>;
 }) {
   const [listBoxOpen, setListBoxOpen] = useState<boolean>(false);
-  const [selectedEngineer, setSelectedEngineer] = useState("");
 
   const { updateOrderMutate, isPending: isUpdateOrderPending } =
     useUpdateOrderDetails();
+
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -29,11 +33,20 @@ export default function ItemsAssigneeSelect({
 
   useEffect(() => {
     if (orderDetails && orderDetails.assigned_engineer) {
-      setSelectedEngineer(orderDetails.assigned_engineer.toString());
-    }
-  }, [orderDetails]);
+      const selected = engineersData?.find(
+        (item) => item._id === orderDetails.assigned_engineer
+      );
 
-  const handleSelectEngineer = (value: string) => {
+      if (!selected) {
+        console.log("Selected engineer not found in DB");
+        return;
+      }
+
+      setSelectedEngineer(selected);
+    }
+  }, [orderDetails, setSelectedEngineer, engineersData]);
+
+  const handleSelectEngineer = (value: EngineerType<true>) => {
     setSelectedEngineer(value);
 
     if (!orderDetails?.customer?._id) {
@@ -44,7 +57,7 @@ export default function ItemsAssigneeSelect({
     const payload: OrderTypeForResponse = {
       ...orderDetails,
       customer: orderDetails.customer._id,
-      assigned_engineer: new Types.ObjectId(value),
+      assigned_engineer: value._id,
     };
 
     updateOrderMutate(payload);
@@ -77,7 +90,11 @@ export default function ItemsAssigneeSelect({
           )
         }
         value={selectedEngineer}
-        onChange={(_, value) => value && handleSelectEngineer(value)}
+        onChange={(_, value) => {
+          if (value) {
+            handleSelectEngineer(value);
+          }
+        }}
         placeholder="Filter by assignee"
         slotProps={{
           button: {
@@ -86,7 +103,7 @@ export default function ItemsAssigneeSelect({
         }}
       >
         {engineersData?.map((engineer) => (
-          <Option value={engineer._id} key={engineer._id.toString()}>
+          <Option value={engineer} key={engineer._id.toString()}>
             {engineer.name}
           </Option>
         ))}

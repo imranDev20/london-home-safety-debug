@@ -1,16 +1,38 @@
 "use client";
-import { Box, Grid, Typography } from "@mui/joy";
+
+import Box from "@mui/joy/Box";
+import Grid from "@mui/joy/Grid";
+import Typography from "@mui/joy/Typography";
+import Button from "@mui/joy/Button";
+
+import MailIcon from "@mui/icons-material/Mail";
+
 import ScheduleInfo from "./schedule-info";
 import ItemsAssigneeSelect from "./items-assignee-select";
-import SendEmailEngineer from "./send-email-engineer";
 import { OrderTypeForResponse } from "@/types/orders";
-import { UserType } from "@/types/users";
+import { EngineerType, UserType } from "@/types/users";
+import { useState } from "react";
+import WriteEmail from "./write-email";
 
 export default function AssignedAndTimeInfo({
   orderDetails,
 }: {
   orderDetails: OrderTypeForResponse<UserType>;
 }) {
+  const [openEmailSendDialog, setOpenEmailSendDialog] =
+    useState<boolean>(false);
+
+  const [selectedEngineer, setSelectedEngineer] =
+    useState<EngineerType<true> | null>(null);
+
+  const handleSendEmailDialog = async () => {
+    setOpenEmailSendDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenEmailSendDialog(false);
+  };
+
   return (
     <>
       <Grid container spacing={3} mt={3}>
@@ -31,11 +53,25 @@ export default function AssignedAndTimeInfo({
 
             <Grid container spacing={2}>
               <Grid xs={12} md={6} lg={6}>
-                <ItemsAssigneeSelect orderDetails={orderDetails} />
+                <ItemsAssigneeSelect
+                  selectedEngineer={selectedEngineer}
+                  orderDetails={orderDetails}
+                  setSelectedEngineer={setSelectedEngineer}
+                />
               </Grid>
 
               <Grid xs={12} md={5} lg={3}>
-                <SendEmailEngineer />
+                <Button
+                  variant="outlined"
+                  size="sm"
+                  color="neutral"
+                  startDecorator={<MailIcon />}
+                  fullWidth
+                  disabled={!selectedEngineer}
+                  onClick={handleSendEmailDialog}
+                >
+                  Send Email
+                </Button>
               </Grid>
             </Grid>
           </Box>
@@ -44,6 +80,13 @@ export default function AssignedAndTimeInfo({
           <ScheduleInfo orderDetails={orderDetails} />
         </Grid>
       </Grid>
+
+      <WriteEmail
+        open={openEmailSendDialog}
+        onClose={handleClose}
+        selectedEngineer={selectedEngineer}
+        orderDetails={orderDetails}
+      />
     </>
   );
 }

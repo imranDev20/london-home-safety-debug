@@ -1,7 +1,9 @@
 "use client";
-import useOrderDetails from "@/shared/hooks/use-order-details";
-import { Box, CircularProgress, Grid } from "@mui/joy";
-import React from "react";
+
+import Box from "@mui/joy/Box";
+import CircularProgress from "@mui/joy/CircularProgress";
+import Grid from "@mui/joy/Grid";
+
 import OrderDetailsHeader from "./order-details-header";
 import AssignedAndTimeInfo from "./assigned-and-time-info";
 import OrderItems from "./order-items";
@@ -10,6 +12,7 @@ import OrderNotes from "./order-notes";
 import CustomerDetails from "./customer-details";
 import OrderActivity from "./order-activity";
 import PropertyDetails from "./property-details";
+import useOrderDetails from "@/shared/hooks/use-order-details";
 
 export default function OrderDetails() {
   const {

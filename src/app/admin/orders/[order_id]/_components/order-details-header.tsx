@@ -168,7 +168,6 @@ export default function OrderDetailsHeader({
               placeholder="Change order status"
               slotProps={{
                 button: {
-                  fullWidth: true,
                   id: "select-field-demo-button",
                   sx: {
                     textTransform: "capitalize",
