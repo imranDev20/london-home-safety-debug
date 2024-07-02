@@ -5,6 +5,7 @@ import { TEXT_COLOR } from "@/shared/constants";
 import OrderTableOptions from "./_components/order-table-options";
 import OrderListHeader from "./_components/order-list-header";
 import { Suspense } from "react";
+import OrderTable from "./_components/order-table";
 
 export default function AdminOrdersPage() {
   return (
@@ -48,6 +49,7 @@ export default function AdminOrdersPage() {
 
       <Suspense>
         <OrderTableOptions />
+        <OrderTable />
       </Suspense>
     </>
   );

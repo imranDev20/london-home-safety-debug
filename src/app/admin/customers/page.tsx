@@ -3,8 +3,10 @@ import { Home, KeyboardArrowRight } from "@mui/icons-material";
 import JoyLink from "@mui/joy/Link";
 import Breadcrumbs from "@mui/joy/Breadcrumbs";
 import Link from "next/link";
-import { PRIMARY_COLOUR, TEXT_COLOR } from "@/shared/constants";
+import { TEXT_COLOR } from "@/shared/constants";
 import CustomerListHeader from "./_components/customer-list-header";
+import CustomerTableOptions from "./_components/customer-table-options";
+import CustomersTable from "./_components/customers-table";
 
 export default function AdminCustomersPage() {
   return (
@@ -47,6 +49,8 @@ export default function AdminCustomersPage() {
       </Breadcrumbs>
 
       <CustomerListHeader />
+      <CustomerTableOptions />
+      <CustomersTable />
     </>
   );
 }

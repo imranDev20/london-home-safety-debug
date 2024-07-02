@@ -1,12 +1,5 @@
 "use client";
-import {
-  FormControl,
-  FormLabel,
-  Grid,
-  Link as JoyLink,
-  Option,
-  Select,
-} from "@mui/joy";
+import { FormControl, FormLabel, Grid, Option, Select } from "@mui/joy";
 import { ORDER_STATUS } from "@/shared/constants";
 import { snakeCaseToNormalText, toSnakeCase } from "@/shared/functions";
 
@@ -15,7 +8,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useQueryString } from "@/shared/hooks/use-query-string";
 import DebounceInput from "@/app/_components/common/debounce-input";
 import Assignee from "./assignee";
-import OrderTable from "./order-table";
 
 export default function OrderTableOptions() {
   const searchParams = useSearchParams();
@@ -177,8 +169,6 @@ export default function OrderTableOptions() {
           </FormControl>
         </Grid>
       </Grid>
-
-      <OrderTable />
     </>
   );
 }

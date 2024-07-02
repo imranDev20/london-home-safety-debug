@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+"use client";
+import React, { useEffect } from "react";
 
 import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
