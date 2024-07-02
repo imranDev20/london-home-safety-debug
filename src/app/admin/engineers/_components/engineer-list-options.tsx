@@ -6,16 +6,12 @@ import Grid from "@mui/joy/Grid";
 import Option from "@mui/joy/Option";
 import Select from "@mui/joy/Select";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
 
 import DebounceInput from "@/app/_components/common/debounce-input";
 import { toSnakeCase } from "@/shared/functions";
 import { useQueryString } from "@/shared/hooks/use-query-string";
 
 export default function EngineerListOptions() {
-  const [openCreateEngineerDrawer, setOpenCreateEngineerDrawer] =
-    useState<boolean>(false);
-
   const { createQueryString, removeQueryString } = useQueryString();
   const router = useRouter();
   const pathname = usePathname();

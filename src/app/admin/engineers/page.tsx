@@ -9,6 +9,7 @@ import Link from "next/link";
 import EngineerListHeader from "./_components/engineer-list-header";
 import EngineerListOptions from "./_components/engineer-list-options";
 import EngineerCards from "./_components/engineer-cards";
+import { Suspense } from "react";
 
 export default function AdminEngineersPage() {
   return (
@@ -48,10 +49,11 @@ export default function AdminEngineersPage() {
         </Typography>
       </Breadcrumbs>
 
-      <EngineerListHeader />
-      <EngineerListOptions />
-
-      <EngineerCards />
+      <Suspense>
+        <EngineerListHeader />
+        <EngineerListOptions />
+        <EngineerCards />
+      </Suspense>
     </>
   );
 }

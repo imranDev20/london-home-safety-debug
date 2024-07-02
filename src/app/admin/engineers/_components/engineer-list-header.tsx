@@ -13,10 +13,6 @@ import Typography from "@mui/joy/Typography";
 export default function EngineerListHeader() {
   const [openCreateEngineerDrawer, setOpenCreateEngineerDrawer] =
     useState<boolean>(false);
-  const { createQueryString, removeQueryString } = useQueryString();
-
-  const router = useRouter();
-  const pathname = usePathname();
 
   return (
     <Stack
