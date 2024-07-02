@@ -80,6 +80,7 @@ export async function POST(req: NextRequest) {
       customer: preOrder.personal_info.customer._id,
       ...preOrder.payment_info,
       remaining_amount: totalCost,
+      assigned_engineer: null,
       paid_amount: 0,
       invoice_id: invoiceId,
     });

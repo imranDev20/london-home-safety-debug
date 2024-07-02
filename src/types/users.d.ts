@@ -48,4 +48,8 @@ export type CustomerType = Omit<
   orders_placed: OrderType[];
 };
 
+export type CustomerForResponseType = CustomerType & {
+  _id: Types.ObjectId;
+};
+
 type UserBasicInfoType = Pick<UserType, "_id" | "name" | "email" | "role">;

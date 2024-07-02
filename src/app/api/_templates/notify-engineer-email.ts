@@ -1,17 +1,11 @@
 import { ADDRESS, BUSINESS_NAME, WEBSITE_URL } from "@/shared/data";
-import {
-  OrderType,
-  OrderItemWithEngineerType,
-  OrderTypeForResponse,
-} from "@/types/orders";
+import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
-
-export const customerEmailSubject = "Your request to contact us was successful";
+import dayjs from "dayjs";
 
 export const notifyEngineerEmailHtml = (
   orderDetails: OrderTypeForResponse<UserType>,
-  content: string,
-  orderItemsForEngineer: OrderItemWithEngineerType[]
+  content: string
 ) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -78,6 +72,19 @@ export const notifyEngineerEmailHtml = (
     .footer a:hover {
       text-decoration: underline;
     }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      padding: 5px 0;
+    }
+    @media (max-width: 600px) {
+      .container {
+        width: 100%;
+        margin: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -93,16 +100,23 @@ export const notifyEngineerEmailHtml = (
       <div class="message-box">
         <p style="font-weight: bold;">Customer Details:</p>
         <p style="margin-left: 20px;">
-          Address: ${orderDetails.customer.address?.street}, ${
+          <strong>Address:</strong> ${orderDetails.customer.address?.street}, ${
   orderDetails.customer.address?.postcode
 }, ${orderDetails.customer.address?.city}<br>
-          Phone: ${orderDetails.customer.phone}<br>
-          Email: ${orderDetails.customer.email}
+          <strong>Phone:</strong> ${orderDetails.customer.phone}<br>
+          <strong>Email:</strong> ${orderDetails.customer.email}<br>
+          <strong>Scheduled:</strong> ${orderDetails.inspection_time}, ${dayjs(
+  orderDetails.inspection_date
+).format("DD MMMM YYYY")}
         </p>
         <p style="font-weight: bold;">Desired Services:</p>
-        <p style="margin-left: 20px;">${orderItemsForEngineer
-          .map((item) => item.title)
-          .join(", ")}</p>
+        <ul style="margin-left: 20px;">
+          ${orderDetails.order_items
+            .map(
+              (item) => `<li>${item.name} - ${item.quantity} ${item.unit}</li>`
+            )
+            .join("")}
+        </ul>
         <p style="font-weight: bold;">Message from Kamal:</p>
         <p style="margin-left: 20px;">${content}</p>
       </div>
@@ -121,5 +135,4 @@ export const notifyEngineerEmailHtml = (
   </div>
 </body>
 </html>
-
 `;

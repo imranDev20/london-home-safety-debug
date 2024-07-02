@@ -5,38 +5,43 @@ import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import Sheet from "@mui/joy/Sheet";
-import { IconButton, Input, Stack, Typography } from "@mui/joy";
-import FormatColorTextRoundedIcon from "@mui/icons-material/FormatColorTextRounded";
-import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
-import InsertPhotoRoundedIcon from "@mui/icons-material/InsertPhotoRounded";
-import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBulletedRounded";
+import Typography from "@mui/joy/Typography";
+import Stack from "@mui/joy/Stack";
+import Input from "@mui/joy/Input";
+
 import { EMAIL_ADDRESS } from "@/shared/data";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { sendEmailToEngineer } from "@/services/send-email.services";
 import { AxiosError } from "axios";
 import { ErrorResponse } from "@/types/response";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
-import useOrderDetails from "@/shared/hooks/use-order-details";
-
-interface ServiceEmailContent {
-  subject: string | "";
-  body: string | "";
-}
+import { EngineerType, UserType } from "@/types/users";
+import { OrderTypeForResponse } from "@/types/orders";
+import { SendEmailToEngineerData } from "@/types/misc";
 
 interface WriteEmailProps {
   open?: boolean;
   onClose?: () => void;
+  selectedEngineer: EngineerType<true> | null;
+  orderDetails: OrderTypeForResponse<UserType>;
 }
 
 const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
-  function WriteEmail({ open, onClose }, ref) {
+  function WriteEmail({ open, onClose, selectedEngineer, orderDetails }, ref) {
     const [receiver, setReceiver] = useState<string>("");
     const [emailContent, setEmailContent] = useState<string>("");
     const [emailSubject, setEmailSubject] = useState<string>("");
     const { enqueueSnackbar } = useSnackbar();
 
-    const { orderDetails } = useOrderDetails();
+    useEffect(() => {
+      if (selectedEngineer && orderDetails) {
+        setReceiver(selectedEngineer.email);
+        setEmailSubject(
+          `New Job Alert: Service Order ${orderDetails.invoice_id}`
+        );
+      }
+    }, [selectedEngineer, open, orderDetails]);
 
     const { isPending: isSendEmailPending, mutateAsync: sendEmailMutate } =
       useMutation({
@@ -56,14 +61,21 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
       });
 
     const handleSendEmailToEngineer = async () => {
-      const payload = {
-        receiver_email: receiver,
+      if (!selectedEngineer) {
+        console.log("You haven't selected any engineer");
+        return;
+      }
+
+      const payload: SendEmailToEngineerData = {
+        engineer: selectedEngineer,
         content: emailContent,
         subject: emailSubject,
-        orderDetails,
+        orderDetails: orderDetails,
+        receiver,
       };
 
       await sendEmailMutate(payload);
+      setEmailContent("");
     };
 
     return (
@@ -74,7 +86,7 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
           px: 1.5,
           py: 1.5,
           ml: "auto",
-          width: { xs: "100dvw", md: 600 },
+          width: { xs: "calc(100dvw - 48px)", md: 600 },
           flexGrow: 1,
           border: "1px solid",
           borderRadius: "8px 8px 0 0",
@@ -137,7 +149,7 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
               endDecorator={
                 <Stack
                   direction="row"
-                  justifyContent="space-between"
+                  justifyContent="flex-end"
                   alignItems="center"
                   flexGrow={1}
                   sx={{
@@ -147,20 +159,6 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
                     borderColor: "divider",
                   }}
                 >
-                  <div>
-                    <IconButton size="sm" variant="plain" color="neutral">
-                      <FormatColorTextRoundedIcon />
-                    </IconButton>
-                    <IconButton size="sm" variant="plain" color="neutral">
-                      <AttachFileRoundedIcon />
-                    </IconButton>
-                    <IconButton size="sm" variant="plain" color="neutral">
-                      <InsertPhotoRoundedIcon />
-                    </IconButton>
-                    <IconButton size="sm" variant="plain" color="neutral">
-                      <FormatListBulletedRoundedIcon />
-                    </IconButton>
-                  </div>
                   <Button
                     color="primary"
                     sx={{ borderRadius: "sm" }}
@@ -185,8 +183,3 @@ const WriteEmail = forwardRef<HTMLDivElement, WriteEmailProps>(
 );
 
 export default WriteEmail;
-
-interface ServiceEmailContent {
-  subject: string;
-  body: string;
-}

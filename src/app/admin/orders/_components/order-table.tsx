@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+"use client";
+import React, { useEffect } from "react";
 
 import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
@@ -111,7 +112,6 @@ const columns = [
 ];
 
 export default function OrderTable() {
-  const isInitialMount = useRef(true);
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -122,7 +122,6 @@ export default function OrderTable() {
   const sortBy = searchParams.get("sort_by") || "";
   const sortOrder = searchParams.get("sort_order") || "";
   const page = searchParams.get("page") || "";
-  const filterCond = searchParams.get("filter");
 
   const {
     ordersData,
@@ -139,12 +138,10 @@ export default function OrderTable() {
   });
 
   useEffect(() => {
-    if (filterCond) {
-      const loadOrders = async () => {
-        await refetchGetOrders();
-      };
-      loadOrders();
-    }
+    const loadOrders = async () => {
+      await refetchGetOrders();
+    };
+    loadOrders();
   }, [
     searchTerm,
     orderStatus,
@@ -153,7 +150,6 @@ export default function OrderTable() {
     sortOrder,
     assignedTo,
     page,
-    filterCond,
   ]);
 
   const handleRowClick = (order: OrderTypeForResponse<UserType>) => {
@@ -201,6 +197,10 @@ export default function OrderTable() {
           overflow: "auto",
           minHeight: `calc(100vh - ${FIXED_HEIGHT}px)`,
           height: `calc(100vh - ${FIXED_HEIGHT}px)`,
+          display: {
+            xs: "none",
+            md: "block",
+          },
         }}
       >
         <DataTable

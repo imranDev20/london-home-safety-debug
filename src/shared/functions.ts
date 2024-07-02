@@ -2,13 +2,11 @@ import slugify from "slugify";
 import dayjs from "dayjs";
 import { Pagination } from "@/types/misc";
 import {
-  OrderType,
-  OrderItemWithEngineerType,
-  PreOrderType,
   OrderStatus,
   OrderStatusValues,
   PreOrderTypeForResponse,
   OrderTypeForResponse,
+  OrderItemType,
 } from "@/types/orders";
 import { UserType } from "@/types/users";
 
@@ -188,7 +186,7 @@ export function calculateOrderTotalCost(
 ): number {
   // Calculate the total cost of order items
   const orderItemsCost = order.order_items.reduce(
-    (total, item: OrderItemWithEngineerType) => {
+    (total, item: OrderItemType) => {
       return total + item.price * item.quantity;
     },
     0

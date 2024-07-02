@@ -3,32 +3,21 @@ import { formatResponse } from "@/shared/functions";
 import dbConnect from "../../_lib/dbConnect";
 import { sendEmail } from "../../_lib/send-email";
 import { notifyEngineerEmailHtml } from "../../_templates/notify-engineer-email";
+import { SendEmailToEngineerData } from "@/types/misc";
 
 export async function POST(req: NextRequest) {
   try {
     await dbConnect();
 
-    const data = await req.json();
-
-    const {
-      receiver_email,
-      subject,
-      assignment,
-      orderDetails,
-      content,
-      orderItemsForEngineer,
-    } = data;
+    const { subject, content, orderDetails, receiver } =
+      (await req.json()) as SendEmailToEngineerData;
 
     await sendEmail({
       fromEmail: "info@londonhomesafety.co.uk",
       fromName: "London Home Safety",
-      to: receiver_email,
+      to: receiver,
       subject: subject,
-      html: notifyEngineerEmailHtml(
-        orderDetails,
-        content,
-        orderItemsForEngineer
-      ),
+      html: notifyEngineerEmailHtml(orderDetails, content),
     });
 
     return NextResponse.json(

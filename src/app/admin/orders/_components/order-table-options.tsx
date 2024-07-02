@@ -1,12 +1,5 @@
 "use client";
-import {
-  FormControl,
-  FormLabel,
-  Grid,
-  Link as JoyLink,
-  Option,
-  Select,
-} from "@mui/joy";
+import { FormControl, FormLabel, Grid, Option, Select } from "@mui/joy";
 import { ORDER_STATUS } from "@/shared/constants";
 import { snakeCaseToNormalText, toSnakeCase } from "@/shared/functions";
 
@@ -15,26 +8,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useQueryString } from "@/shared/hooks/use-query-string";
 import DebounceInput from "@/app/_components/common/debounce-input";
 import Assignee from "./assignee";
-import OrderTable from "./order-table";
 
 export default function OrderTableOptions() {
   const searchParams = useSearchParams();
   const orderStatus = searchParams.get("order_status") || "";
-  const filterCond = searchParams.get("filter");
 
   const { createQueryString, removeQueryString } = useQueryString();
   const router = useRouter();
   const pathname = usePathname();
 
   const handleDebounce = (value: string): void => {
-    if (value !== "" && !filterCond) {
-      router.push(
-        `${pathname}?${createQueryString("q", value)}&${createQueryString(
-          "filter",
-          "applied"
-        )}`
-      );
-    } else if (value !== "") {
+    if (value !== "") {
       router.push(`${pathname}?${createQueryString("q", value)}`);
     } else {
       router.push(`${pathname}?${removeQueryString("q")}`);
@@ -79,15 +63,15 @@ export default function OrderTableOptions() {
                 },
               }}
               value={orderStatus || ""}
-              onChange={(_, value) =>
+              onChange={(_, value) => {
                 router.push(
                   `${pathname}?${createQueryString(
                     "order_status",
                     value as string
                   )}`,
                   { scroll: false }
-                )
-              }
+                );
+              }}
             >
               <Option
                 value=""
@@ -185,8 +169,6 @@ export default function OrderTableOptions() {
           </FormControl>
         </Grid>
       </Grid>
-
-      <OrderTable />
     </>
   );
 }

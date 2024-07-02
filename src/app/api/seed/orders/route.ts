@@ -150,14 +150,14 @@ export async function POST(req: NextRequest) {
             timestamp: new Date(),
           },
         ],
+        assigned_engineer: faker.helpers.arrayElement(
+          engineers.map((engineer) => engineer._id)
+        ),
         remaining_amount: faker.datatype.number({ min: 100, max: 1000 }),
         paid_amount: faker.datatype.number({ min: 10, max: 500 }),
         invoice_id: await generateInvoiceId(), // Generate the invoice ID
         order_items: preOrder.service_info.order_items.map((item) => ({
           ...item,
-          assigned_engineer: faker.helpers.arrayElement(
-            engineers.map((engineer) => engineer._id)
-          ),
         })),
       };
 

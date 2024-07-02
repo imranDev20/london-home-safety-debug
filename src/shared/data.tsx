@@ -1394,11 +1394,11 @@ export const ADMIN_OPTIONS = [
     label: "Notifications",
     Icon: NotificationsIcon,
   },
-  {
-    route: "/admin/support",
-    label: "Support",
-    Icon: SupportIcon,
-  },
+  // {
+  //   route: "/admin/support",
+  //   label: "Support",
+  //   Icon: SupportIcon,
+  // },
   {
     route: "/admin/settings",
     label: "Settings",

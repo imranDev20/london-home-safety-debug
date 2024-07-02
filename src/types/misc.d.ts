@@ -1,7 +1,8 @@
 import SvgIcon from "@mui/joy/SvgIcon";
 import { StaticImageData } from "next/image";
 import { Dispatch, SetStateAction } from "react";
-import { BedroomsType } from "./orders";
+import { BedroomsType, OrderTypeForResponse } from "./orders";
+import { EngineerType, UserType } from "./users";
 
 // These are confirmed to be in use
 export type Pagination = {
@@ -56,4 +57,12 @@ export type NavItem = {
 
 export type NavLeafItem = Omit<NavItem, "children"> & {
   categoryPath?: string;
+};
+
+export type SendEmailToEngineerData = {
+  engineer: EngineerType<true>;
+  subject: string;
+  content: string;
+  receiver: string;
+  orderDetails: OrderTypeForResponse<UserType>;
 };

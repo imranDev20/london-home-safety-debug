@@ -1,8 +1,6 @@
 "use client";
 import CongestionChargeIcon from "@/app/_components/icons/congestion-charge-icon";
 import { CONGESTION_ZONE_OPTIONS, PARKING_OPTIONS } from "@/shared/data";
-import useOrderDetails from "@/shared/hooks/use-order-details";
-import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
 import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
 import {

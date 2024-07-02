@@ -1,17 +1,15 @@
 import { Pagination } from "./misc";
 import {
   OrderType,
-  PreOrderType,
-  InvoiceData,
   PreOrderTypeForResponse,
   OrderTypeForResponse,
 } from "./orders";
 import { ITestimonial } from "./testimonial";
 import {
-  CustomerType,
   EngineerType,
   UserType,
   UserBasicInfoType,
+  CustomerForResponseType,
 } from "./users";
 
 export type SuccessResponseWithArray<T> = {
@@ -36,7 +34,8 @@ export type GetTestimonialsResponse = SuccessResponseWithArray<ITestimonial>;
 
 export type GetEngineersResponse = SuccessResponseWithArray<EngineerType<true>>;
 export type GetEngineerDetailsResponse = SuccessResponse<EngineerType>;
-export type GetCustomersResponse = SuccessResponseWithArray<CustomerType>;
+export type GetCustomersResponse =
+  SuccessResponseWithArray<CustomerForResponseType>;
 export type AuthUserResponse = SuccessResponse<UserBasicInfoType>;
 
 export type GetOrdersResponse = SuccessResponseWithArray<

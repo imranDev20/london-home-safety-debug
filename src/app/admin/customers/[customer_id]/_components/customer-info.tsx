@@ -1,19 +1,17 @@
 "use client";
-
-import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
 import { MapOutlined, PhoneOutlined } from "@mui/icons-material";
-import { Avatar, Card, CardContent, Stack, Typography } from "@mui/joy";
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  Sheet,
+  Stack,
+  Typography,
+} from "@mui/joy";
 
-export default function CustomerDetails({
-  orderDetails,
-}: {
-  orderDetails: OrderTypeForResponse<UserType>;
-}) {
-  if (!orderDetails) {
-    return "Failed to load data...";
-  }
-
+const CustomerInfo = ({ userDetails }: { userDetails: UserType }) => {
   return (
     <>
       <Typography
@@ -28,15 +26,11 @@ export default function CustomerDetails({
       <Card>
         <CardContent orientation="vertical">
           <Stack direction="row" spacing={2} alignItems="center">
-            <Avatar>{orderDetails?.customer?.name?.charAt(0)}</Avatar>
+            <Avatar>{userDetails?.name?.charAt(0)}</Avatar>
 
             <Stack>
-              <Typography level="title-md">
-                {orderDetails.customer?.name}
-              </Typography>
-              <Typography level="body-sm">
-                {orderDetails.customer?.email}
-              </Typography>
+              <Typography level="title-md">{userDetails?.name}</Typography>
+              <Typography level="body-sm">{userDetails?.email}</Typography>
             </Stack>
           </Stack>
 
@@ -47,9 +41,7 @@ export default function CustomerDetails({
                   fontSize: 20,
                 }}
               />
-              <Typography level="title-sm">
-                {orderDetails.customer?.phone}
-              </Typography>
+              <Typography level="title-sm">{userDetails?.phone}</Typography>
             </Stack>
 
             <Stack direction="row" spacing={1}>
@@ -59,9 +51,8 @@ export default function CustomerDetails({
                 }}
               />
               <Typography level="title-sm">
-                {orderDetails?.customer?.address?.street},{" "}
-                {orderDetails?.customer?.address?.city}{" "}
-                {orderDetails?.customer?.address?.postcode}
+                {userDetails?.address?.street}, {userDetails?.address?.city}{" "}
+                {userDetails?.address?.postcode}
               </Typography>
             </Stack>
           </Stack>
@@ -69,4 +60,6 @@ export default function CustomerDetails({
       </Card>
     </>
   );
-}
+};
+
+export default CustomerInfo;

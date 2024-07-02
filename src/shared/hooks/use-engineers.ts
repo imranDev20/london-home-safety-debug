@@ -10,6 +10,7 @@ export const useEngineersData = (enabled?: boolean) => {
     queryFn: () => getUsers<"engineer">(undefined, "engineer"),
     enabled: enabled ?? true,
     refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   return data;

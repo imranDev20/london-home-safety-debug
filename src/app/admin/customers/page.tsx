@@ -1,13 +1,15 @@
 import { Home, KeyboardArrowRight } from "@mui/icons-material";
-import { Breadcrumbs, Link as JoyLink, Typography } from "@mui/joy";
+
+import JoyLink from "@mui/joy/Link";
+import Breadcrumbs from "@mui/joy/Breadcrumbs";
 import Link from "next/link";
 import { TEXT_COLOR } from "@/shared/constants";
-import OrderTableOptions from "./_components/order-table-options";
-import OrderListHeader from "./_components/order-list-header";
+import CustomerListHeader from "./_components/customer-list-header";
+import CustomerTableOptions from "./_components/customer-table-options";
+import CustomersTable from "./_components/customers-table";
 import { Suspense } from "react";
-import OrderTable from "./_components/order-table";
 
-export default function AdminOrdersPage() {
+export default function AdminCustomersPage() {
   return (
     <>
       <Breadcrumbs
@@ -35,21 +37,22 @@ export default function AdminOrdersPage() {
         >
           <Home />
         </JoyLink>
-        <Typography
+        <JoyLink
+          component={Link}
           color="primary"
+          href="/admin/customers"
           sx={{
-            fontWeight: 500,
+            textDecoration: "none",
           }}
         >
-          Orders
-        </Typography>
+          Customers
+        </JoyLink>
       </Breadcrumbs>
 
-      <OrderListHeader />
-
       <Suspense>
-        <OrderTableOptions />
-        <OrderTable />
+        <CustomerListHeader />
+        <CustomerTableOptions />
+        <CustomersTable />
       </Suspense>
     </>
   );

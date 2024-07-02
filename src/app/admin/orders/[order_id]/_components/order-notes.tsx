@@ -1,17 +1,7 @@
 "use client";
-import useOrderDetails from "@/shared/hooks/use-order-details";
-import useUpdateOrderDetails from "@/shared/hooks/use-update-order-details";
 import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
-import {
-  Card,
-  CardContent,
-  IconButton,
-  Stack,
-  Textarea,
-  Typography,
-} from "@mui/joy";
-import React, { useEffect, useState } from "react";
+import { Card, CardContent, Typography } from "@mui/joy";
 
 export default function OrderNotes({
   orderDetails,
