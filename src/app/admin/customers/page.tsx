@@ -7,6 +7,7 @@ import { TEXT_COLOR } from "@/shared/constants";
 import CustomerListHeader from "./_components/customer-list-header";
 import CustomerTableOptions from "./_components/customer-table-options";
 import CustomersTable from "./_components/customers-table";
+import { Suspense } from "react";
 
 export default function AdminCustomersPage() {
   return (
@@ -48,9 +49,11 @@ export default function AdminCustomersPage() {
         </JoyLink>
       </Breadcrumbs>
 
-      <CustomerListHeader />
-      <CustomerTableOptions />
-      <CustomersTable />
+      <Suspense>
+        <CustomerListHeader />
+        <CustomerTableOptions />
+        <CustomersTable />
+      </Suspense>
     </>
   );
 }

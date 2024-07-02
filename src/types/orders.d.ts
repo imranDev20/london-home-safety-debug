@@ -1,4 +1,4 @@
-import { Document, Types } from "mongoose";
+import { Types } from "mongoose";
 import { UserType } from "./users";
 
 export type PropertyType = "residential" | "commercial";

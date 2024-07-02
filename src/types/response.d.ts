@@ -1,14 +1,11 @@
 import { Pagination } from "./misc";
 import {
   OrderType,
-  PreOrderType,
-  InvoiceData,
   PreOrderTypeForResponse,
   OrderTypeForResponse,
 } from "./orders";
 import { ITestimonial } from "./testimonial";
 import {
-  CustomerType,
   EngineerType,
   UserType,
   UserBasicInfoType,
