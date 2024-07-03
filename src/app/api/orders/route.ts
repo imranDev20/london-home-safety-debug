@@ -229,9 +229,7 @@ export async function GET(req: NextRequest) {
         $match: {
           ...(orderStatus ? { "mostRecentStatus.status": orderStatus } : {}),
           ...(assignedTo
-            ? {
-                "order_items.assigned_engineer": new Types.ObjectId(assignedTo),
-              }
+            ? { assigned_engineer: new Types.ObjectId(assignedTo) }
             : {}),
         },
       },
