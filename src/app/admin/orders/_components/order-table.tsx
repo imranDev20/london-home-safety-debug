@@ -128,7 +128,7 @@ export default function OrderTable() {
     isGetOrdersDataFetching,
     isGetOrdersDataPending,
     refetchGetOrders,
-  } = useOrdersData(true, {
+  } = useOrdersData(false, {
     q: searchTerm,
     order_status: orderStatus,
     assigned_to: assignedTo,

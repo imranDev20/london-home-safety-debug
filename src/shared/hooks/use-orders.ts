@@ -11,7 +11,7 @@ interface OrderQueries {
   page?: string;
 }
 
-export const useOrdersData = (enabled?: boolean, queries?: OrderQueries) => {
+export const useOrdersData = (enabled: boolean, queries?: OrderQueries) => {
   const { q, order_status, assigned_to, sort_by, sort_order, page } =
     queries as OrderQueries;
   const {
@@ -23,7 +23,7 @@ export const useOrdersData = (enabled?: boolean, queries?: OrderQueries) => {
     queryKey: ["orders"],
     queryFn: () =>
       getOrders(q, order_status, assigned_to, sort_by, sort_order, page),
-    enabled: enabled ?? true,
+    enabled: enabled,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });

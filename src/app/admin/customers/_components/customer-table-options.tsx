@@ -1,9 +1,12 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-
 import { useState } from "react";
 
-import { FormControl, FormLabel, Grid, Option, Select } from "@mui/joy";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import Grid from "@mui/joy/Grid";
+import Option from "@mui/joy/Option";
+import Select from "@mui/joy/Select";
 
 import { exportUsers } from "@/services/user.services";
 import { useQuery } from "@tanstack/react-query";
@@ -14,68 +17,9 @@ import DebounceInput from "@/app/_components/common/debounce-input";
 import { useQueryString } from "@/shared/hooks/use-query-string";
 
 export default function CustomerTableOptions() {
-  const [openCreateCustomerDrawer, setOpenCreateCustomerDrawer] =
-    useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
   const { createQueryString, removeQueryString } = useQueryString();
-
-  // Mutate function to export users
-  const { isLoading: isExportUsersLoading, refetch: refetchExportUsers } =
-    useQuery({
-      queryKey: ["export-users"],
-      queryFn: async () => {
-        const response = await exportUsers();
-        return response.data;
-      },
-      enabled: false,
-    });
-
-  const handleExportUsers = async () => {
-    try {
-      const response = await refetchExportUsers();
-      const data = response.data;
-
-      if (response.status === "success") {
-        // const progressUpdates = data.progressUpdates;
-        const excelData = data.excelData;
-
-        // Update progress
-        // for (const { progress } of progressUpdates) {
-        //   setProgress(progress);
-        // }
-
-        // Download Excel file
-        const byteArray = new Uint8Array(
-          atob(excelData)
-            .split("")
-            .map((char) => char.charCodeAt(0))
-        );
-        const blob = new Blob([byteArray], {
-          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        });
-        const downloadUrl = window.URL.createObjectURL(blob);
-
-        const link = document.createElement("a");
-        link.href = downloadUrl;
-        link.setAttribute(
-          "download",
-          `Customers - ${dayjs().format("YYYY-MM-DD@hh:mm:ss")}.xlsx`
-        );
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      } else {
-        console.error("Error exporting users:", data.error);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-    // finally {
-    //   setIsDownloading(false);
-    //   setProgress(null);
-    // }
-  };
 
   const handleDebounce = (value: string) => {
     if (value !== "") {
@@ -119,7 +63,7 @@ export default function CustomerTableOptions() {
                 },
               }}
               defaultValue="createdAt"
-              onChange={(e, value) =>
+              onChange={(_, value) =>
                 router.push(
                   `${pathname}?${createQueryString("sort_by", value as string)}`
                 )
