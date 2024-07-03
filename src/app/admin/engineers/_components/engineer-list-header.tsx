@@ -1,9 +1,6 @@
 "use client";
-import { useQueryString } from "@/shared/hooks/use-query-string";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
 
-import DownloadIcon from "@mui/icons-material/Download";
+import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 
 import Button from "@mui/joy/Button";
@@ -42,14 +39,6 @@ export default function EngineerListHeader() {
             sm: "row",
           }}
         >
-          <Button
-            size="sm"
-            variant="outlined"
-            startDecorator={<DownloadIcon />}
-            loadingPosition="start"
-          >
-            Download Excel
-          </Button>
           <Button
             size="sm"
             startDecorator={<AddIcon />}

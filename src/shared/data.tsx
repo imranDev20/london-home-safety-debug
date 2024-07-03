@@ -1399,9 +1399,9 @@ export const ADMIN_OPTIONS = [
   //   label: "Support",
   //   Icon: SupportIcon,
   // },
-  {
-    route: "/admin/settings",
-    label: "Settings",
-    Icon: SettingsIcon,
-  },
+  // {
+  //   route: "/admin/settings",
+  //   label: "Settings",
+  //   Icon: SettingsIcon,
+  // },
 ];
