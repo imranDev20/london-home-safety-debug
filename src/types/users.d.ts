@@ -2,7 +2,11 @@ import { Types } from "mongoose";
 import { OrderType } from "./orders";
 
 export type Role = "customer" | "engineer" | "admin";
-export type CreationMethod = "registration" | "by_admin" | "through_order";
+export type CreationMethod =
+  | "registration"
+  | "by_admin"
+  | "through_order"
+  | "google";
 
 export type UserType<HasId extends boolean = false> = {
   _id: HasId extends true ? Types.ObjectId : never;
@@ -12,6 +16,7 @@ export type UserType<HasId extends boolean = false> = {
   phone: string;
   role: Role;
   password: string;
+  image: string;
 
   provider: "credentials" | "google";
 

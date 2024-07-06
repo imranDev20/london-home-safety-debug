@@ -24,6 +24,7 @@ import Link from "next/link";
 import { hexToRgba } from "@/shared/functions";
 import { useSnackbar } from "../../providers/snackbar-provider";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 function RenderMenuItem({
   label,
@@ -44,8 +45,6 @@ function RenderMenuItem({
 
 export default function NavbarDropdown() {
   const theme = useTheme();
-  const { enqueueSnackbar } = useSnackbar();
-  const router = useRouter();
 
   const { data: session } = useSession();
 
@@ -71,7 +70,16 @@ export default function NavbarDropdown() {
             sx={{
               borderRadius: "50%",
             }}
-          />
+          >
+            {session?.user.image && (
+              <Image
+                src={session?.user.image}
+                alt={session.user.name}
+                width={40}
+                height={40}
+              />
+            )}
+          </Avatar>
         </MenuButton>
 
         <Menu
@@ -99,7 +107,16 @@ export default function NavbarDropdown() {
                   borderRadius: "50%",
                   backgroundColor: hexToRgba(theme.palette.primary[500], 0.3),
                 }}
-              />
+              >
+                {session?.user.image && (
+                  <Image
+                    src={session?.user.image}
+                    alt={session.user.name}
+                    width={40}
+                    height={40}
+                  />
+                )}
+              </Avatar>
               <Box sx={{ ml: 1.5 }}>
                 <Typography level="title-sm" textColor="text.primary">
                   {session?.user?.name}

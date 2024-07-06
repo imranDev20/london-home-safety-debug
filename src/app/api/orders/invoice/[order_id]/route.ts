@@ -3,6 +3,8 @@ import dbConnect from "../../../_lib/dbConnect";
 import Order from "../../../_models/Order";
 import { formatResponse } from "@/shared/functions";
 import { generateInvoicePdfFromOrder } from "@/app/api/_lib/generate-Invoice";
+import { getServerSession } from "next-auth";
+import { config } from "@/app/api/auth/[...nextauth]/auth";
 
 export async function GET(
   req: NextRequest,
@@ -10,6 +12,14 @@ export async function GET(
 ) {
   try {
     await dbConnect();
+    const session = await getServerSession(config);
+
+    if (!session) {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
 
     const orderId = params.order_id;
 
@@ -17,6 +27,16 @@ export async function GET(
       path: "customer",
       select: "-password", // Exclude the password field
     });
+
+    if (
+      session.user._id !== order?.customer._id &&
+      session?.user.role !== "admin"
+    ) {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
 
     if (!order) {
       return NextResponse.json({ error: "Order not found" }, { status: 500 });

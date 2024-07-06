@@ -39,8 +39,8 @@ export default function ProfileNavigation({
       Icon: Dashboard,
     },
     {
-      route: "/profile/property",
-      label: "Property",
+      route: "/profile/properties",
+      label: "Properties",
       Icon: Business,
     },
     {

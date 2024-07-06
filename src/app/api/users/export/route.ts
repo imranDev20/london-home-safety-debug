@@ -3,10 +3,22 @@ import exceljs from "exceljs";
 import dbConnect from "../../_lib/dbConnect";
 import User from "../../_models/User";
 import { formatResponse } from "@/shared/functions";
+import { getServerSession } from "next-auth";
+import { config } from "../../auth/[...nextauth]/auth";
 
 export async function GET(req: NextRequest) {
   try {
     await dbConnect();
+
+    // Restrict unauthorized users
+    const session = await getServerSession(config);
+
+    if (session?.user.role !== "admin") {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
 
     const users = await User.find({}, { name: 1, email: 1, phone: 1 });
     const totalUsers = users.length;

@@ -190,8 +190,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const sortField = getSortField(sortBy);
 
-    console.log(assignedTo);
-
     const pipeline: any[] = [
       // Match customer and search term
       {

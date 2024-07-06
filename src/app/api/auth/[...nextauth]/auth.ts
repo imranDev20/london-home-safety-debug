@@ -6,7 +6,7 @@ import type {
 import type { NextAuthOptions } from "next-auth";
 import { getServerSession } from "next-auth";
 
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "../../_lib/dbConnect";
 import bcrypt from "bcrypt";
@@ -73,6 +73,24 @@ export const config = {
 
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      if (account?.provider === "google") {
+        const googleProfile = profile as GoogleProfile;
+
+        await dbConnect();
+        const existingUser = await User.findOne({ email: profile?.email });
+
+        if (!existingUser) {
+          const newUser = new User({
+            name: googleProfile?.name,
+            email: googleProfile?.email,
+            image: googleProfile?.picture,
+            provider: account.provider,
+            creation_method: "google",
+          });
+
+          await newUser.save();
+        }
+      }
       return true;
     },
 

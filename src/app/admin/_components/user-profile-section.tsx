@@ -4,6 +4,7 @@ import { Box, Divider, Typography, Avatar, IconButton } from "@mui/joy";
 import { Logout } from "@mui/icons-material";
 import Skeleton from "@mui/joy/Skeleton";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 interface UserProfileSectionProps {
   setOpenConfirmModal: Dispatch<SetStateAction<boolean>>;
@@ -93,7 +94,16 @@ export default function UserProfileSection({
             gap: 1,
           }}
         >
-          <Avatar size="sm" />
+          <Avatar size="sm">
+            {session?.user.image && (
+              <Image
+                src={session.user.image}
+                alt={session.user.name}
+                width={32}
+                height={32}
+              />
+            )}
+          </Avatar>
           <Box>
             <Typography level="title-sm">{session?.user?.name}</Typography>
             <Typography component="span" level="body-xs" color="neutral">

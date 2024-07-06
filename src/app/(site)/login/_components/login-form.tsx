@@ -20,12 +20,12 @@ import Link from "next/link";
 import { BUSINESS_NAME } from "@/shared/data";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-// import GoogleIcon from "@/app/_components/icons/google-icon";
 
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 
 import { LoginPayload } from "@/types/account";
 import { getSession, signIn } from "next-auth/react";
+import GoogleColoredIcon from "@/app/_components/icons/google-colored-icon";
 
 export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
   const [visibilityToggle, setVisibilityToggle] = useState<boolean>(false);
@@ -72,6 +72,10 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
     setLoading(false);
   };
 
+  const loginWithGoogle = async () => {
+    await signIn("google", { callbackUrl });
+  };
+
   return (
     <>
       <Stack gap={4} sx={{ mb: 2 }}>
@@ -91,7 +95,8 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
           color="neutral"
           fullWidth
           size="lg"
-          // startDecorator={<GoogleIcon />}
+          startDecorator={<GoogleColoredIcon />}
+          onClick={loginWithGoogle}
         >
           Continue with Google
         </Button>

@@ -1,6 +1,6 @@
 import createSvgIcon from "@mui/joy/utils/createSvgIcon";
 
-const GasOutlinedIcon = createSvgIcon(
+const GoogleColoredIcon = createSvgIcon(
   <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
     <path
       fill="#4285F4"
@@ -22,4 +22,4 @@ const GasOutlinedIcon = createSvgIcon(
   "GasOutlined"
 );
 
-export default GasOutlinedIcon;
+export default GoogleColoredIcon;

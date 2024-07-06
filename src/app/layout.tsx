@@ -3,7 +3,6 @@ import QueryProvider from "./_components/providers/query-provider";
 import ThemeRegistry from "./_components/providers/theme-registry";
 import { SnackbarProvider } from "./_components/providers/snackbar-provider";
 import TopLoader from "./_components/global/top-loader";
-import TokenRefresh from "./_components/providers/token-refresh";
 import AuthProvider from "./_components/providers/auth-provider";
 
 export const metadata = {
@@ -15,8 +14,6 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <TokenRefresh />
-
         <AuthProvider>
           <QueryProvider>
             <ThemeRegistry>

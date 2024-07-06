@@ -3,6 +3,8 @@ import dbConnect from "../../_lib/dbConnect";
 import User from "../../_models/User";
 import { formatResponse } from "@/shared/functions";
 import { UserType } from "@/types/users";
+import { getServerSession } from "next-auth";
+import { config } from "../../auth/[...nextauth]/auth";
 
 export async function GET(
   req: NextRequest,
@@ -11,6 +13,16 @@ export async function GET(
   try {
     await dbConnect();
     const { user_id } = params;
+
+    // Restrict unauthorized users
+    const session = await getServerSession(config);
+
+    if (session?.user.role !== "admin" && session?.user._id !== user_id) {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
 
     // Find user and exclude password field
     const user = await User.findById(user_id).select("-password");

@@ -15,6 +15,7 @@ import { UserType } from "@/types/users";
 import { ADDRESS, EMAIL_ADDRESS, PHONE_NO } from "@/shared/data";
 import { CONGESTION_ZONE_OPTIONS, PARKING_OPTIONS } from "@/shared/data";
 import Order from "@/app/api/_models/Order";
+import dayjs from "dayjs";
 
 export async function generateInvoiceId() {
   const mostRecentOrder = await Order.findOne().sort({ createdAt: -1 }).exec();
@@ -205,9 +206,11 @@ export async function generateInvoicePdfFromOrder(
   doc.text(`${invoiceId}`, 190, 80, { align: "right" });
   doc
     .setFont("helvetica", "bold")
-    .text(`Date:`, 170, 85, { align: "right" })
+    .text(`Date:`, 160, 85, { align: "right" })
     .setFont("helvetica", "normal");
-  doc.text(`${new Date().toLocaleDateString()}`, 190, 85, { align: "right" });
+  doc.text(`${dayjs(order.createdAt).format("DD MMMM, YYYY")}`, 190, 85, {
+    align: "right",
+  });
 
   // Add billing and shipping address
   doc
