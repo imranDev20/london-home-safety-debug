@@ -12,25 +12,41 @@ import { useTheme } from "@mui/joy/styles";
 import React from "react";
 
 import {
+  Dashboard,
   ListAltRounded,
   LogoutRounded,
   PersonRounded,
+  ShoppingCart,
+  SvgIconComponent,
 } from "@mui/icons-material";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { logoutAccount } from "@/services/account.services";
 import { useRouter } from "next/navigation";
-import { AxiosError } from "axios";
 import Link from "next/link";
 import { hexToRgba } from "@/shared/functions";
 import { useSnackbar } from "../../providers/snackbar-provider";
-import { ErrorResponse } from "@/types/response";
 import { signOut, useSession } from "next-auth/react";
+
+function RenderMenuItem({
+  label,
+  href,
+  Icon,
+}: {
+  label: string;
+  href: string;
+  Icon: SvgIconComponent;
+}) {
+  return (
+    <MenuItem component={Link} href={href}>
+      <Icon />
+      {label}
+    </MenuItem>
+  );
+}
 
 export default function NavbarDropdown() {
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const queryClient = useQueryClient();
+
   const { data: session } = useSession();
 
   const handleLogoutAccount = () => {
@@ -76,7 +92,7 @@ export default function NavbarDropdown() {
                 textDecoration: "none",
               }}
               component={Link}
-              href="/profile"
+              href={session?.user.role === "admin" ? "/admin" : "/profile"}
             >
               <Avatar
                 sx={{
@@ -95,14 +111,40 @@ export default function NavbarDropdown() {
             </Box>
           </MenuItem>
           <ListDivider />
-          <MenuItem component={Link} href="/profile">
-            <PersonRounded />
-            Profile
-          </MenuItem>
-          <MenuItem component={Link} href="/profile/orders">
-            <ListAltRounded />
-            Orders
-          </MenuItem>
+
+          {session?.user.role === "admin" ? (
+            <>
+              <RenderMenuItem
+                Icon={Dashboard}
+                href="/admin"
+                label="Dashboard"
+              />
+              <RenderMenuItem
+                Icon={ShoppingCart}
+                href="/admin/orders"
+                label="Orders"
+              />
+              <RenderMenuItem
+                Icon={PersonRounded}
+                href="/admin/customers"
+                label="Customers"
+              />
+            </>
+          ) : (
+            <>
+              <RenderMenuItem
+                Icon={PersonRounded}
+                href="/profile"
+                label="Profile"
+              />
+              <RenderMenuItem
+                Icon={ListAltRounded}
+                href="/profile/orders"
+                label="Orders"
+              />
+            </>
+          )}
+
           <ListDivider />
 
           <MenuItem onClick={handleLogoutAccount}>
