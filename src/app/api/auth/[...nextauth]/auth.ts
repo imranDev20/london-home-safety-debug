@@ -21,6 +21,10 @@ export const config = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        remember_me: {
+          label: "Remember Me",
+          type: "boolean",
+        },
       },
 
       async authorize(credentials) {
@@ -45,11 +49,12 @@ export const config = {
         }
 
         return {
-          id: user._id.toString(),
+          _id: user._id.toString(),
           name: user.name,
           email: user.email,
           email_verified: user.email_verified,
           role: user.role,
+          provider: user.provider,
         };
       },
     }),
@@ -79,17 +84,30 @@ export const config = {
       return baseUrl;
     },
     async session({ session, token }) {
-      if (token && token.id) {
-        session.user = {
+      return {
+        ...session,
+        user: {
           ...session.user,
-          id: token.id as string,
-        };
-      }
-      return session;
+          name: token.name,
+          _id: token._id,
+          role: token.role,
+          provider: token.provider,
+        },
+      };
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      if (user) {
-        token.id = user.id;
+
+    async jwt({ token, trigger, session }) {
+      if (trigger === "update") {
+        token.name = session.name;
+      } else {
+        if (token.email) {
+          const user = await User.findOne({ email: token.email });
+          // console.log({user})
+          token.name = user?.name;
+          token._id = user?._id;
+          token.role = user?.role;
+          token.provider = user?.provider;
+        }
       }
       return token;
     },

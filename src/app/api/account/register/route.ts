@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     // Validate input
     if (!name || !email || !password) {
       return NextResponse.json(
-        { success: false, message: "Please provide name, email, and password" },
+        formatResponse(false, null, "Please provide name, email, and password"),
         { status: 400 }
       );
     }

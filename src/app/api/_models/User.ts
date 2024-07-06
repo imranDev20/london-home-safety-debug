@@ -15,8 +15,12 @@ const userSchema = new mongoose.Schema<UserType<true>>(
     },
     email_verified: {
       type: Boolean,
-      required: true,
       default: false,
+    },
+    provider: {
+      type: String,
+      enum: ["credentials", "google"],
+      default: "credentials",
     },
     phone: {
       type: String,

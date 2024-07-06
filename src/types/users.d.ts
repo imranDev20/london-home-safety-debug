@@ -13,6 +13,8 @@ export type UserType<HasId extends boolean = false> = {
   role: Role;
   password: string;
 
+  provider: "credentials" | "google";
+
   address: {
     city: string;
     street: string;
