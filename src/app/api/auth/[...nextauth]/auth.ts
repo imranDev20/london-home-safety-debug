@@ -85,6 +85,7 @@ export const config = {
             email: googleProfile?.email,
             image: googleProfile?.picture,
             provider: account.provider,
+            creation_method: "google",
           });
 
           await newUser.save();

@@ -107,7 +107,16 @@ export default function NavbarDropdown() {
                   borderRadius: "50%",
                   backgroundColor: hexToRgba(theme.palette.primary[500], 0.3),
                 }}
-              />
+              >
+                {session?.user.image && (
+                  <Image
+                    src={session?.user.image}
+                    alt={session.user.name}
+                    width={40}
+                    height={40}
+                  />
+                )}
+              </Avatar>
               <Box sx={{ ml: 1.5 }}>
                 <Typography level="title-sm" textColor="text.primary">
                   {session?.user?.name}

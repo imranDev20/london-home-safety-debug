@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema<UserType<true>>(
       type: String,
       default: null,
     },
-
     email_verified: {
       type: Boolean,
       default: false,
@@ -41,9 +40,15 @@ const userSchema = new mongoose.Schema<UserType<true>>(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: [
+        function () {
+          return this.creation_method !== "google";
+        },
+        "Password is required",
+      ],
       minlength: [6, "Password must be at least 6 characters long"],
     },
+
     address: {
       street: {
         type: String,
@@ -91,7 +96,7 @@ const userSchema = new mongoose.Schema<UserType<true>>(
     creation_method: {
       type: String,
       required: true,
-      enum: ["through_order", "by_admin", "registration", "seed"],
+      enum: ["through_order", "by_admin", "registration", "seed", "google"],
     },
   },
   {
