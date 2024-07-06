@@ -70,7 +70,6 @@ const CreateCustomerForm = ({
         specialty: data.specialty,
         skills: data.skills,
         experience: data.experience,
-        creation_method: "by_admin",
       };
       const response = await createUserMutate(payload);
 

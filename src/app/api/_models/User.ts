@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema<UserType<true>>(
       unique: true,
       trim: true,
     },
+
+    image: {
+      type: String,
+      default: null,
+    },
+
     email_verified: {
       type: Boolean,
       default: false,

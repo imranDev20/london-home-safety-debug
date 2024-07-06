@@ -73,7 +73,6 @@ export default function RegisterForm() {
       name: data.name,
       password: data.password,
       email: data.email,
-      creation_method: "registration",
     };
     await registerUserMutate(payload);
   };

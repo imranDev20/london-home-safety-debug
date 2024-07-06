@@ -12,6 +12,7 @@ export type UserType<HasId extends boolean = false> = {
   phone: string;
   role: Role;
   password: string;
+  image: string;
 
   provider: "credentials" | "google";
 
