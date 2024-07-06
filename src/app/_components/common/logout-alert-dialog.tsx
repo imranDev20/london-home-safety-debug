@@ -11,6 +11,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logoutAccount } from "@/services/account.services";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
+import { signOut } from "next-auth/react";
 
 type LogoutAlertDialogProps = {
   open: boolean;
@@ -22,28 +23,11 @@ const LogoutAlertDialog = ({ open, setOpen }: LogoutAlertDialogProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const {
-    mutateAsync: logoutAccountMutate,
-    isPending: isLogoutAccountPending,
-  } = useMutation({
-    mutationFn: async () => {
-      const response = await logoutAccount();
-      return response;
-    },
-    onSuccess: (response) => {
-      router.replace("/login");
-      enqueueSnackbar(response?.message, "success");
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-      setOpen(false);
-    },
-
-    onError: (error) => {
-      enqueueSnackbar(error?.message, "error");
-    },
-  });
-
-  const handleLogoutAccount = async () => {
-    await logoutAccountMutate();
+  const handleLogoutAccount = () => {
+    signOut({
+      redirect: true,
+      callbackUrl: `${window.location.origin}/login`,
+    });
   };
 
   return (
@@ -70,7 +54,7 @@ const LogoutAlertDialog = ({ open, setOpen }: LogoutAlertDialogProps) => {
             <Button
               variant="solid"
               color="danger"
-              loading={isLogoutAccountPending}
+              // loading={isLogoutAccountPending}
               onClick={handleLogoutAccount}
             >
               Confirm Logout

@@ -3,7 +3,6 @@ import {
   Box,
   Drawer,
   IconButton,
-  Input,
   List,
   ListItem,
   ListItemButton,
@@ -15,14 +14,13 @@ import {
 } from "@mui/joy";
 import Sheet from "@mui/joy/Sheet";
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { Search } from "@mui/icons-material";
 import { ADMIN_OPTIONS } from "@/shared/data";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Menu from "@mui/icons-material/Menu";
 
-import LogoutAlertDialog from "./logout-alert-dialog";
+import LogoutAlertDialog from "../../_components/common/logout-alert-dialog";
 import UserProfileSection from "./user-profile-section";
 
 function NavigationList({

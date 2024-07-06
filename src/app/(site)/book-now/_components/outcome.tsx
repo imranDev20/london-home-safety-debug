@@ -4,14 +4,15 @@ import errorAnimation from "@/assets/error-animation-2.json";
 import { Box, Button, Typography } from "@mui/joy";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { createQueryString } from "@/shared/functions";
 import { useEffect, useState } from "react";
 import { useStripe } from "@stripe/react-stripe-js";
+import { useQueryString } from "@/shared/hooks/use-query-string";
 
 export default function Outcome() {
   const stripe = useStripe();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { createQueryString } = useQueryString();
 
   const [message, setMessage] = useState<null | {
     status: string;

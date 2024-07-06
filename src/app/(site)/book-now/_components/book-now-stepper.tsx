@@ -5,10 +5,11 @@ import StepButton from "@mui/joy/StepButton";
 import StepIndicator from "@mui/joy/StepIndicator";
 import Check from "@mui/icons-material/Check";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createQueryString } from "@/shared/functions";
+
 import { useQuery } from "@tanstack/react-query";
 import { getPreOrder } from "@/services/pre-order.services";
 import { Grid, Skeleton } from "@mui/joy";
+import { useQueryString } from "@/shared/hooks/use-query-string";
 
 const steps = [
   {
@@ -30,6 +31,7 @@ export default function BookNowStepper() {
   const pathname = usePathname();
   const router = useRouter();
   const activeStep = parseInt(searchParams.get("active_step") as string) || 1;
+  const { createQueryString } = useQueryString();
 
   const { data, isPending: isPreOrderDataPending } = useQuery({
     queryKey: ["pre-order"],

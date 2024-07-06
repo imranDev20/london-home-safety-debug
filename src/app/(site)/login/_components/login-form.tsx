@@ -29,8 +29,9 @@ import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 import { loginAccount } from "@/services/account.services";
 import { LoginPayload } from "@/types/account";
 import { ErrorResponse } from "@/types/response";
+import { signIn } from "next-auth/react";
 
-export default function LoginForm() {
+export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
   const [visibilityToggle, setVisibilityToggle] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
@@ -49,29 +50,29 @@ export default function LoginForm() {
     },
   });
 
-  const { mutateAsync: loginUserMutate, isPending: isLoginUserMutatePending } =
-    useMutation({
-      mutationFn: (userData: LoginPayload) => loginAccount(userData),
-      onSuccess: (response) => {
-        queryClient.invalidateQueries({ queryKey: ["users", "current-user"] });
-        ``;
-        queryClient.resetQueries();
+  // const { mutateAsync: loginUserMutate, isPending: isLoginUserMutatePending } =
+  //   useMutation({
+  //     mutationFn: (userData: LoginPayload) => loginAccount(userData),
+  //     onSuccess: (response) => {
+  //       queryClient.invalidateQueries({ queryKey: ["users", "current-user"] });
+  //       ``;
+  //       queryClient.resetQueries();
 
-        if (response.data.role === "admin") {
-          router.replace("/admin");
-        } else {
-          router.replace("/");
-        }
-        reset();
-        enqueueSnackbar(response?.message, "success");
-      },
-      onError: (error: AxiosError<ErrorResponse>) => {
-        enqueueSnackbar(
-          error.response?.data.message || error?.message,
-          "error"
-        );
-      },
-    });
+  //       if (response.data.role === "admin") {
+  //         router.replace("/admin");
+  //       } else {
+  //         router.replace("/");
+  //       }
+  //       reset();
+  //       enqueueSnackbar(response?.message, "success");
+  //     },
+  //     onError: (error: AxiosError<ErrorResponse>) => {
+  //       enqueueSnackbar(
+  //         error.response?.data.message || error?.message,
+  //         "error"
+  //       );
+  //     },
+  //   });
 
   const onLoginFormSubmit: SubmitHandler<LoginPayload> = async (data) => {
     const payload: LoginPayload = {
@@ -80,7 +81,13 @@ export default function LoginForm() {
       rememberMe: data.rememberMe,
     };
 
-    await loginUserMutate(payload);
+    await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      callbackUrl,
+    });
+
+    // await loginUserMutate(payload);
   };
 
   return (
@@ -208,7 +215,7 @@ export default function LoginForm() {
                 type="submit"
                 fullWidth
                 size="lg"
-                loading={isLoginUserMutatePending}
+                // loading={isLoginUserMutatePending}
               >
                 Login
               </Button>

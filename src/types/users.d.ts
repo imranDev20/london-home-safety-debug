@@ -8,6 +8,7 @@ export type UserType<HasId extends boolean = false> = {
   _id: HasId extends true ? Types.ObjectId : never;
   name: string;
   email: string;
+  email_verified: boolean;
   phone: string;
   role: Role;
   password: string;

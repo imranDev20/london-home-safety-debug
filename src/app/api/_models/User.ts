@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema<UserType<true>>(
       unique: true,
       trim: true,
     },
+    email_verified: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     phone: {
       type: String,
       trim: true,

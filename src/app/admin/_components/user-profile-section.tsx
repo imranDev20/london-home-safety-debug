@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { Box, Divider, Typography, Avatar, IconButton } from "@mui/joy";
 import { Logout } from "@mui/icons-material";
 import Skeleton from "@mui/joy/Skeleton";
-import useCurrentUser from "@/shared/hooks/use-current-user";
+import { useSession } from "next-auth/react";
 
 interface UserProfileSectionProps {
   setOpenConfirmModal: Dispatch<SetStateAction<boolean>>;
@@ -14,9 +14,9 @@ interface UserProfileSectionProps {
 export default function UserProfileSection({
   setOpenConfirmModal,
 }: UserProfileSectionProps) {
-  const { userData, isPending: isCurrentUserPending } = useCurrentUser();
+  const { data: session, status } = useSession();
 
-  if (isCurrentUserPending) {
+  if (status === "loading") {
     return (
       <Box>
         <Divider
@@ -95,9 +95,9 @@ export default function UserProfileSection({
         >
           <Avatar size="sm" />
           <Box>
-            <Typography level="title-sm">{userData?.name}</Typography>
+            <Typography level="title-sm">{session?.user?.name}</Typography>
             <Typography component="span" level="body-xs" color="neutral">
-              {userData?.email}
+              {session?.user?.email}
             </Typography>
           </Box>
         </Box>

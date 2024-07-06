@@ -23,60 +23,40 @@ import { AxiosError } from "axios";
 import Link from "next/link";
 import { hexToRgba } from "@/shared/functions";
 import { useSnackbar } from "../../providers/snackbar-provider";
-import useCurrentUser from "@/shared/hooks/use-current-user";
 import { ErrorResponse } from "@/types/response";
+import { signOut, useSession } from "next-auth/react";
 
 export default function NavbarDropdown() {
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { data: session } = useSession();
 
-  const { userData } = useCurrentUser();
-
-  const {
-    mutateAsync: logoutAccountMutate,
-    isPending: isLogoutAccountPending,
-  } = useMutation({
-    mutationFn: () => logoutAccount(),
-
-    onSuccess: (response) => {
-      enqueueSnackbar(response.message, "success");
-      queryClient.invalidateQueries({ queryKey: ["current-user"] });
-      queryClient.resetQueries();
-      router.replace("/login");
-    },
-
-    onError: (error: AxiosError<ErrorResponse>) => {
-      enqueueSnackbar(error.response?.data.message || error?.message, "error");
-    },
-  });
-
-  const handleLogoutAccount = async () => {
-    await logoutAccountMutate();
+  const handleLogoutAccount = () => {
+    signOut({
+      redirect: true,
+      callbackUrl: `${window.location.origin}/login`,
+    });
   };
 
   return (
     <>
       <Dropdown>
-        {isLogoutAccountPending ? (
-          <CircularProgress thickness={4} size="md" />
-        ) : (
-          <MenuButton
-            variant="plain"
+        <MenuButton
+          variant="plain"
+          sx={{
+            maxWidth: "40px",
+            maxHeight: "40px",
+            borderRadius: "9999999px",
+          }}
+        >
+          <Avatar
             sx={{
-              maxWidth: "40px",
-              maxHeight: "40px",
-              borderRadius: "9999999px",
+              borderRadius: "50%",
             }}
-          >
-            <Avatar
-              sx={{
-                borderRadius: "50%",
-              }}
-            />
-          </MenuButton>
-        )}
+          />
+        </MenuButton>
 
         <Menu
           placement="bottom-end"
@@ -106,10 +86,10 @@ export default function NavbarDropdown() {
               />
               <Box sx={{ ml: 1.5 }}>
                 <Typography level="title-sm" textColor="text.primary">
-                  {userData?.name}
+                  {session?.user?.name}
                 </Typography>
                 <Typography level="body-xs" textColor="text.tertiary">
-                  {userData?.email}
+                  {session?.user?.email}
                 </Typography>
               </Box>
             </Box>

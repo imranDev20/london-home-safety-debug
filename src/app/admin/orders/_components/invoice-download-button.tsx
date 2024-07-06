@@ -1,17 +1,21 @@
 import { getOrderInvoice } from "@/services/orders.services";
-import { OrderType, OrderTypeForResponse } from "@/types/orders";
+import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
-import { Button } from "@mui/joy";
+import Button, { ButtonProps } from "@mui/joy/Button";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import React from "react";
 
 type InvoiceDownloadButtonProps = {
   order: OrderTypeForResponse<UserType>;
+  buttonProps?: ButtonProps;
+  text?: string;
 };
 
 export default function InvoiceDownloadButton({
   order,
+  buttonProps,
+  text,
 }: InvoiceDownloadButtonProps) {
   const { isLoading: isExportOrdersLoading, refetch: refetchGetInvoice } =
     useQuery({
@@ -26,9 +30,12 @@ export default function InvoiceDownloadButton({
 
       const data = response.data;
       console.log(response);
+
       if (response.status === "success") {
         // const progressUpdates = data.progressUpdates;
+
         const invoiceData = data.invoiceData;
+
         // Download Excel file
         const byteArray = new Uint8Array(
           atob(invoiceData)
@@ -62,8 +69,9 @@ export default function InvoiceDownloadButton({
   };
   return (
     <Button
-      size="sm"
-      variant="plain"
+      {...buttonProps}
+      size={buttonProps?.size || "sm"}
+      variant={buttonProps?.variant || "plain"}
       onClick={(event) => {
         event.stopPropagation();
         handleDownloadInvoice();
@@ -71,9 +79,12 @@ export default function InvoiceDownloadButton({
       sx={{
         fontSize: 13,
         fontWeight: 500,
+
+        ...buttonProps?.sx,
       }}
+      loading={isExportOrdersLoading}
     >
-      Download
+      {text ? text : "Download"}
     </Button>
   );
 }
