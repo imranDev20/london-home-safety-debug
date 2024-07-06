@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "../_models/User";
 import { formatResponse } from "@/shared/functions";
 import bcrypt from "bcrypt";
-import { validateToken } from "../_lib/validateToken";
 import { getServerSession } from "next-auth";
 import { config } from "../auth/[...nextauth]/auth";
 
