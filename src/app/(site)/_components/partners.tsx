@@ -63,7 +63,7 @@ const SPONSER_PARTNER = [
 
 export default function Partners() {
   return (
-    <Container sx={{ my: 3, mb: 10 }} id="partners">
+    <Container sx={{ mt: 10, mb: 10 }} id="partners">
       <Box
         sx={{
           textAlign: "center",

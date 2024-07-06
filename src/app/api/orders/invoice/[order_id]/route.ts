@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "../../../_lib/dbConnect";
 import Order from "../../../_models/Order";
-import { OrderType } from "@/types/orders";
-import { UserType } from "@/types/users";
 import { formatResponse } from "@/shared/functions";
 import { generateInvoicePdfFromOrder } from "@/app/api/_lib/generate-Invoice";
 

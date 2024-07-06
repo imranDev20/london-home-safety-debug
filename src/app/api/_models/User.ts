@@ -13,6 +13,15 @@ const userSchema = new mongoose.Schema<UserType<true>>(
       unique: true,
       trim: true,
     },
+    email_verified: {
+      type: Boolean,
+      default: false,
+    },
+    provider: {
+      type: String,
+      enum: ["credentials", "google"],
+      default: "credentials",
+    },
     phone: {
       type: String,
       trim: true,
@@ -61,10 +70,6 @@ const userSchema = new mongoose.Schema<UserType<true>>(
     },
     skills: {
       type: [String],
-      required: function () {
-        return this.role === "engineer";
-      },
-      message: "Skills are required for engineers.",
     },
     specialty: {
       type: String,
@@ -75,14 +80,12 @@ const userSchema = new mongoose.Schema<UserType<true>>(
     },
     experience: {
       type: Number,
-      required: function () {
-        return this.role === "engineer";
-      },
-      message: "Experience is required for engineers.",
     },
+
     creation_method: {
       type: String,
       required: true,
+      enum: ["through_order", "by_admin", "registration", "seed"],
     },
   },
   {

@@ -17,6 +17,8 @@ import { getOrders } from "@/services/orders.services";
 import DataTable from "@/app/_components/common/data-table";
 import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
+import { useEffect } from "react";
+import InvoiceDownloadButton from "@/app/admin/orders/_components/invoice-download-button";
 
 const columns = [
   {
@@ -60,17 +62,7 @@ const columns = [
     width: 90,
     key: "invoice",
     render: (value: string, row: OrderTypeForResponse<UserType>) => (
-      <Button
-        component="a"
-        href={value}
-        size="sm"
-        target="_blank"
-        sx={{
-          fontSize: 12,
-        }}
-      >
-        Download
-      </Button>
+      <InvoiceDownloadButton order={row} />
     ),
   },
 ];
@@ -85,12 +77,29 @@ export default function CustomerOrders() {
     isFetching: isGetOrdersDataFetching,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["orders"],
-    queryFn: () => getOrders(),
+    queryFn: () =>
+      getOrders(
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        customer_id as string
+      ),
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    enabled: false,
   });
+
+  useEffect(() => {
+    if (customer_id) {
+      refetch();
+    }
+  }, [customer_id, refetch]);
 
   const handleRowClick = (row: OrderTypeForResponse<UserType>) => {
     router.push(`/admin/customers/${customSlugify(row._id.toString())}`);

@@ -38,6 +38,7 @@ import {
 import dayjs from "dayjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import InvoiceDownloadButton from "../../_components/invoice-download-button";
 
 export default function OrderDetailsHeader({
   orderDetails,
@@ -205,7 +206,7 @@ export default function OrderDetailsHeader({
             </Select>
           </FormControl>
 
-          <Button
+          {/* <Button
             size="sm"
             fullWidth
             startDecorator={<Download />}
@@ -213,7 +214,23 @@ export default function OrderDetailsHeader({
             variant="outlined"
           >
             Download Invoice
-          </Button>
+          </Button> */}
+
+          <InvoiceDownloadButton
+            order={orderDetails}
+            buttonProps={{
+              size: "sm",
+              variant: "outlined",
+              color: "neutral",
+              sx: {
+                boxShadow: "xs",
+                fontWeight: 600,
+              },
+              fullWidth: true,
+              startDecorator: <Download />,
+            }}
+            text="Download Invoice"
+          />
 
           <Dropdown>
             <MenuButton

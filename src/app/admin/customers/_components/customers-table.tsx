@@ -82,6 +82,7 @@ export default function CustomersTable() {
     queryFn: () =>
       getUsers<"customer">(searchTerm, "customer", sortBy, sortOrder, page),
     refetchOnMount: false,
+    enabled: false,
   });
 
   useEffect(() => {

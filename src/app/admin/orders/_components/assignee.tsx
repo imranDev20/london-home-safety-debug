@@ -9,7 +9,7 @@ import {
   Select,
 } from "@mui/joy";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Assignee() {
   const [listBoxOpen, setListBoxOpen] = useState<boolean>(false);
@@ -25,6 +25,12 @@ export default function Assignee() {
     refetch: refetchGetEngineers,
   } = useEngineersData(false);
   const engineersData = data?.data;
+
+  useEffect(() => {
+    if (assignedToQuery !== "") {
+      refetchGetEngineers();
+    }
+  }, [assignedToQuery, refetchGetEngineers]);
 
   return (
     <>
@@ -68,9 +74,14 @@ export default function Assignee() {
           }}
           value={assignedToQuery}
           onChange={(_, value) => {
-            router.push(
-              `${pathname}?${createQueryString("assigned_to", value as string)}`
-            );
+            if (value !== null) {
+              router.push(
+                `${pathname}?${createQueryString(
+                  "assigned_to",
+                  value as string
+                )}`
+              );
+            }
           }}
         >
           <Option value="">All Engineers</Option>

@@ -27,7 +27,15 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
-  const nonInvertedRoutes = ["/login", "/register"];
+  const nonInvertedRoutes = [
+    "/login",
+    "/register",
+    "/profile",
+    "/profile/property",
+    "/profile/orders",
+    "/profile/testimonials",
+    "/profile/orders",
+  ];
 
   return (
     <Box component="header">
@@ -84,7 +92,9 @@ export default function Header() {
       <Box component="nav">
         <Navbar
           setOpenMobileDrawer={setOpenMobileDrawer}
-          isInverted={!nonInvertedRoutes.includes(pathname)}
+          isInverted={
+            !nonInvertedRoutes.some((route) => pathname.startsWith(route))
+          }
         />
       </Box>
 

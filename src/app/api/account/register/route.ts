@@ -6,6 +6,7 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "../../_lib/generate-token";
+import { formatResponse } from "@/shared/functions";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
     // Validate input
     if (!name || !email || !password) {
       return NextResponse.json(
-        { success: false, message: "Please provide name, email, and password" },
+        formatResponse(false, null, "Please provide name, email, and password"),
         { status: 400 }
       );
     }
@@ -24,7 +25,7 @@ export async function POST(req: NextRequest) {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
-        { success: false, message: "Email already exists" },
+        formatResponse(false, null, "Email already exists"),
         { status: 400 }
       );
     }
@@ -43,39 +44,9 @@ export async function POST(req: NextRequest) {
     });
     await newUser.save();
 
-    // Generate JWT tokens
-    const accessToken = await generateAccessToken(newUser);
-    const refreshToken = await generateRefreshToken(newUser);
-
-    const response = NextResponse.json({
-      success: true,
-      message: "User registered successfully",
-      data: {
-        _id: newUser._id,
-        name: newUser.name,
-        email: newUser.email,
-        role: newUser.role,
-        creation_method: newUser.creation_method,
-      },
-    });
-
-    response.cookies.set("accessToken", accessToken, {
-      httpOnly: true,
-      maxAge: 60 * 15, //20 minutes in seconds
-      sameSite: "strict",
-      path: "/",
-      secure: process.env.NODE_ENV === "production",
-    });
-
-    response.cookies.set("refreshToken", refreshToken, {
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 7,
-      sameSite: "strict",
-      path: "/",
-      secure: process.env.NODE_ENV === "production",
-    });
-
-    return response;
+    return NextResponse.json(
+      formatResponse(true, newUser, "User registered successfully")
+    );
   } catch (error: any) {
     console.log(error);
     return NextResponse.json(

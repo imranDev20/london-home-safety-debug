@@ -20,7 +20,7 @@ export default function EngineerListOptions() {
     if (value !== "") {
       router.push(`${pathname}?${createQueryString("q", value)}`);
     } else {
-      router.push(`${pathname}?${removeQueryString("q")}}`);
+      router.push(`${pathname}?${removeQueryString("q")}`);
     }
   };
 
@@ -32,7 +32,7 @@ export default function EngineerListOptions() {
             id="select-field-demo-label"
             htmlFor="select-field-demo-button"
           >
-            Search for customers
+            Search for engineers
           </FormLabel>
           <DebounceInput
             placeholder="Type in here…"
@@ -42,13 +42,13 @@ export default function EngineerListOptions() {
         </FormControl>
       </Grid>
 
-      <Grid xs={12} md={2}>
+      {/* <Grid xs={12} md={2}>
         <FormControl size="sm">
           <FormLabel
             id="select-field-demo-label"
             htmlFor="select-field-demo-button"
           >
-            Filter
+            Filter by specialty
           </FormLabel>
           <Select
             placeholder="Filter by specialty"
@@ -74,9 +74,9 @@ export default function EngineerListOptions() {
             ))}
           </Select>
         </FormControl>
-      </Grid>
+      </Grid> */}
 
-      <Grid xs={12} md={2}>
+      <Grid xs={12} md={3}>
         <FormControl size="sm">
           <FormLabel
             id="select-field-demo-label"
@@ -85,39 +85,31 @@ export default function EngineerListOptions() {
             Sort
           </FormLabel>
           <Select
-            placeholder="Filter by status"
+            placeholder="Sort customers by..."
             slotProps={{
               button: {
                 id: "select-field-demo-button",
-                sx: {
-                  textTransform: "capitalize",
-                },
               },
             }}
+            defaultValue="createdAt"
+            onChange={(_, value) =>
+              router.push(
+                `${pathname}?${createQueryString("sort_by", value as string)}`
+              )
+            }
           >
-            {[
-              "Name",
-              "Specialty",
-              "Ongoing Projects",
-              "Completed Projects",
-              "Email",
-              "Phone",
-            ].map((sortValue) => (
-              <Option
-                key={sortValue}
-                value={toSnakeCase(sortValue)}
-                sx={{
-                  textTransform: "capitalize",
-                }}
-              >
-                {sortValue}
+            <Option value="createdAt">Date Created</Option>
+
+            {["Name", "Email", "Phone"].map((sortVal) => (
+              <Option value={toSnakeCase(sortVal)} key={sortVal}>
+                {sortVal}
               </Option>
             ))}
           </Select>
         </FormControl>
       </Grid>
 
-      <Grid xs={12} md={2}>
+      <Grid xs={12} md={3}>
         <FormControl size="sm">
           <FormLabel
             id="select-field-demo-label"
@@ -136,23 +128,17 @@ export default function EngineerListOptions() {
                 },
               },
             }}
+            onChange={(e, value) =>
+              router.push(
+                `${pathname}?${createQueryString(
+                  "sort_order",
+                  value as string
+                )}`
+              )
+            }
           >
-            <Option
-              value="asc"
-              sx={{
-                textTransform: "capitalize",
-              }}
-            >
-              Ascending
-            </Option>
-            <Option
-              value="desc"
-              sx={{
-                textTransform: "capitalize",
-              }}
-            >
-              Descending
-            </Option>
+            <Option value="asc">Ascending</Option>
+            <Option value="desc">Descending</Option>
           </Select>
         </FormControl>
       </Grid>

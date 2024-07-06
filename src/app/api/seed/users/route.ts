@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 import { formatResponse } from "@/shared/functions";
 import dbConnect from "../../_lib/dbConnect";

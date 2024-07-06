@@ -3,25 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "../_models/User";
 import { formatResponse } from "@/shared/functions";
 import bcrypt from "bcrypt";
-import { validateToken } from "../_lib/validateToken";
+import { getServerSession } from "next-auth";
+import { config } from "../auth/[...nextauth]/auth";
 
 export async function GET(req: NextRequest) {
   try {
     await dbConnect();
-
-    // Validate the token and check the user's role
-    const { isValid, userId, userRole, response } = await validateToken(req);
-    if (!isValid) {
-      return response;
-    }
-
-    // Only allow admin users to fetch the users list
-    if (userRole !== "admin") {
-      return NextResponse.json(
-        formatResponse(false, null, "Unauthorized access"),
-        { status: 403 }
-      );
-    }
 
     const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
     const limit = 10;
@@ -31,6 +18,15 @@ export async function GET(req: NextRequest) {
     const role = req.nextUrl.searchParams.get("role") || "";
     const sortBy = req.nextUrl.searchParams.get("sort_by") || "createdAt";
     const sortOrder = req.nextUrl.searchParams.get("sort_order") || "desc";
+
+    // Restrict unauthorized users
+    const session = await getServerSession(config);
+    if (session?.user.role !== "admin") {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
 
     // Prepare the query object
     const query: any = {};

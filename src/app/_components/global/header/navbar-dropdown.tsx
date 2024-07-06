@@ -12,71 +12,67 @@ import { useTheme } from "@mui/joy/styles";
 import React from "react";
 
 import {
+  Dashboard,
   ListAltRounded,
   LogoutRounded,
   PersonRounded,
+  ShoppingCart,
+  SvgIconComponent,
 } from "@mui/icons-material";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { logoutAccount } from "@/services/account.services";
 import { useRouter } from "next/navigation";
-import { AxiosError } from "axios";
 import Link from "next/link";
 import { hexToRgba } from "@/shared/functions";
 import { useSnackbar } from "../../providers/snackbar-provider";
-import useCurrentUser from "@/shared/hooks/use-current-user";
-import { ErrorResponse } from "@/types/response";
+import { signOut, useSession } from "next-auth/react";
+
+function RenderMenuItem({
+  label,
+  href,
+  Icon,
+}: {
+  label: string;
+  href: string;
+  Icon: SvgIconComponent;
+}) {
+  return (
+    <MenuItem component={Link} href={href}>
+      <Icon />
+      {label}
+    </MenuItem>
+  );
+}
 
 export default function NavbarDropdown() {
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const queryClient = useQueryClient();
 
-  const { userData } = useCurrentUser();
+  const { data: session } = useSession();
 
-  const {
-    mutateAsync: logoutAccountMutate,
-    isPending: isLogoutAccountPending,
-  } = useMutation({
-    mutationFn: () => logoutAccount(),
-
-    onSuccess: (response) => {
-      enqueueSnackbar(response.message, "success");
-      queryClient.invalidateQueries({ queryKey: ["current-user"] });
-      queryClient.resetQueries();
-      router.replace("/login");
-    },
-
-    onError: (error: AxiosError<ErrorResponse>) => {
-      enqueueSnackbar(error.response?.data.message || error?.message, "error");
-    },
-  });
-
-  const handleLogoutAccount = async () => {
-    await logoutAccountMutate();
+  const handleLogoutAccount = () => {
+    signOut({
+      redirect: true,
+      callbackUrl: `${window.location.origin}/login`,
+    });
   };
 
   return (
     <>
       <Dropdown>
-        {isLogoutAccountPending ? (
-          <CircularProgress thickness={4} size="md" />
-        ) : (
-          <MenuButton
-            variant="plain"
+        <MenuButton
+          variant="plain"
+          sx={{
+            maxWidth: "40px",
+            maxHeight: "40px",
+            borderRadius: "9999999px",
+          }}
+        >
+          <Avatar
             sx={{
-              maxWidth: "40px",
-              maxHeight: "40px",
-              borderRadius: "9999999px",
+              borderRadius: "50%",
             }}
-          >
-            <Avatar
-              sx={{
-                borderRadius: "50%",
-              }}
-            />
-          </MenuButton>
-        )}
+          />
+        </MenuButton>
 
         <Menu
           placement="bottom-end"
@@ -96,7 +92,7 @@ export default function NavbarDropdown() {
                 textDecoration: "none",
               }}
               component={Link}
-              href="/profile"
+              href={session?.user.role === "admin" ? "/admin" : "/profile"}
             >
               <Avatar
                 sx={{
@@ -106,23 +102,49 @@ export default function NavbarDropdown() {
               />
               <Box sx={{ ml: 1.5 }}>
                 <Typography level="title-sm" textColor="text.primary">
-                  {userData?.name}
+                  {session?.user?.name}
                 </Typography>
                 <Typography level="body-xs" textColor="text.tertiary">
-                  {userData?.email}
+                  {session?.user?.email}
                 </Typography>
               </Box>
             </Box>
           </MenuItem>
           <ListDivider />
-          <MenuItem component={Link} href="/profile">
-            <PersonRounded />
-            Profile
-          </MenuItem>
-          <MenuItem component={Link} href="/profile/orders">
-            <ListAltRounded />
-            Orders
-          </MenuItem>
+
+          {session?.user.role === "admin" ? (
+            <>
+              <RenderMenuItem
+                Icon={Dashboard}
+                href="/admin"
+                label="Dashboard"
+              />
+              <RenderMenuItem
+                Icon={ShoppingCart}
+                href="/admin/orders"
+                label="Orders"
+              />
+              <RenderMenuItem
+                Icon={PersonRounded}
+                href="/admin/customers"
+                label="Customers"
+              />
+            </>
+          ) : (
+            <>
+              <RenderMenuItem
+                Icon={PersonRounded}
+                href="/profile"
+                label="Profile"
+              />
+              <RenderMenuItem
+                Icon={ListAltRounded}
+                href="/profile/orders"
+                label="Orders"
+              />
+            </>
+          )}
+
           <ListDivider />
 
           <MenuItem onClick={handleLogoutAccount}>

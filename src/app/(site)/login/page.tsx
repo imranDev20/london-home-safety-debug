@@ -1,7 +1,15 @@
 import { Card, CardContent, Container, Grid, Sheet } from "@mui/joy";
 import LoginForm from "./_components/login-form";
 
-export default function LoginPage() {
+interface SignInPageProps {
+  searchParams: {
+    callbackUrl: string;
+  };
+}
+
+export default function LoginPage({
+  searchParams: { callbackUrl },
+}: SignInPageProps) {
   return (
     <>
       <Sheet variant="soft">
@@ -15,7 +23,7 @@ export default function LoginPage() {
                 }}
               >
                 <CardContent>
-                  <LoginForm />
+                  <LoginForm callbackUrl={callbackUrl || "/"} />
                 </CardContent>
               </Card>
             </Grid>

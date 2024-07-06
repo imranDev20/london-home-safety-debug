@@ -3,7 +3,6 @@ import {
   Box,
   Drawer,
   IconButton,
-  Input,
   List,
   ListItem,
   ListItemButton,
@@ -14,18 +13,21 @@ import {
   Divider,
 } from "@mui/joy";
 import Sheet from "@mui/joy/Sheet";
-import React, { ReactNode, useState } from "react";
-import { Search } from "@mui/icons-material";
+import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { ADMIN_OPTIONS } from "@/shared/data";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Menu from "@mui/icons-material/Menu";
 
-import LogoutAlertDialog from "./logout-alert-dialog";
+import LogoutAlertDialog from "../../_components/common/logout-alert-dialog";
 import UserProfileSection from "./user-profile-section";
 
-function NavigationList() {
+function NavigationList({
+  setOpenMobileDrawer,
+}: {
+  setOpenMobileDrawer?: Dispatch<SetStateAction<boolean>>;
+}) {
   const pathname = usePathname();
 
   return (
@@ -51,6 +53,7 @@ function NavigationList() {
               (option.route !== "/admin" &&
                 pathname.startsWith(`${option.route}/`))
             }
+            onClick={() => setOpenMobileDrawer && setOpenMobileDrawer(false)}
             sx={{
               borderRadius: "sm",
             }}
@@ -77,7 +80,7 @@ interface AdminNavigationProps {
 
 export default function AdminNavigation(props: AdminNavigationProps) {
   const { children } = props;
-  const [open, setOpen] = useState<boolean>(false);
+  const [openMobileDrawer, setOpenMobileDrawer] = useState<boolean>(false);
   const [openConfirmModal, setOpenConfirmModal] = useState<boolean>(false);
 
   return (
@@ -108,7 +111,7 @@ export default function AdminNavigation(props: AdminNavigationProps) {
           <IconButton
             variant="outlined"
             color="neutral"
-            onClick={() => setOpen(true)}
+            onClick={() => setOpenMobileDrawer(true)}
           >
             <Menu />
           </IconButton>
@@ -116,8 +119,8 @@ export default function AdminNavigation(props: AdminNavigationProps) {
 
         {/* Mobile & tablet device screens drawer */}
         <Drawer
-          open={open}
-          onClose={() => setOpen(false)}
+          open={openMobileDrawer}
+          onClose={() => setOpenMobileDrawer(false)}
           slotProps={{
             content: {
               sx: {
@@ -150,7 +153,7 @@ export default function AdminNavigation(props: AdminNavigationProps) {
           </Box>
           <Divider />
 
-          <NavigationList />
+          <NavigationList setOpenMobileDrawer={setOpenMobileDrawer} />
           <UserProfileSection setOpenConfirmModal={setOpenConfirmModal} />
         </Drawer>
 

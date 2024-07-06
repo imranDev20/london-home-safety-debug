@@ -22,7 +22,8 @@ import {
   SECONDARY_COLOUR,
   TEXT_COLOR,
 } from "@/shared/constants";
-import useCurrentUser from "@/shared/hooks/use-current-user";
+import { NavItem } from "@/types/misc";
+import { useSession } from "next-auth/react";
 
 export default function Navbar({
   setOpenMobileDrawer,
@@ -32,7 +33,15 @@ export default function Navbar({
   isInverted?: boolean;
 }) {
   const pathname = usePathname();
-  const { userData, isPending: isCurrentUserPending } = useCurrentUser();
+
+  const { data: session, status, update } = useSession();
+
+  function handleShowSelected(item: NavItem) {
+    return (
+      (item.path === "/" && pathname === "/") ||
+      (item.path !== "/" && pathname.startsWith(item.path))
+    );
+  }
 
   return (
     <Box sx={{ zIndex: 10, position: "relative" }}>
@@ -93,18 +102,12 @@ export default function Navbar({
                       sx={{
                         ...(isInverted
                           ? {
-                              color:
-                                (item.path === "/" && pathname === "/") ||
-                                (item.path !== "/" &&
-                                  pathname.startsWith(item.path))
-                                  ? SECONDARY_COLOUR[500]
-                                  : "white",
-                              backgroundColor:
-                                (item.path === "/" && pathname === "/") ||
-                                (item.path !== "/" &&
-                                  pathname.startsWith(item.path))
-                                  ? hexToRgba(SECONDARY_COLOUR[500], 0.2)
-                                  : "transparent",
+                              color: handleShowSelected(item)
+                                ? SECONDARY_COLOUR[500]
+                                : "white",
+                              backgroundColor: handleShowSelected(item)
+                                ? hexToRgba(SECONDARY_COLOUR[500], 0.2)
+                                : "transparent",
                               ":hover": {
                                 color: SECONDARY_COLOUR[500],
                                 backgroundColor: hexToRgba(
@@ -114,18 +117,12 @@ export default function Navbar({
                               },
                             }
                           : {
-                              color:
-                                (item.path === "/" && pathname === "/") ||
-                                (item.path !== "/" &&
-                                  pathname.startsWith(item.path))
-                                  ? PRIMARY_COLOUR[500]
-                                  : TEXT_COLOR.primary,
-                              backgroundColor:
-                                (item.path === "/" && pathname === "/") ||
-                                (item.path !== "/" &&
-                                  pathname.startsWith(item.path))
-                                  ? hexToRgba(PRIMARY_COLOUR[500], 0.1)
-                                  : "transparent",
+                              color: handleShowSelected(item)
+                                ? PRIMARY_COLOUR[500]
+                                : TEXT_COLOR.primary,
+                              backgroundColor: handleShowSelected(item)
+                                ? hexToRgba(PRIMARY_COLOUR[500], 0.1)
+                                : "transparent",
                               ":hover": {
                                 color: PRIMARY_COLOUR[500],
                                 backgroundColor: hexToRgba(
@@ -296,7 +293,7 @@ export default function Navbar({
                 },
               }}
             >
-              {isCurrentUserPending ? null : userData ? (
+              {status === "loading" ? null : status === "authenticated" ? (
                 <NavbarDropdown />
               ) : (
                 <Button

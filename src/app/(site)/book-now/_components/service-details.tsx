@@ -1,6 +1,6 @@
 "use client";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { createQueryString, isObjectEmpty } from "@/shared/functions";
+import { isObjectEmpty } from "@/shared/functions";
 import { ServiceFormInput } from "@/types/form";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
@@ -28,6 +28,7 @@ import { COMMERCIAL_SERVICES, RESIDENTIAL_SERVICES } from "@/shared/data";
 import { AxiosError } from "axios";
 import { ErrorResponse } from "@/types/response";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
+import { useQueryString } from "@/shared/hooks/use-query-string";
 
 export default function ServiceDetails() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function ServiceDetails() {
   const pathname = usePathname();
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
+  const { createQueryString } = useQueryString();
 
   // Service step form
   const {
