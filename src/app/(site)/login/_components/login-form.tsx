@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
@@ -26,16 +24,14 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 
-import { loginAccount } from "@/services/account.services";
 import { LoginPayload } from "@/types/account";
-import { ErrorResponse } from "@/types/response";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
 export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
   const [visibilityToggle, setVisibilityToggle] = useState<boolean>(false);
-  const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     formState: { errors },
@@ -50,44 +46,30 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
     },
   });
 
-  // const { mutateAsync: loginUserMutate, isPending: isLoginUserMutatePending } =
-  //   useMutation({
-  //     mutationFn: (userData: LoginPayload) => loginAccount(userData),
-  //     onSuccess: (response) => {
-  //       queryClient.invalidateQueries({ queryKey: ["users", "current-user"] });
-  //       ``;
-  //       queryClient.resetQueries();
-
-  //       if (response.data.role === "admin") {
-  //         router.replace("/admin");
-  //       } else {
-  //         router.replace("/");
-  //       }
-  //       reset();
-  //       enqueueSnackbar(response?.message, "success");
-  //     },
-  //     onError: (error: AxiosError<ErrorResponse>) => {
-  //       enqueueSnackbar(
-  //         error.response?.data.message || error?.message,
-  //         "error"
-  //       );
-  //     },
-  //   });
-
   const onLoginFormSubmit: SubmitHandler<LoginPayload> = async (data) => {
-    const payload: LoginPayload = {
-      password: data.password,
-      email: data.email,
-      rememberMe: data.rememberMe,
-    };
-
-    await signIn("credentials", {
+    setLoading(true);
+    const response = await signIn("credentials", {
       email: data.email,
       password: data.password,
       callbackUrl,
+      redirect: false,
     });
 
-    // await loginUserMutate(payload);
+    if (response?.ok) {
+      enqueueSnackbar("User login successfull", "success");
+    } else {
+      enqueueSnackbar(response?.error || "Something went", "error");
+    }
+
+    const session = await getSession();
+
+    if (session?.user.role === "admin") {
+      router.replace("/admin");
+    } else {
+      router.replace("/");
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -211,12 +193,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
             </Box>
 
             <Stack gap={4} sx={{ mt: 2 }}>
-              <Button
-                type="submit"
-                fullWidth
-                size="lg"
-                // loading={isLoginUserMutatePending}
-              >
+              <Button type="submit" fullWidth size="lg" loading={loading}>
                 Login
               </Button>
             </Stack>

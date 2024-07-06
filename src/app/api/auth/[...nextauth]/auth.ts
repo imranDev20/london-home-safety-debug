@@ -21,10 +21,6 @@ export const config = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
-        remember_me: {
-          label: "Remember Me",
-          type: "boolean",
-        },
       },
 
       async authorize(credentials) {
@@ -67,6 +63,7 @@ export const config = {
 
   pages: {
     signIn: "/login",
+    error: "/error",
   },
 
   session: {
@@ -76,7 +73,6 @@ export const config = {
 
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log(user, "USER IN SIGNIN");
       return true;
     },
 
@@ -96,19 +92,20 @@ export const config = {
       };
     },
 
-    async jwt({ token, trigger, session }) {
+    async jwt({ token, trigger, session, user }) {
       if (trigger === "update") {
         token.name = session.name;
       } else {
         if (token.email) {
           const user = await User.findOne({ email: token.email });
-          // console.log({user})
+
           token.name = user?.name;
           token._id = user?._id;
           token.role = user?.role;
           token.provider = user?.provider;
         }
       }
+
       return token;
     },
   },

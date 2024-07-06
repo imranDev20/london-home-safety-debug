@@ -6,7 +6,6 @@ import { sendEmail } from "../_lib/send-email";
 import { placedOrderEmailHtml } from "../_templates/order-placed-email";
 import PreOrder from "../_models/PreOrder";
 import { PreOrderTypeForResponse } from "@/types/orders";
-
 import mongoose, { Types } from "mongoose";
 
 import {
@@ -15,7 +14,8 @@ import {
 } from "../_lib/generate-Invoice";
 import { UserType } from "@/types/users";
 import { receivedOrderEmailHtml } from "../_templates/order-received-email";
-import { validateToken } from "../_lib/validateToken";
+import { config } from "../auth/[...nextauth]/auth";
+import { getServerSession } from "next-auth";
 
 export async function POST(req: NextRequest) {
   try {
@@ -148,14 +148,9 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, res: NextResponse) {
   try {
     await dbConnect();
-
-    const { isValid, userId, userRole, response } = await validateToken(req);
-    if (!isValid) {
-      return response;
-    }
 
     const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
     const limit = 10;
@@ -168,9 +163,10 @@ export async function GET(req: NextRequest) {
     const sortOrder = req.nextUrl.searchParams.get("sort_order") || "desc";
     const customerId = req.nextUrl.searchParams.get("customer_id") || "";
 
+    const session = await getServerSession(config);
     if (
-      userRole !== "admin" &&
-      (!customerId || new Types.ObjectId(customerId) !== userId)
+      session?.user.role !== "admin" &&
+      (!customerId || new Types.ObjectId(customerId) !== session?.user._id)
     ) {
       return NextResponse.json(
         formatResponse(false, null, "Unauthorized access"),
