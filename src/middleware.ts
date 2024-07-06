@@ -12,7 +12,7 @@ export default withAuth(
     }
 
     if (
-      (pathname.startsWith("/profile") || pathname === "/book-now") &&
+      pathname.startsWith("/profile") &&
       (token?.role === "admin" || token?.role === "engineer")
     ) {
       return NextResponse.redirect(`${origin}/`);
@@ -34,5 +34,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/profile/:path*", "/admin/:path*", "/login", "/book-now"],
+  matcher: ["/profile/:path*", "/admin/:path*", "/login"],
 };

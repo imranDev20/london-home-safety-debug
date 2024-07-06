@@ -4,8 +4,10 @@ import Order from "../../_models/Order";
 import { formatResponse } from "@/shared/functions";
 import { OrderTypeForResponse } from "@/types/orders";
 import { UserType } from "@/types/users";
+import { getServerSession } from "next-auth";
+import { config } from "../../auth/[...nextauth]/auth";
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function GET(
   req: NextRequest,
@@ -26,6 +28,18 @@ export async function GET(
       return NextResponse.json(formatResponse(false, null, "Order not found"), {
         status: 404,
       });
+    }
+
+    const session = await getServerSession(config);
+
+    if (
+      session?.user.role !== "admin" &&
+      session?.user._id !== order.customer._id
+    ) {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
     }
 
     // Ensure timestamp is converted to Date objects if they are strings
@@ -53,6 +67,15 @@ export async function PATCH(
   { params }: { params: { order_id: string } }
 ) {
   try {
+    const session = await getServerSession(config);
+
+    if (session?.user.role !== "admin") {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
+
     await dbConnect();
     const orderId = params.order_id;
 

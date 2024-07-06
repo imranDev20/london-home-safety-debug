@@ -2,10 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "../../_lib/dbConnect";
 import User from "../../_models/User";
 import bcrypt from "bcrypt";
-import {
-  generateAccessToken,
-  generateRefreshToken,
-} from "../../_lib/generate-token";
 import { formatResponse } from "@/shared/functions";
 
 export async function POST(req: NextRequest) {

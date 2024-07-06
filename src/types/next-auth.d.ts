@@ -6,8 +6,9 @@ declare module "next-auth" {
   interface User extends DefaultUser {
     id?: string;
     _id: string;
-
-    role: string;
+    role: Role;
+    email: string;
+    name: string;
     provider: "credentials" | "google";
   }
 

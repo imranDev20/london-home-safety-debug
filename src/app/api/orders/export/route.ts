@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import exceljs from "exceljs";
 import dbConnect from "../../_lib/dbConnect";
 import Order from "../../_models/Order";
-import { OrderType } from "@/types/orders";
-import { UserType } from "@/types/users";
+
 import {
   calculateOrderTotalCost,
   formatResponse,
@@ -11,10 +10,21 @@ import {
   snakeCaseToNormalText,
 } from "@/shared/functions";
 import dayjs from "dayjs";
+import { getServerSession } from "next-auth";
+import { config } from "../../auth/[...nextauth]/auth";
 
 export async function GET(req: NextRequest) {
   try {
     await dbConnect();
+
+    const session = await getServerSession(config);
+
+    if (session?.user.role !== "admin") {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
 
     const orders = await Order.find(
       {},
