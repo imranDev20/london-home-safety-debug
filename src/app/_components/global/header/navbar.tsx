@@ -34,7 +34,7 @@ export default function Navbar({
 }) {
   const pathname = usePathname();
 
-  const { data: session, status, update } = useSession();
+  const { status } = useSession();
 
   function handleShowSelected(item: NavItem) {
     return (

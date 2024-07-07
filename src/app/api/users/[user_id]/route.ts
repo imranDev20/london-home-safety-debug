@@ -49,6 +49,15 @@ export async function PATCH(
     await dbConnect();
     const { user_id } = params;
 
+    const session = await getServerSession(config);
+
+    if (session?.user.role !== "admin" && session?.user._id !== user_id) {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
+
     const data: Partial<UserType> = await req.json();
 
     // Find the user by ID
@@ -69,6 +78,46 @@ export async function PATCH(
 
     return NextResponse.json(
       formatResponse(true, user, "Your profile has been updated successfully!")
+    );
+  } catch (error: any) {
+    console.log(error);
+    return NextResponse.json(
+      formatResponse(false, null, error.message || "Internal server error"),
+      {
+        status: 500,
+      }
+    );
+  }
+}
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { user_id: string } }
+) {
+  try {
+    await dbConnect();
+    const { user_id } = params;
+
+    const session = await getServerSession(config);
+
+    // Only admin or the user themselves can delete the user
+    if (session?.user.role !== "admin" && session?.user._id !== user_id) {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
+
+    const user = await User.findByIdAndDelete(user_id);
+
+    if (!user) {
+      return NextResponse.json(formatResponse(false, null, "User not found"), {
+        status: 404,
+      });
+    }
+
+    return NextResponse.json(
+      formatResponse(true, null, "User deleted successfully")
     );
   } catch (error: any) {
     console.log(error);

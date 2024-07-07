@@ -1,6 +1,7 @@
 import * as React from "react";
 import Header from "../_components/global/header/header";
 import Footer from "../_components/global/footer";
+import CookieConsentComponent from "../_components/cookie-consent-component";
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -13,6 +14,7 @@ export default function SiteLayout(props: { children: React.ReactNode }) {
       <Header />
       <main>{props.children}</main>
       <Footer />
+      <CookieConsentComponent />
     </>
   );
 }

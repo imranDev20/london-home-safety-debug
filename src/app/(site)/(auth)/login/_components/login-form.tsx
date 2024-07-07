@@ -65,7 +65,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
 
     if (session?.user.role === "admin") {
       router.replace("/admin");
-    } else {
+    } else if (session?.user.role === "customer") {
       router.replace("/");
     }
 
@@ -194,7 +194,13 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
                   />
                 )}
               />
-              <JoyLink level="title-md">Forgot your password?</JoyLink>
+              <JoyLink
+                level="title-md"
+                component={Link}
+                href="/forgot-password"
+              >
+                Forgot your password?
+              </JoyLink>
             </Box>
 
             <Stack gap={4} sx={{ mt: 2 }}>

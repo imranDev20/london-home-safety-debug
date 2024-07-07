@@ -1,7 +1,15 @@
 import { Card, CardContent, Container, Grid, Sheet } from "@mui/joy";
 import RegisterForm from "./_components/register-form";
 
-export default function RegisterPage() {
+type RegisterPageProps = {
+  searchParams: {
+    callbackUrl: string;
+  };
+};
+
+export default function RegisterPage({
+  searchParams: { callbackUrl },
+}: RegisterPageProps) {
   return (
     <>
       <Sheet variant="soft">
@@ -15,7 +23,7 @@ export default function RegisterPage() {
                 }}
               >
                 <CardContent>
-                  <RegisterForm />
+                  <RegisterForm callbackUrl={callbackUrl} />
                 </CardContent>
               </Card>
             </Grid>

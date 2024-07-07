@@ -11,6 +11,7 @@ import { sendEmail } from "../_lib/send-email";
 import { placedOrderEmailHtml } from "../_templates/order-placed-email";
 import { receivedOrderEmailHtml } from "../_templates/order-received-email";
 import { UserType } from "@/types/users";
+import { formatResponse } from "@/shared/functions";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2024-06-20",

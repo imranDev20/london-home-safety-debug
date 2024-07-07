@@ -1,4 +1,3 @@
-// schemas/testimonialSchema.js
 import { z } from "zod";
 
 const testimonialSchema = z.object({

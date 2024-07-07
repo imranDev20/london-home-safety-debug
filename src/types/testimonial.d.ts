@@ -1,4 +1,6 @@
+import testimonialSchema from "@/app/(site)/_schemas/testimonial-schema";
 import { Types } from "mongoose";
+import { z } from "zod";
 
 export interface ITestimonial {
   _id: Types.ObjectId;
@@ -8,4 +10,4 @@ export interface ITestimonial {
   subject: string;
 }
 
-export type TestimonialInput = Omit<ITestimonial, "_id">;
+export type TestimonialInput = z.infer<typeof testimonialSchema>;

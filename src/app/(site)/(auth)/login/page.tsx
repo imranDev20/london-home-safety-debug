@@ -20,6 +20,8 @@ export default function LoginPage({
                 variant="plain"
                 sx={{
                   p: 4,
+                  borderRadius: "lg",
+                  boxShadow: "sm",
                 }}
               >
                 <CardContent>
