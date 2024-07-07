@@ -20,6 +20,8 @@ export default function RegisterPage({
                 variant="plain"
                 sx={{
                   p: 4,
+                  borderRadius: "lg",
+                  boxShadow: "sm",
                 }}
               >
                 <CardContent>

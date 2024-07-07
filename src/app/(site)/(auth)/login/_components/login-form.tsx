@@ -23,9 +23,11 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 
-import { LoginPayload } from "@/types/account";
+import { LoginFormInput } from "@/types/account";
 import { getSession, signIn } from "next-auth/react";
 import GoogleColoredIcon from "@/app/_components/icons/google-colored-icon";
+import { zodResolver } from "@hookform/resolvers/zod";
+import loginSchema from "../_schemas/login-schema";
 
 export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
   const [visibilityToggle, setVisibilityToggle] = useState<boolean>(false);
@@ -38,7 +40,8 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
     handleSubmit,
     control,
     reset,
-  } = useForm<LoginPayload>({
+  } = useForm<LoginFormInput>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -46,7 +49,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
     },
   });
 
-  const onLoginFormSubmit: SubmitHandler<LoginPayload> = async (data) => {
+  const onLoginFormSubmit: SubmitHandler<LoginFormInput> = async (data) => {
     setLoading(true);
     const response = await signIn("credentials", {
       email: data.email,
@@ -116,13 +119,6 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
           <Stack gap={2}>
             <Controller
               name="email"
-              rules={{
-                required: "Email is required",
-                pattern: {
-                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                  message: "Provide a valid email",
-                },
-              }}
               control={control}
               render={({ field }) => (
                 <FormControl error={!!errors.email} size="lg">
@@ -142,9 +138,6 @@ export default function LoginForm({ callbackUrl }: { callbackUrl: string }) {
 
             <Controller
               name="password"
-              rules={{
-                required: "Password is required",
-              }}
               control={control}
               render={({ field }) => (
                 <FormControl error={!!errors.password} size="lg">
