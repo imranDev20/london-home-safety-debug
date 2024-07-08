@@ -25,7 +25,7 @@ export default function PropertyPage() {
             color="primary"
           />
           <Typography component="h1" level="h3">
-            Property
+            Properties
           </Typography>
         </Box>
 

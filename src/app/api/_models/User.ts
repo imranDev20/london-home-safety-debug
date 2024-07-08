@@ -33,7 +33,6 @@ const userSchema = new mongoose.Schema<UserType<true>>(
     },
     role: {
       type: String,
-      required: true,
       enum: ["customer", "admin", "engineer"],
       default: "customer",
       trim: true,
@@ -95,8 +94,8 @@ const userSchema = new mongoose.Schema<UserType<true>>(
 
     creation_method: {
       type: String,
-      required: true,
       enum: ["through_order", "by_admin", "registration", "seed", "google"],
+      default: "registration",
     },
   },
   {

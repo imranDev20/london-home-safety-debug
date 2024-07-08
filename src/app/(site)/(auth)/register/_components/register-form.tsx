@@ -24,8 +24,12 @@ import { RegisterFormInput, RegisterPayload } from "@/types/account";
 import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
 import { AxiosError } from "axios";
 import { ErrorResponse } from "@/types/response";
+import GoogleColoredIcon from "@/app/_components/icons/google-colored-icon";
+import { signIn } from "next-auth/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import registerSchema from "../_schemas/register-schema";
 
-export default function RegisterForm() {
+export default function RegisterForm({ callbackUrl }: { callbackUrl: string }) {
   const [visibilityToggle, setVisibilityToggle] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
@@ -38,6 +42,7 @@ export default function RegisterForm() {
     watch,
     reset,
   } = useForm<RegisterFormInput>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -78,6 +83,10 @@ export default function RegisterForm() {
     await registerUserMutate(payload);
   };
 
+  const loginWithGoogle = async () => {
+    await signIn("google", { callbackUrl });
+  };
+
   return (
     <>
       <Stack gap={4} sx={{ mb: 2 }}>
@@ -97,7 +106,8 @@ export default function RegisterForm() {
           color="neutral"
           fullWidth
           size="lg"
-          //   startDecorator={<GoogleIcon />}
+          startDecorator={<GoogleColoredIcon />}
+          onClick={loginWithGoogle}
         >
           Continue with Google
         </Button>
@@ -117,9 +127,6 @@ export default function RegisterForm() {
           <Stack gap={2}>
             <Controller
               name="name"
-              rules={{
-                required: "Name is required",
-              }}
               control={control}
               render={({ field }) => (
                 <FormControl error={!!errors.name} size="lg">
@@ -136,13 +143,6 @@ export default function RegisterForm() {
             />
             <Controller
               name="email"
-              rules={{
-                required: "Email is required",
-                pattern: {
-                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                  message: "Provide a valid email",
-                },
-              }}
               control={control}
               render={({ field }) => (
                 <FormControl error={!!errors.email} size="lg">
@@ -162,9 +162,6 @@ export default function RegisterForm() {
 
             <Controller
               name="password"
-              rules={{
-                required: "Password is required",
-              }}
               control={control}
               render={({ field }) => (
                 <FormControl error={!!errors.password} size="lg">
@@ -191,13 +188,6 @@ export default function RegisterForm() {
 
             <Controller
               name="confirmPassword"
-              rules={{
-                required: "Please confirm your password",
-                validate: (value) => {
-                  const password = watch("password");
-                  return password === value || "Passwords do not match";
-                },
-              }}
               control={control}
               render={({ field }) => (
                 <FormControl error={!!errors.confirmPassword} size="lg">

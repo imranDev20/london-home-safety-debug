@@ -104,3 +104,38 @@ export async function PATCH(
     });
   }
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { order_id: string } }
+) {
+  try {
+    await dbConnect();
+    const orderId = params.order_id;
+
+    const session = await getServerSession(config);
+
+    if (session?.user.role !== "admin") {
+      return NextResponse.json(
+        formatResponse(false, null, "Unauthorized access"),
+        { status: 403 }
+      );
+    }
+
+    const order = await Order.findByIdAndDelete(orderId);
+
+    if (!order) {
+      return NextResponse.json(formatResponse(false, null, "Order not found"), {
+        status: 404,
+      });
+    }
+
+    return NextResponse.json(
+      formatResponse(true, null, "Order deleted successfully")
+    );
+  } catch (error: any) {
+    return NextResponse.json(formatResponse(false, null, error.message), {
+      status: 500,
+    });
+  }
+}

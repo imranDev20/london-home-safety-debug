@@ -35,6 +35,7 @@ export default function Header() {
     "/profile/orders",
     "/profile/testimonials",
     "/profile/orders",
+    "/forgot-password",
   ];
 
   return (

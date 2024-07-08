@@ -23,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import testimonialSchema from "../../_schemas/testimonial-schema";
 import { useFormState, useFormStatus } from "react-dom";
 import { createTestimonialAction } from "../../_actions/testimonial-actions";
+import { TestimonialInput } from "@/types/testimonial";
 
 function SubmitButton({ isValid }: { isValid: boolean }) {
   const { pending } = useFormStatus();
@@ -47,12 +48,11 @@ export default function TestimonialForm({
   });
 
   const {
-    handleSubmit,
     formState: { errors, isValid },
     control,
     register,
     reset,
-  } = useForm({
+  } = useForm<TestimonialInput>({
     mode: "all",
     resolver: zodResolver(testimonialSchema),
     defaultValues: {
