@@ -157,6 +157,7 @@ export default function OrderDetailsHeader({
               xs: "100%",
               md: "unset",
             },
+            minWidth: "350px",
           }}
         >
           <FormControl

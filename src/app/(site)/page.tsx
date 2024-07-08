@@ -8,6 +8,8 @@ import ServiceCategories from "./_components/service-categories";
 import ServicesHome from "./_components/services-home";
 import Testimonials from "./_components/testimonials/testimonials";
 
+export const revalidate = 0;
+
 export default function Home() {
   return (
     <>

@@ -23,50 +23,48 @@ export default function Achievements() {
         <Grid container spacing={10}>
           <Grid md={5}>
             <Typography
-              sx={{
-                fontWeight: 500,
-                textTransform: "uppercase",
-                letterSpacing: 2,
-                mb: 1,
-              }}
-              color="primary"
-            >
-              Why choose us
-            </Typography>
-            <Typography
               component="h2"
               sx={{
-                mb: 2,
+                mb: 5,
               }}
               fontSize={36}
             >
-              Reliable & Professional Maintenance Work
+              Our Proud Achievements
             </Typography>
-            <Typography
-              color="neutral"
-              sx={{
-                lineHeight: 1.8,
-                my: 3,
-              }}
-            >
-              Mauris ac risus sed quam semper auctor. Nam tempus volutpat ipsum,
-              non viverra odio mollis mollis. Integer lacus ligula, imperdiet
-              vel massa in, maximus suscipit turpis. Mauris ac risus sed quam
-              semper auctor. Nam tempus volutpat ipsum, non viverra
-            </Typography>
+
             <Stack
               direction="row"
-              spacing={10}
+              spacing={4}
               sx={{
                 mb: 4,
               }}
             >
-              <Counter end={100} duration={2000} />
-              <Counter end={100} duration={2000} />
+              <Counter
+                end={2000}
+                duration={2000}
+                title="Satisfied Customers"
+                description="Proudly served over 2,000 happy customers across London."
+              />
+              <Counter
+                end={500}
+                duration={2000}
+                title="Successful Projects"
+                description="Completed more than 500 successful safety projects."
+              />
             </Stack>
-            <Stack direction="row" spacing={10}>
-              <Counter end={100} duration={2000} />
-              <Counter end={100} duration={2000} />
+            <Stack direction="row" spacing={4}>
+              <Counter
+                end={100}
+                duration={2000}
+                title="Annual Inspections"
+                description="We conduct over 500 safety inspections annually, helping to maintain the highest safety standards for our clients."
+              />
+              <Counter
+                end={20}
+                duration={2000}
+                title="Certified Engineers"
+                description="Our team consists of over 20 certified engineers dedicated to providing the highest quality safety services."
+              />
             </Stack>
           </Grid>
 

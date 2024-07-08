@@ -1,4 +1,4 @@
-import { FormatQuote, ShoppingCart } from "@mui/icons-material";
+import { FormatQuote } from "@mui/icons-material";
 import { Box, Typography } from "@mui/joy";
 
 export default function TestimonialsPage() {

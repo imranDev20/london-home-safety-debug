@@ -35,6 +35,9 @@ export type UserType<HasId extends boolean = false> = {
   experience?: number;
   creation_method: CreationMethod;
   createdAt: string;
+
+  placed_orders: Types.ObjectId[] | OrderType;
+  received_orders: Types.ObjectId[] | OrderType;
 };
 
 export type EngineerType<HasId extends boolean = false> = Omit<

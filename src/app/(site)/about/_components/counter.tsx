@@ -7,9 +7,16 @@ import { useInView } from "react-intersection-observer";
 interface CounterProps {
   end: number;
   duration: number;
+  title: string;
+  description: string;
 }
 
-const Counter: React.FC<CounterProps> = ({ end, duration }) => {
+const Counter: React.FC<CounterProps> = ({
+  end,
+  duration,
+  title,
+  description,
+}) => {
   const [count, setCount] = useState<number>(0);
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -55,10 +62,10 @@ const Counter: React.FC<CounterProps> = ({ end, duration }) => {
           mb: 1,
         }}
       >
-        Years Experience
+        {title}
       </Typography>
       <Typography level="body-md" color="neutral">
-        The standard chunk of Lorem Ipsum used since the 1500s below.
+        {description}
       </Typography>
     </div>
   );

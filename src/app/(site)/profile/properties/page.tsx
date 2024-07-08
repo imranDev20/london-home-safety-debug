@@ -1,4 +1,4 @@
-import { BookmarkAdd, Business, Edit } from "@mui/icons-material";
+import { Business, Edit } from "@mui/icons-material";
 import { Box, Button, Card, Grid, IconButton, Typography } from "@mui/joy";
 import InfoBlocks from "../_components/info-blocks";
 
@@ -9,7 +9,7 @@ export default function PropertyPage() {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "flex-start",
         }}
       >
         <Box

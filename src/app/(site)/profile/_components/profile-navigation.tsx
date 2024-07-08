@@ -49,11 +49,11 @@ export default function ProfileNavigation({
       Icon: ShoppingCart,
     },
 
-    {
-      route: "/profile/testimonials",
-      label: "Testimonials",
-      Icon: FormatQuote,
-    },
+    // {
+    //   route: "/profile/testimonials",
+    //   label: "Testimonials",
+    //   Icon: FormatQuote,
+    // },
   ];
 
   return (
