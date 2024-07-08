@@ -15,8 +15,6 @@ async function fetchTestimonials(page: number): Promise<ITestimonial[]> {
   return testimonials;
 }
 
-export const revalidate = 0;
-
 export default async function TestimonialDataWrapper() {
   const testimonialData = await fetchTestimonials(1);
 
