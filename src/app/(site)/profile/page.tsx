@@ -1,24 +1,62 @@
 import { Dashboard } from "@mui/icons-material";
 import { Avatar, Box, Button, Card, Grid, Stack, Typography } from "@mui/joy";
 import InfoBlocks from "./_components/info-blocks";
+import User from "@/app/api/_models/User";
+import { getServerSession } from "next-auth";
+import { config } from "@/app/api/auth/[...nextauth]/auth";
+import Order from "@/app/api/_models/Order";
+import Image from "next/image";
 
-export default function ProfilePage() {
+export const revalidate = 0;
+
+export default async function ProfilePage() {
+  const session = await getServerSession(config);
+  const user = await User.findOne({ _id: session?.user._id });
+
+  if (!user) {
+    throw new Error("No user found");
+  }
+
+  const orders = await Order.find({ customer: user._id });
+  if (!orders) {
+    throw new Error("No orders found");
+  }
+
   const PROFILE_CARD_OPTIONS = [
     {
-      number: 16,
+      number: orders?.length,
       text: "All Orders",
     },
     {
-      number: 16,
+      number:
+        orders?.filter((order) =>
+          order.order_status
+            .map((status) => status.status)
+            .includes("completed")
+        )?.length ?? 0,
       text: "Completed Orders",
     },
 
     {
-      number: 16,
+      number:
+        orders?.filter(
+          (order) =>
+            !order.order_status
+              .map((status) => status.status)
+              .includes("completed") &&
+            !order.order_status
+              .map((status) => status.status)
+              .includes("cancelled")
+        )?.length ?? 0,
       text: "Pending Orders",
     },
     {
-      number: 16,
+      number:
+        orders?.filter((order) =>
+          order.order_status
+            .map((status) => status.status)
+            .includes("cancelled")
+        )?.length ?? 0,
       text: "Cancelled Orders",
     },
   ];
@@ -26,15 +64,15 @@ export default function ProfilePage() {
   const USER_DETAILS = [
     {
       title: "Name",
-      value: "Imran Kabir",
+      value: user?.name,
     },
     {
       title: "Email",
-      value: "imrandev20@gmail.com",
+      value: user?.email,
     },
     {
       title: "Phone No",
-      value: "+880 1756 68 1894",
+      value: user?.phone ?? "N/A",
     },
   ];
 
@@ -44,7 +82,7 @@ export default function ProfilePage() {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "flex-start",
         }}
       >
         <Box
@@ -86,7 +124,16 @@ export default function ProfilePage() {
               width: 70,
               height: 70,
             }}
-          />
+          >
+            {session?.user.image && (
+              <Image
+                src={session?.user.image}
+                alt={session?.user?.name || "User Avatar"}
+                width={70}
+                height={70}
+              />
+            )}
+          </Avatar>
           <Box>
             <Typography level="h4">Imran Kabir</Typography>
             <Typography color="neutral" level="body-md">

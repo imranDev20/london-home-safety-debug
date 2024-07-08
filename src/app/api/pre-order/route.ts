@@ -52,6 +52,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let customer;
         customer = await User.findOne({ email }); //checking if user exists
 
+        console.log(customer, "THE CUSTOMER");
+
         if (!customer) {
           customer = new User({
             name,
@@ -78,7 +80,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
           customer.role = "customer";
           customer.phone = phone;
           customer.address = address;
-          customer.creation_method = "registration";
+          customer.creation_method =
+            customer?.creation_method || "registration";
           await customer.save();
         }
 

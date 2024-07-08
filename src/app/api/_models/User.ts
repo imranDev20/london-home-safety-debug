@@ -1,5 +1,5 @@
 import { UserType } from "@/types/users";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema<UserType<true>>(
   {
@@ -88,6 +88,7 @@ const userSchema = new mongoose.Schema<UserType<true>>(
       },
       message: "Specialty is required for engineers.",
     },
+
     experience: {
       type: Number,
     },
@@ -96,6 +97,17 @@ const userSchema = new mongoose.Schema<UserType<true>>(
       type: String,
       enum: ["through_order", "by_admin", "registration", "seed", "google"],
       default: "registration",
+    },
+
+    placed_orders: {
+      type: [Schema.Types.ObjectId],
+      ref: "Order",
+      default: null,
+    },
+    received_orders: {
+      type: [Schema.Types.ObjectId],
+      ref: "Order",
+      default: null,
     },
   },
   {

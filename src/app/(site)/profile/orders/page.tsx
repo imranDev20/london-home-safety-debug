@@ -1,13 +1,25 @@
+import Order from "@/app/api/_models/Order";
+import { config } from "@/app/api/auth/[...nextauth]/auth";
 import { ORDER_STATUS_COLORS, ORDER_STATUS_ICONS } from "@/shared/constants";
-import { hexToRgba, snakeCaseToNormalText } from "@/shared/functions";
+import {
+  calculateOrderTotalCost,
+  getMostRecentStatus,
+  hexToRgba,
+  snakeCaseToNormalText,
+} from "@/shared/functions";
 import { East, ShoppingCart } from "@mui/icons-material";
 import { Box, Card, Chip, Grid, IconButton, Stack, Typography } from "@mui/joy";
+import dayjs from "dayjs";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import React from "react";
 
-export default function OrdersPage() {
-  // getMostRecentStatus(row.order_status)
+export default async function OrdersPage() {
   const status = "awaiting_confirmation";
+  const session = await getServerSession(config);
+
+  const orders = await Order.find({ customer: session?.user._id });
+
   return (
     <>
       <Box
@@ -36,9 +48,9 @@ export default function OrdersPage() {
       </Box>
 
       <Stack mt={3} spacing={3}>
-        {[0, 1, 2].map((item) => (
+        {orders.map((item) => (
           <Card
-            key={item}
+            key={item._id.toString()}
             variant="plain"
             sx={{
               boxShadow: "md",
@@ -55,7 +67,7 @@ export default function OrdersPage() {
                   alignItems: "center",
                 }}
               >
-                <Typography level="title-md">INV200A</Typography>
+                <Typography level="title-md">{item.invoice_id}</Typography>
               </Grid>
 
               <Grid
@@ -70,16 +82,22 @@ export default function OrdersPage() {
                 <Chip
                   variant="soft"
                   size="sm"
-                  startDecorator={ORDER_STATUS_ICONS[status]}
+                  startDecorator={
+                    ORDER_STATUS_ICONS[getMostRecentStatus(item.order_status)]
+                  }
                   sx={{
                     backgroundColor: hexToRgba(
-                      ORDER_STATUS_COLORS[status],
+                      ORDER_STATUS_COLORS[
+                        getMostRecentStatus(item.order_status)
+                      ],
                       0.2
                     ),
                     textTransform: "capitalize",
                   }}
                 >
-                  {snakeCaseToNormalText(status as string)}
+                  {snakeCaseToNormalText(
+                    getMostRecentStatus(item.order_status)
+                  )}
                 </Chip>
               </Grid>
 
@@ -92,7 +110,9 @@ export default function OrdersPage() {
                   alignItems: "center",
                 }}
               >
-                <Typography level="body-md">Nov 11, 2024</Typography>
+                <Typography level="body-md">
+                  {dayjs(item.createdAt).format("DD MMMM, YYYY")}
+                </Typography>
               </Grid>
 
               <Grid
@@ -104,7 +124,9 @@ export default function OrdersPage() {
                   alignItems: "center",
                 }}
               >
-                <Typography level="body-md">$350</Typography>
+                <Typography level="body-md">
+                  {calculateOrderTotalCost(item)}
+                </Typography>
               </Grid>
 
               <Grid
@@ -118,7 +140,7 @@ export default function OrdersPage() {
                 <IconButton
                   size="sm"
                   component={Link}
-                  href={`/profile/orders/11`}
+                  href={`/profile/orders/${item._id}`}
                 >
                   <East />
                 </IconButton>

@@ -17,7 +17,7 @@ const orderStatusSchema = new Schema<OrderStatus>({
   },
 });
 
-const orderItemSchema = new Schema<OrderItemType>({
+export const orderItemSchema = new Schema<OrderItemType>({
   // Changed the schema name here
   name: {
     type: String,

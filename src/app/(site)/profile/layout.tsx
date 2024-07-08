@@ -1,5 +1,5 @@
 import ProfileNavigation from "./_components/profile-navigation";
-import { Container, Box, Sheet } from "@mui/joy";
+import { Container, Sheet } from "@mui/joy";
 
 export default function ProfileLayout(props: { children: React.ReactNode }) {
   return (

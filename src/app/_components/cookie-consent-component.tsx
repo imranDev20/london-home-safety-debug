@@ -15,16 +15,16 @@ const CookieConsentComponent = () => {
     CookieConsent.run(getConfig());
   }, []);
 
-  return (
-    <div>
-      <button type="button" onClick={CookieConsent.showPreferences}>
-        Manage cookie preferences
-      </button>
-      <button type="button" onClick={ResetCookieConsent}>
-        Reset cookie consent
-      </button>
-    </div>
-  );
+  return null;
 };
 
 export default CookieConsentComponent;
+
+// <div>
+// <button type="button" onClick={CookieConsent.showPreferences}>
+//   Manage cookie preferences
+// </button>
+// <button type="button" onClick={ResetCookieConsent}>
+//   Reset cookie consent
+// </button>
+// </div>
