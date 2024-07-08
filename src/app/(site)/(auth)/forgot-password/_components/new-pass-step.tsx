@@ -1,10 +1,12 @@
 "use client";
 
-import { verifyToken } from "@/services/account.services";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { changePassword, verifyToken } from "@/services/account.services";
+import { Visibility, VisibilityOff, Warning } from "@mui/icons-material";
 import {
+  Alert,
   Box,
   Button,
+  CircularProgress,
   FormControl,
   FormLabel,
   IconButton,
@@ -12,17 +14,24 @@ import {
   Stack,
   Typography,
 } from "@mui/joy";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import newPasswordSchema from "../_schemas/new-password-schema";
-import { NewPasswordInput } from "@/types/account";
+import { NewPasswordInput, NewPasswordPayload } from "@/types/account";
 import HookFormError from "@/app/_components/common/hook-form-error";
 import { BUSINESS_NAME } from "@/shared/data";
+import { AxiosError } from "axios";
+import { ErrorResponse } from "@/types/response";
+import { useSnackbar } from "@/app/_components/providers/snackbar-provider";
+import EmailStep from "./email-step";
+import { useRouter } from "next/navigation";
 
 export default function NewPassStep({ token }: { token: string }) {
   const [visibilityToggle, setVisibilityToggle] = useState<boolean>(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const {
     formState: { errors },
@@ -34,6 +43,22 @@ export default function NewPassStep({ token }: { token: string }) {
     defaultValues: {
       password: "",
       confirmPassword: "",
+    },
+  });
+
+  const {
+    mutateAsync: changePasswordMutate,
+    isPending: isChangePasswordPending,
+  } = useMutation({
+    mutationFn: (changePassData: NewPasswordPayload) =>
+      changePassword(changePassData),
+
+    onSuccess: async (response) => {
+      enqueueSnackbar(response?.message, "success");
+      router.replace(`/login`);
+    },
+    onError: (error: AxiosError<ErrorResponse>) => {
+      enqueueSnackbar(error.response?.data.message || error.message, "error");
     },
   });
 
@@ -50,48 +75,57 @@ export default function NewPassStep({ token }: { token: string }) {
     refetchOnMount: false,
   });
 
-  const onLoginFormSubmit: SubmitHandler<NewPasswordInput> = async (data) => {};
+  const onChangePasswordFormSubmit: SubmitHandler<NewPasswordInput> = async (
+    data
+  ) => {
+    const payload = {
+      password: data.password,
+      token: token,
+    };
 
-  // if (isVerifyTokenPending) {
-  //   return (
-  //     <Box
-  //       sx={{
-  //         display: "flex",
-  //         height: "50vh",
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //       }}
-  //     >
-  //       <CircularProgress
-  //         thickness={4}
-  //         sx={{ "--CircularProgress-size": "100px" }}
-  //       >
-  //         Loading
-  //       </CircularProgress>
-  //     </Box>
-  //   );
-  // }
+    await changePasswordMutate(payload);
+  };
 
-  // if (isError) {
-  //   const axiosError = error as AxiosError<ErrorResponse>;
+  if (isVerifyTokenPending) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          height: "50vh",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress
+          thickness={4}
+          sx={{ "--CircularProgress-size": "100px" }}
+        >
+          Loading
+        </CircularProgress>
+      </Box>
+    );
+  }
 
-  //   return (
-  //     <Box>
-  //       <Alert
-  //         startDecorator={<Warning />}
-  //         variant="soft"
-  //         color="danger"
-  //         sx={{
-  //           mb: 2,
-  //         }}
-  //       >
-  //         {axiosError.response?.data.message || axiosError.message}
-  //       </Alert>
+  if (isError) {
+    const axiosError = error as AxiosError<ErrorResponse>;
 
-  //       <EmailStep callbackUrl="" />
-  //     </Box>
-  //   );
-  // }
+    return (
+      <Box>
+        <Alert
+          startDecorator={<Warning />}
+          variant="soft"
+          color="danger"
+          sx={{
+            mb: 2,
+          }}
+        >
+          {axiosError.response?.data.message || axiosError.message}
+        </Alert>
+
+        <EmailStep callbackUrl="" />
+      </Box>
+    );
+  }
 
   return (
     <>
@@ -103,7 +137,7 @@ export default function NewPassStep({ token }: { token: string }) {
         </Stack>
       </Stack>
 
-      <form onSubmit={handleSubmit(onLoginFormSubmit)}>
+      <form onSubmit={handleSubmit(onChangePasswordFormSubmit)}>
         <Box sx={{ pt: 2 }}>
           <Stack gap={2}>
             <Controller
@@ -158,7 +192,12 @@ export default function NewPassStep({ token }: { token: string }) {
             />
 
             <Stack gap={4} sx={{ mt: 2 }}>
-              <Button type="submit" fullWidth size="lg">
+              <Button
+                type="submit"
+                fullWidth
+                size="lg"
+                loading={isChangePasswordPending}
+              >
                 Submit
               </Button>
             </Stack>

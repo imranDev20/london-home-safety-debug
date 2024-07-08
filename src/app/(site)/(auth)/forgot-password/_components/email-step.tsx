@@ -28,6 +28,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { resetPassword } from "@/services/account.services";
 import { AxiosError } from "axios";
 import { ErrorResponse } from "@/types/response";
+import { PlaylistAddCheckCircleRounded } from "@mui/icons-material";
+import { Alert } from "@mui/joy";
 
 export default function EmailStep({ callbackUrl }: { callbackUrl: string }) {
   const { enqueueSnackbar } = useSnackbar();
@@ -48,11 +50,11 @@ export default function EmailStep({ callbackUrl }: { callbackUrl: string }) {
   const {
     mutateAsync: resetPasswordMutate,
     isPending: isResetUserMutatePending,
+    data: resetPasswordData,
   } = useMutation({
     mutationFn: (userData: ForgotPasswordInput) => resetPassword(userData),
     onSuccess: async (response) => {
-      console.log(response);
-      // enqueueSnackbar(response?.message, "success");
+      enqueueSnackbar(response.message, "success");
       // router.replace(`/forgot-password?active_step=${2}`);
     },
     onError: (error: AxiosError<ErrorResponse>) => {
@@ -75,6 +77,19 @@ export default function EmailStep({ callbackUrl }: { callbackUrl: string }) {
 
   return (
     <>
+      {resetPasswordData?.message && (
+        <Alert
+          variant="soft"
+          color="success"
+          startDecorator={<PlaylistAddCheckCircleRounded />}
+          sx={{
+            mb: 2,
+          }}
+        >
+          {resetPasswordData?.message}
+        </Alert>
+      )}
+
       <Stack gap={4} sx={{ mb: 2 }}>
         <Stack gap={1}>
           <Typography component="h1" level="h2">

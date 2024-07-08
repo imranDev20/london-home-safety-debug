@@ -1,6 +1,7 @@
 import {
   ForgotPasswordInput,
   LoginFormInput,
+  NewPasswordPayload,
   RegisterPayload,
 } from "@/types/account";
 import { AuthUserResponse, DataLessResponse } from "@/types/response";
@@ -41,6 +42,14 @@ export const resetPassword = async (
 export const verifyToken = async (token: string) => {
   const response: DataLessResponse = await http.get(
     `${ACCOUNT_PATH}/reset-password?token=${token}`
+  );
+  return response;
+};
+
+export const changePassword = async (payload: NewPasswordPayload) => {
+  const response: DataLessResponse = await http.post(
+    `${ACCOUNT_PATH}/reset-password`,
+    payload
   );
   return response;
 };

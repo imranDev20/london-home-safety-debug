@@ -95,7 +95,7 @@ export const passwordResetEmailHtml = (resetLink: string) => `
         If you did not request a password reset, please ignore this email or contact support if you have any questions.
       </p>
       <p>
-        This password reset link will expire in 30 minutes.
+        This password reset link will expire in 3 minutes.
       </p>
       <p>
         Best regards,<br/>

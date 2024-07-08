@@ -7,6 +7,10 @@ import { z } from "zod";
 export type LoginFormInput = z.infer<typeof loginSchema>;
 export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
 export type NewPasswordInput = z.infer<typeof newPasswordSchema>;
+export type NewPasswordPayload = {
+  password: string;
+  token: string;
+};
 
 export type RegisterFormInput = z.infer<typeof registerSchema>;
 

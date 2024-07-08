@@ -4,11 +4,13 @@ import { formatResponse } from "@/shared/functions";
 import Token from "../../_models/Token";
 import User from "../../_models/User";
 import bcrypt from "bcrypt";
+import { UserType } from "@/types/users";
+import { TokenType } from "@/types/account";
 
 export async function POST(req: NextRequest) {
   try {
     await dbConnect();
-    const { newPassword, token } = await req.json(); // Added rememberMe
+    const { password, token } = await req.json(); // Added rememberMe
 
     if (!token) {
       return NextResponse.json(
@@ -17,7 +19,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!newPassword) {
+    if (!password) {
       return NextResponse.json(
         formatResponse(false, null, "You must provide a new password "),
         { status: 400 }
@@ -45,19 +47,27 @@ export async function POST(req: NextRequest) {
 
     // Hash the password
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    const newUser = new User({
+    const updatedUser: Partial<UserType> = {
       name: existingUser.name,
-      email: existingToken.email,
+      email: existingUser.email,
       password: hashedPassword,
       creation_method: "registration",
+    };
+
+    (Object.keys(updatedUser) as (keyof UserType)[]).forEach((key) => {
+      existingUser.set(key, updatedUser[key]);
     });
 
-    await newUser.save();
+    await existingUser.save();
 
     return NextResponse.json(
-      formatResponse(true, newUser, "Password updated successfully")
+      formatResponse(
+        true,
+        existingUser,
+        "Password updated successfully. Login now!"
+      )
     );
   } catch (error: any) {
     console.log(error);
@@ -113,14 +123,17 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const newToken = new Token({
+    const updatedToken: Partial<TokenType> = {
       token: existingToken.token,
       is_verified: true,
       email: existingToken.email,
       type: "reset-password",
-    });
+    };
 
-    await newToken.save();
+    (Object.keys(updatedToken) as (keyof TokenType)[]).forEach((key) => {
+      existingToken.set(key, updatedToken[key]);
+    });
+    await existingToken.save();
 
     return NextResponse.json(
       formatResponse(true, null, "Token is exists and valid")
